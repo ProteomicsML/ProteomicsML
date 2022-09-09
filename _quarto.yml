@@ -1,0 +1,56 @@
+project:
+  type: website
+
+website:
+  title: "ProteomicsML.org"
+  site-url: "https://proteomicsml.org"
+  navbar:
+    background: teal
+    right:
+      - icon: github
+        href: https://github.com/ProteomicsML
+        aria-label: GitHub
+      - icon: twitter
+        href: https://twitter.com/ProteomicsML
+        aria-label: Twitter
+    left:
+      - text: "Home"
+        file: index.qmd
+      - text: Publication
+        file: publication.qmd
+      - text: Tutorials
+        file: tutorials/index.qmd
+      - text: Datasets
+        file: datasets/index.qmd
+  sidebar:
+    style: "docked"
+    search: true
+    collapse-level: 2
+    contents:
+      - text: "Home"
+        file: index.qmd
+      - text: Publication
+        file: publication.qmd
+      - "---"
+      - auto: tutorials
+      - "---"
+      - auto: "datasets"
+  repo-url: https://github.com/ProteomicsML/ProteomicsML
+  repo-actions: [edit]
+  body-footer	: |
+    <small><i>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons CC-BY 4.0</a> license.</i></small>
+  google-analytics:
+    tracking-id: G-VVRMZHT2W2
+    storage: none
+    anonymize-ip: true
+  open-graph: true
+  twitter-card: true
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 4
+    smooth-scroll: true
+    link-external-icon: false
+    link-external-newwindow: true

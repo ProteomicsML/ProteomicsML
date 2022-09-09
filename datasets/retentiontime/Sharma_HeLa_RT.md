@@ -1,6 +1,9 @@
-# Sharma_HeLa_RT
+---
+title: Sharma et al. HeLa
+date: last-modified
+---
 
-## attributes:
+### Attributes
 - data type: Peptide retention time
 - title: Kirill Pevzner "Proteomics Retention Time Prediction" dataset from Sharma et al. HeLa data from kaggle
 - tag: Sharma_HeLa_RT
@@ -13,12 +16,12 @@
 - columns: peptide sequence, uncalibrated elution time
 - chromatography_column_type: <unknown>
 
-## data description:
+### Data description
 This dataset was downloaded from kaggle (https://www.kaggle.com/datasets/kirillpe/proteomics-retention-time-prediction)
 It is a simple list of peptide sequences and uncalibrated retention times in seconds specific to one dataset.
 The pedigree of the data is not well known.
 
-## comments:
+### Comments
 - Reference is Sharma et al., but exact publication is unknown
 - The kaggle web page lists a filename "mod.txt", but the data archive includes only one file "unmod.txt"
 - There are 14,361 data lines in the file (plus 1 header line)
