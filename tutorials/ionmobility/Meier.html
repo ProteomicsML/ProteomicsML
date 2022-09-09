@@ -1,0 +1,1765 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.78">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>ProteomicsML.org – meier</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-VVRMZHT2W2"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+ 
+  gtag('consent', 'default', {
+    'ad_storage': 'denied',
+    'analytics_storage': 'denied'
+  });
+gtag('config', 'G-VVRMZHT2W2', { 'anonymize_ip': true});
+</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">ProteomicsML.org</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../../index.html" aria-current="page">Home</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../publication.html">Publication</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../tutorials/index.html">Tutorials</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../datasets/index.html">Datasets</a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/ProteomicsML"><i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/ProteomicsML"><i class="bi bi-twitter" role="img" aria-label="Twitter">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">(Untitled)</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">Home</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../publication.html" class="sidebar-item-text sidebar-link">Publication</a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../tutorials/index.html" class="sidebar-item-text sidebar-link">Tutorials</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">Fragmentation</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/fragmentation/nist-1-parsing-spectral-library.html" class="sidebar-item-text sidebar-link">NIST (part 1): Parsing the spectral library</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/fragmentation/nist-2-traditional-ml-gradient-boosting.html" class="sidebar-item-text sidebar-link">NIST (part 2): Traditional ML: Gradient boosting</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/fragmentation/nist-3-deep-learning-lstm.html" class="sidebar-item-text sidebar-link">NIST (part 3): Deep learning: BiLSTM</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/fragmentation/proteometools-prosit.html" class="sidebar-item-text sidebar-link">Prosit-style GRU with ProteomeTools data</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Ion mobility</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/ionmobility/Meier.html" class="sidebar-item-text sidebar-link active">Tutorial - predicting CCS values for TIMS data</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">Retention time</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/retentiontime/DLomix Prosit.html" class="sidebar-item-text sidebar-link">DLOmix Prosit</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/retentiontime/Manual Embedding.html" class="sidebar-item-text sidebar-link">Manual embedding</a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../datasets/index.html" class="sidebar-item-text sidebar-link">Datasets</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">Fragmentation</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../datasets/fragmentation/NIST.html" class="sidebar-item-text sidebar-link">NIST Peptide libraries</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../datasets/fragmentation/ProteomeTools_FI.html" class="sidebar-item-text sidebar-link">ProteomeTools</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">Ion mobility</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../datasets/ionmobility/Meier_TIMS.html" class="sidebar-item-text sidebar-link">Meier et al.&nbsp;TIMS</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../datasets/ionmobility/VanPuyvelde_TWIMS.html" class="sidebar-item-text sidebar-link">Van Puyvelde et al.&nbsp;TWIMS</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">Retention time</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../datasets/retentiontime/DLOmix.html" class="sidebar-item-text sidebar-link">DLOmix</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../datasets/retentiontime/ProteomeTools_RT.html" class="sidebar-item-text sidebar-link">ProteomeTools</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../datasets/retentiontime/Sharma_HeLa_RT.html" class="sidebar-item-text sidebar-link">Sharma et al.&nbsp;HeLa</a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#tutorial---predicting-ccs-values-for-tims-data" id="toc-tutorial---predicting-ccs-values-for-tims-data" class="nav-link active" data-scroll-target="#tutorial---predicting-ccs-values-for-tims-data">Tutorial - predicting CCS values for TIMS data</a>
+  <ul>
+  <li><a href="#data-reading-and-preparation" id="toc-data-reading-and-preparation" class="nav-link" data-scroll-target="#data-reading-and-preparation">Data reading and preparation</a></li>
+  <li><a href="#training-a-linear-regression-model-for-ccs-prediction" id="toc-training-a-linear-regression-model-for-ccs-prediction" class="nav-link" data-scroll-target="#training-a-linear-regression-model-for-ccs-prediction">Training a linear regression model for CCS prediction</a></li>
+  <li><a href="#training-an-rf-non-linear-regression-model-for-ccs-prediction" id="toc-training-an-rf-non-linear-regression-model-for-ccs-prediction" class="nav-link" data-scroll-target="#training-an-rf-non-linear-regression-model-for-ccs-prediction">Training an RF (non-linear) regression model for CCS prediction</a></li>
+  <li><a href="#training-a-xgboost-non-linear-regression-model-for-ccs-prediction" id="toc-training-a-xgboost-non-linear-regression-model-for-ccs-prediction" class="nav-link" data-scroll-target="#training-a-xgboost-non-linear-regression-model-for-ccs-prediction">Training a XGBoost (non-linear) regression model for CCS prediction</a></li>
+  <li><a href="#training-a-deep-learning-lstm-model-for-ccs-prediction" id="toc-training-a-deep-learning-lstm-model-for-ccs-prediction" class="nav-link" data-scroll-target="#training-a-deep-learning-lstm-model-for-ccs-prediction">Training a deep learning LSTM model for CCS prediction</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.dev/ProteomicsML/ProteomicsML/blob/main/tutorials/ionmobility/Meier.ipynb" class="toc-action">Edit this page</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="tutorial---predicting-ccs-values-for-tims-data" class="level1">
+<h1>Tutorial - predicting CCS values for TIMS data</h1>
+<p>Ion mobility is a technique to separate ionized analytes based on their size, shape, and physicochemical properties. Initially the techniques for ion mobility propelled the ions with an electric field through a cell with inert gas. The ions collide with the inert gas without fragmentation. Seperation is achieved by propelling the ions faster or slower in the electric field (i.e., based on their charge) and are slowed down by the collissions with the gas (i.e., based on shape and size). Trapped ion mobility (TIMS) reverses this operation by trapping the ions in an electric field and forcing them forward by collision with the gas. From any of the different ion mobility techniques you are able to derive the collisional cross section (CCS) in Angstrom squared. In this notebook you can follow a short tutorial on how to trian a Machine Learning model for the prediction of these CCS values.</p>
+<div class="cell" data-execution_count="183">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> pearsonr</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>vol_dict <span class="op">=</span> {<span class="st">"A"</span> : <span class="fl">88.6</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">"B"</span> : <span class="fl">0.0</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">"O"</span> : <span class="fl">0.0</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">"X"</span> : <span class="fl">0.0</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>            <span class="st">"J"</span> : <span class="fl">0.0</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>            <span class="st">"R"</span> : <span class="fl">173.4</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>            <span class="st">"N"</span> : <span class="fl">114.1</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            <span class="st">"D"</span> : <span class="fl">111.1</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>            <span class="st">"C"</span> : <span class="fl">108.5</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Q"</span> : <span class="fl">143.8</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>            <span class="st">"E"</span> : <span class="fl">138.4</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>            <span class="st">"G"</span> : <span class="fl">60.1</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>            <span class="st">"H"</span> : <span class="fl">153.2</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>            <span class="st">"I"</span> : <span class="fl">166.7</span>,</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>            <span class="st">"L"</span> : <span class="fl">166.7</span>,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>            <span class="st">"K"</span> : <span class="fl">168.6</span>,</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>            <span class="st">"M"</span> : <span class="fl">162.9</span>,</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>            <span class="st">"F"</span> : <span class="fl">189.9</span>,</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>            <span class="st">"P"</span> : <span class="fl">112.7</span>,</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>            <span class="st">"S"</span> : <span class="fl">89.0</span>,</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>            <span class="st">"T"</span> : <span class="fl">116.1</span>,</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>            <span class="st">"W"</span> : <span class="fl">227.8</span>,</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Y"</span> : <span class="fl">193.6</span>,</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>            <span class="st">"V"</span> : <span class="dv">140</span>}</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>aa_to_pos <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">zip</span>(vol_dict.keys(),<span class="bu">range</span>(<span class="bu">len</span>(vol_dict.keys()))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="data-reading-and-preparation" class="level2">
+<h2 class="anchored" data-anchor-id="data-reading-and-preparation">Data reading and preparation</h2>
+<p>Read the training data from <a href="https://doi.org/10.1038/s41467-021-21352-8">Meier et al.</a></p>
+<div class="cell" data-execution_count="184">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ccs_df <span class="op">=</span> pd.read_csv(<span class="st">"https://github.com/ProteomicsML/IonMobility/blob/main/datasets/Meier_IM_CCS/combined_sm.zip?raw=true"</span>, compression<span class="op">=</span><span class="st">"zip"</span>, index_col<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Execute the cell below to read a smaller data set from <a href="https://www.nature.com/articles/s41597-022-01216-6">Van Puyvelde et al.</a>. Remove all the “#” to read this smaller data set. On for example colab it is recommended to load this smaller data set. Please do note that the description is based on the larger data set. It is expected that more complex models do not benefit at the same rate from the smaller data set (e.g., the deep learning network). Hans Vissers from Waters analyzed this traveling wave IM data:</p>
+<div class="cell" data-execution_count="185">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ccs_df = pd.read_csv(</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#    "https://raw.githubusercontent.com/ProteomicsML/IonMobility/main/datasets/VanPuyvelde_TWIMS_CCS/TWIMSpeptideCCS.tsv",</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#    low_memory=False,</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#    sep="\t"</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A small summarization of the data that was just read:</p>
+<div class="cell" data-execution_count="186">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ccs_df.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="186">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Charge</th>
+      <th>Mass</th>
+      <th>Intensity</th>
+      <th>Retention time</th>
+      <th>CCS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>718917.000000</td>
+      <td>718917.000000</td>
+      <td>7.189170e+05</td>
+      <td>718917.000000</td>
+      <td>718917.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>2.376747</td>
+      <td>1829.771049</td>
+      <td>6.716163e+05</td>
+      <td>300.215311</td>
+      <td>475.545205</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.582843</td>
+      <td>606.256496</td>
+      <td>2.139819e+06</td>
+      <td>940.711797</td>
+      <td>109.083740</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>2.000000</td>
+      <td>696.428259</td>
+      <td>2.790800e+02</td>
+      <td>0.004795</td>
+      <td>275.418854</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>2.000000</td>
+      <td>1361.766700</td>
+      <td>5.405700e+04</td>
+      <td>28.260000</td>
+      <td>392.076630</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>2.000000</td>
+      <td>1729.834520</td>
+      <td>1.655000e+05</td>
+      <td>50.624000</td>
+      <td>454.656281</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>3.000000</td>
+      <td>2189.009920</td>
+      <td>5.357000e+05</td>
+      <td>84.241000</td>
+      <td>534.702698</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>4.000000</td>
+      <td>4599.284130</td>
+      <td>2.481000e+08</td>
+      <td>6897.700000</td>
+      <td>1118.786133</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="187">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ccs_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="187">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Modified sequence</th>
+      <th>Charge</th>
+      <th>Mass</th>
+      <th>Intensity</th>
+      <th>Retention time</th>
+      <th>CCS</th>
+      <th>PT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>_(ac)AAAAAAAAAAGAAGGR_</td>
+      <td>2</td>
+      <td>1239.63200</td>
+      <td>149810.0</td>
+      <td>70.140</td>
+      <td>409.092529</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>_(ac)AAAAAAAAEQQSSNGPVKK_</td>
+      <td>2</td>
+      <td>1810.91734</td>
+      <td>21349.0</td>
+      <td>19.645</td>
+      <td>481.229248</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>_(ac)AAAAAAAGAAGSAAPAAAAGAPGSGGAPSGSQGVLIGDR_</td>
+      <td>3</td>
+      <td>3144.55482</td>
+      <td>194000.0</td>
+      <td>3947.700</td>
+      <td>772.098083</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>_(ac)AAAAAAAGDSDSWDADAFSVEDPVRK_</td>
+      <td>2</td>
+      <td>2634.18340</td>
+      <td>6416400.0</td>
+      <td>94.079</td>
+      <td>573.213196</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>_(ac)AAAAAAAGDSDSWDADAFSVEDPVRK_</td>
+      <td>3</td>
+      <td>2634.18340</td>
+      <td>5400600.0</td>
+      <td>94.841</td>
+      <td>635.000549</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>718912</th>
+      <td>_YYYVCQYCPAGNNM(ox)NR_</td>
+      <td>2</td>
+      <td>2087.82880</td>
+      <td>131230.0</td>
+      <td>21.753</td>
+      <td>461.667145</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>718913</th>
+      <td>_YYYVCQYCPAGNWANR_</td>
+      <td>2</td>
+      <td>2083.86690</td>
+      <td>84261.0</td>
+      <td>28.752</td>
+      <td>459.721191</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>718914</th>
+      <td>_YYYVPADFVEYEK_</td>
+      <td>2</td>
+      <td>1684.76609</td>
+      <td>382810.0</td>
+      <td>92.273</td>
+      <td>436.103699</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>718915</th>
+      <td>_YYYVQNVYTPVDEHVYPDHR_</td>
+      <td>3</td>
+      <td>2556.17099</td>
+      <td>30113.0</td>
+      <td>26.381</td>
+      <td>580.297058</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>718916</th>
+      <td>_YYYVQNVYTPVDEHVYPDHR_</td>
+      <td>4</td>
+      <td>2556.17099</td>
+      <td>33682.0</td>
+      <td>26.381</td>
+      <td>691.901123</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+<p>718917 rows × 7 columns</p>
+</div>
+</div>
+</div>
+<p>Prepare the data to not contain any "_" characters or modifications in between [ ]:</p>
+<div class="cell" data-execution_count="188">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Strip "_" from sequence</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>ccs_df[<span class="st">"sequence"</span>] <span class="op">=</span> ccs_df[<span class="st">"Modified sequence"</span>].<span class="bu">str</span>.strip(<span class="st">"_"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Strip everything between "()" and "[]" from sequence</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>ccs_df[<span class="st">"sequence"</span>] <span class="op">=</span> ccs_df[<span class="st">"sequence"</span>].<span class="bu">str</span>.replace(<span class="vs">r"[\(\[].*?[\)\]]"</span>, <span class="st">""</span>, regex<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Count the occurence of amino acids, those that did not get detected; repace with 0</p>
+<div class="cell" data-execution_count="189">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply counter to each sequence, fill NA with 0.0, make matrix from counts</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>X_matrix_count <span class="op">=</span> pd.DataFrame(ccs_df[<span class="st">"sequence"</span>].<span class="bu">apply</span>(Counter).to_dict()).fillna(<span class="fl">0.0</span>).T</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="190">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>X_matrix_count</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="190">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>A</th>
+      <th>G</th>
+      <th>R</th>
+      <th>E</th>
+      <th>Q</th>
+      <th>S</th>
+      <th>N</th>
+      <th>P</th>
+      <th>V</th>
+      <th>K</th>
+      <th>L</th>
+      <th>I</th>
+      <th>D</th>
+      <th>W</th>
+      <th>F</th>
+      <th>M</th>
+      <th>T</th>
+      <th>C</th>
+      <th>Y</th>
+      <th>H</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>12.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>8.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>17.0</td>
+      <td>9.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>4.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>9.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>5.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>9.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>5.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>718912</th>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>4.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>718913</th>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>4.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>718914</th>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>4.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>718915</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>4.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>5.0</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>718916</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>4.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>5.0</td>
+      <td>2.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>718917 rows × 20 columns</p>
+</div>
+</div>
+</div>
+<p>A fairly rudimentary technique is to use the volume of each amino acid and sum these volumes:</p>
+<div class="cell" data-execution_count="191">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> to_predicted_ccs(row):</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    vol_sum <span class="op">=</span> <span class="bu">sum</span>([vol_dict[k]<span class="op">*</span>v <span class="cf">for</span> k,v <span class="kw">in</span> row.to_dict().items()])    </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> vol_sum</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>ccs_df[<span class="st">"predicted_CCS_vol_based"</span>] <span class="op">=</span> X_matrix_count.<span class="bu">apply</span>(to_predicted_ccs,axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Lets see the results:</p>
+<div class="cell" data-execution_count="192">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">len</span>(ccs_df.index) <span class="op">&lt;</span> <span class="fl">1e4</span>:</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    set_alpha <span class="op">=</span> <span class="fl">0.2</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    set_size <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    set_alpha <span class="op">=</span> <span class="fl">0.05</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    set_size <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>,<span class="dv">5</span>):</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    plt.scatter(</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>        ccs_df.loc[ccs_df[<span class="st">"Charge"</span>]<span class="op">==</span>c,<span class="st">"CCS"</span>],</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>        ccs_df.loc[ccs_df[<span class="st">"Charge"</span>]<span class="op">==</span>c,<span class="st">"predicted_CCS_vol_based"</span>],</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>        alpha<span class="op">=</span>set_alpha,</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>        s<span class="op">=</span>set_size, </span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>        label<span class="op">=</span><span class="st">"Z="</span><span class="op">+</span><span class="bu">str</span>(c)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>legend <span class="op">=</span> plt.legend()</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> lh <span class="kw">in</span> legend.legendHandles:</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    lh.set_sizes([<span class="dv">25</span>])</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    lh.set_alpha(<span class="dv">1</span>)</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Observed CCS (Angstrom^2)"</span>)</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Predicted CCS (Angstrom^2)"</span>)</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Meier_files/figure-html/cell-11-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>Clear correlation, but seems we need to change the intercepts of each curve and make seperate predictions for each peptide charge state. In addition to these observations it seems that higher charge states have higher errors. This likely influenced by a large part by the relation between higher charge states and longer peptides. These longer peptides can deviate more from each other in terms of structures (and CCS). Instead of spending more time on this, lets have a look at a more ML-based approach.</p>
+</section>
+<section id="training-a-linear-regression-model-for-ccs-prediction" class="level2">
+<h2 class="anchored" data-anchor-id="training-a-linear-regression-model-for-ccs-prediction">Training a linear regression model for CCS prediction</h2>
+<div class="cell" data-execution_count="193">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In this section we will fit a linear regression model. This model is only able to fit a linear function between the features (sequence) and target (CCS). This linear model can be expressed as the following equation:</p>
+<p>$ Y = _0 + _1 X$</p>
+<p>Where <span class="math inline">\(Y\)</span> is a vector (/list) of all CCS values and X a matrix (/2-dimensional list) of all the amino acids counts. The intercept and weights of each features are learned so the predicted value (<span class="math inline">\(\hat{Y}\)</span>) is close to the observed outcome (<span class="math inline">\(Y\)</span>). What is considered close and how this closeness between predictions and observations are minimized is not further discussed here. However, there is a rich amount of information available on the internet (e.g., https://www.coursera.org/learn/machine-learning).</p>
+<p>First, we will split the matrix into 90% training peptides and 10% testing peptides. These testing peptides are very valuable in estimating model performance. Since the model has not seen these sequences before it cannot overfit on these particular examples.</p>
+<div class="cell" data-execution_count="194">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get all the index identifiers</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>all_idx <span class="op">=</span> <span class="bu">list</span>(X_matrix_count.index)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>random.seed(<span class="dv">42</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Shuffle the index identifiers so we can randomly split them in a testing and training set</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>random.shuffle(all_idx)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Select 90 % for training and the remaining 10 % for testing</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>train_idx <span class="op">=</span> all_idx[<span class="dv">0</span>:<span class="bu">int</span>(<span class="bu">len</span>(all_idx)<span class="op">*</span><span class="fl">0.9</span>)]</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>test_idx <span class="op">=</span> all_idx[<span class="bu">int</span>(<span class="bu">len</span>(all_idx)<span class="op">*</span><span class="fl">0.9</span>):]</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the train and test indices and point to new variables</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>ccs_df_train <span class="op">=</span> ccs_df.loc[train_idx,:]</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>ccs_df_test <span class="op">=</span> ccs_df.loc[test_idx,:]</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Also for the feature matrix get the train and test indices</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>X_matrix_count_train <span class="op">=</span> X_matrix_count.loc[train_idx,:]</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>X_matrix_count_test <span class="op">=</span> X_matrix_count.loc[test_idx,:]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now lets start training the models. Although we could encode the charge as a feature here we separate all models to counter any charge to composition specific patterns.</p>
+<div class="cell" data-execution_count="195">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize a model object</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>linear_model_z2 <span class="op">=</span> LinearRegression()</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the initialized model object to our training data (only charge 2)</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>linear_model_z2.fit(</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    X<span class="op">=</span>X_matrix_count_train.loc[ccs_df_train[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">2</span>,:],</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>ccs_df_train.loc[ccs_df_train[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">2</span>,<span class="st">"CCS"</span>]</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Repeat for the other two charge states</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>linear_model_z3 <span class="op">=</span> LinearRegression()</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>linear_model_z3.fit(</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    X<span class="op">=</span>X_matrix_count_train.loc[ccs_df_train[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">3</span>,:],</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>ccs_df_train.loc[ccs_df_train[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">3</span>,<span class="st">"CCS"</span>]</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>linear_model_z4 <span class="op">=</span> LinearRegression()</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>linear_model_z4.fit(</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    X<span class="op">=</span>X_matrix_count_train.loc[ccs_df_train[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">4</span>,:],</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>ccs_df_train.loc[ccs_df_train[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">4</span>,<span class="st">"CCS"</span>]</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="195">
+<style>#sk-container-id-13 {color: black;background-color: white;}#sk-container-id-13 pre{padding: 0;}#sk-container-id-13 div.sk-toggleable {background-color: white;}#sk-container-id-13 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-13 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-13 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-13 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-13 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-13 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-13 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-13 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-13 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-13 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-13 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-13 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-13 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-13 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-13 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-13 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-13 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-13 div.sk-item {position: relative;z-index: 1;}#sk-container-id-13 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-13 div.sk-item::before, #sk-container-id-13 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-13 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-13 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-13 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-13 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-13 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-13 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-13 div.sk-label-container {text-align: center;}#sk-container-id-13 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-13 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-13" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LinearRegression()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-13" type="checkbox" checked=""><label for="sk-estimator-id-13" class="sk-toggleable__label sk-toggleable__label-arrow">LinearRegression</label><div class="sk-toggleable__content"><pre>LinearRegression()</pre></div></div></div></div></div>
+</div>
+</div>
+<p>Now we can have a look at the coefficients ($_1) learned. These should be highly correlated with the previous experimentally determined volumetric observations for each amino acid:</p>
+<div class="cell" data-execution_count="196">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot the coefficients of each amino acid against their experimentally determined volumes</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    linear_model_z2.coef_,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    [vol_dict[v] <span class="cf">for</span> v <span class="kw">in</span> X_matrix_count.columns]</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot a diagonal line we expect the points to be on</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>plt.plot(</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">6.0</span>,<span class="fl">26.0</span>],</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">60.0</span>,<span class="dv">260</span>],</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span><span class="st">"grey"</span>,</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    zorder<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Annotate each point with their respective amino acids</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> v,x,y <span class="kw">in</span> <span class="bu">zip</span>(X_matrix_count.columns,</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>                 linear_model_z2.coef_,</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>                 [vol_dict[v] <span class="cf">for</span> v <span class="kw">in</span> X_matrix_count.columns]):</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    plt.annotate(v,(x<span class="op">+</span><span class="fl">0.1</span>,y<span class="op">+</span><span class="fl">5.0</span>))</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Meier_files/figure-html/cell-15-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>Observations are very similar. There are differences that could be cause by a multitude of reasons. For example, the difference between volumetric observations in the CCS cell is different or being part of a polypeptide chain changes the volume of the amino acid.</p>
+<p>Next we will plot the predictions of the test set and compare them with observational data. Note that we apply each charge model seperately.</p>
+<div class="cell" data-execution_count="197">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">len</span>(ccs_df.index) <span class="op">&lt;</span> <span class="fl">1e4</span>:</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    set_alpha <span class="op">=</span> <span class="fl">0.2</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    set_size <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    set_alpha <span class="op">=</span> <span class="fl">0.05</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    set_size <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot the observations on the test set against the predictions on the same set (z=2)</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    linear_model_z2.predict(X<span class="op">=</span>X_matrix_count_test.loc[ccs_df[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">2</span>,:]),</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    ccs_df_test.loc[ccs_df[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">2</span>,<span class="st">"CCS"</span>],</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span>set_alpha,</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span>set_size,</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Z=2"</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot the observations on the test set against the predictions on the same set (z=3)</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    linear_model_z3.predict(X<span class="op">=</span>X_matrix_count_test.loc[ccs_df[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">3</span>,:]),</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    ccs_df_test.loc[ccs_df[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">3</span>,<span class="st">"CCS"</span>],</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span>set_alpha,</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span>set_size,</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Z=3"</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot the observations on the test set against the predictions on the same set (z=4)</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>    linear_model_z4.predict(X<span class="op">=</span>X_matrix_count_test.loc[ccs_df[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">4</span>,:]),</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>    ccs_df_test.loc[ccs_df[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">4</span>,<span class="st">"CCS"</span>],</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span>set_alpha,</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span>set_size,</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Z=4"</span></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot a diagonal the points should be one</span></span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="dv">300</span>,<span class="dv">1100</span>],[<span class="dv">300</span>,<span class="dv">1100</span>],c<span class="op">=</span><span class="st">"grey"</span>)</span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a legend for the charge states</span></span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>legend <span class="op">=</span> plt.legend()</span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Make sure the legend labels are visible and big enough</span></span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> lh <span class="kw">in</span> legend.legendHandles:</span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a>    lh.set_sizes([<span class="dv">25</span>])</span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a>    lh.set_alpha(<span class="dv">1</span>)</span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the predictions and calculate performance metrics</span></span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a>predictions <span class="op">=</span> linear_model_z2.predict(X_matrix_count_test.loc[ccs_df[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">3</span>,:])</span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a>mare <span class="op">=</span> <span class="bu">round</span>(<span class="bu">sum</span>((<span class="bu">abs</span>(predictions<span class="op">-</span>ccs_df_test.loc[ccs_df[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">3</span>,<span class="st">"CCS"</span>])<span class="op">/</span>ccs_df_test.loc[ccs_df[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">3</span>,<span class="st">"CCS"</span>])<span class="op">*</span><span class="dv">100</span>)<span class="op">/</span><span class="bu">len</span>(predictions),<span class="dv">3</span>)</span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a>pcc <span class="op">=</span> <span class="bu">round</span>(pearsonr(predictions,ccs_df_test.loc[ccs_df[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">3</span>,<span class="st">"CCS"</span>])[<span class="dv">0</span>],<span class="dv">3</span>)</span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a>perc_95 <span class="op">=</span> <span class="bu">round</span>(np.percentile((<span class="bu">abs</span>(predictions<span class="op">-</span>ccs_df_test.loc[ccs_df[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">3</span>,<span class="st">"CCS"</span>])<span class="op">/</span>ccs_df_test.loc[ccs_df[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">3</span>,<span class="st">"CCS"</span>])<span class="op">*</span><span class="dv">100</span>,<span class="dv">95</span>)<span class="op">*</span><span class="dv">2</span>,<span class="dv">2</span>)</span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="ss">f"Linear model - PCC: </span><span class="sc">{</span>pcc<span class="sc">}</span><span class="ss"> - MARE: </span><span class="sc">{</span>mare<span class="sc">}</span><span class="ss">% - 95th percentile: </span><span class="sc">{</span>perc_95<span class="sc">}</span><span class="ss">% (z3 model for z3 observations)"</span>)</span>
+<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.gca()</span>
+<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a>ax.set_aspect(<span class="st">'equal'</span>)</span>
+<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Observed CCS (^2)"</span>)</span>
+<span id="cb15-58"><a href="#cb15-58" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Predicted CCS (^2)"</span>)</span>
+<span id="cb15-59"><a href="#cb15-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-60"><a href="#cb15-60" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Meier_files/figure-html/cell-16-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>It is clear that the predictions and observations are on the diagonal. This means that they are very similar. However, there are still some differences between observations and predictions.</p>
+<p>In the previous example we trained models for charge state seperately. This is slightly inconvenient and other charge states might still be able to provide useful training examples. As long as the model corrects for the right charge state of course. In the next example we add charge state to the feature matrix. The linear model should be (partially…) able to account for the charge states of peptides.</p>
+<div class="cell" data-execution_count="198">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a new copy of feature matrix and add charge as a feature</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>X_matrix_count_charge_train <span class="op">=</span> X_matrix_count_train.copy()</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>X_matrix_count_charge_train[<span class="st">"charge"</span>] <span class="op">=</span> ccs_df_train[<span class="st">"Charge"</span>]</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>X_matrix_count_charge_test <span class="op">=</span> X_matrix_count_test.copy()</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>X_matrix_count_charge_test[<span class="st">"charge"</span>] <span class="op">=</span> ccs_df_test[<span class="st">"Charge"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="199">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the linear model, but this time with the charge as a feature</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>linear_model <span class="op">=</span> LinearRegression()</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>linear_model.fit(</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    X<span class="op">=</span>X_matrix_count_charge_train,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>ccs_df_train.loc[:,<span class="st">"CCS"</span>]</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="199">
+<style>#sk-container-id-14 {color: black;background-color: white;}#sk-container-id-14 pre{padding: 0;}#sk-container-id-14 div.sk-toggleable {background-color: white;}#sk-container-id-14 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-14 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-14 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-14 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-14 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-14 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-14 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-14 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-14 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-14 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-14 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-14 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-14 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-14 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-14 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-14 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-14 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-14 div.sk-item {position: relative;z-index: 1;}#sk-container-id-14 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-14 div.sk-item::before, #sk-container-id-14 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-14 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-14 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-14 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-14 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-14 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-14 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-14 div.sk-label-container {text-align: center;}#sk-container-id-14 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-14 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-14" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LinearRegression()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-14" type="checkbox" checked=""><label for="sk-estimator-id-14" class="sk-toggleable__label sk-toggleable__label-arrow">LinearRegression</label><div class="sk-toggleable__content"><pre>LinearRegression()</pre></div></div></div></div></div>
+</div>
+</div>
+<div class="cell" data-execution_count="200">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">len</span>(ccs_df.index) <span class="op">&lt;</span> <span class="fl">1e4</span>:</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    set_alpha <span class="op">=</span> <span class="fl">0.2</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    set_size <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    set_alpha <span class="op">=</span> <span class="fl">0.05</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    set_size <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot the observations on the test set against the predictions on the same set</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    linear_model.predict(X<span class="op">=</span>X_matrix_count_charge_test.loc[ccs_df[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">2</span>,:]),</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    ccs_df_test.loc[ccs_df[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">2</span>,<span class="st">"CCS"</span>],</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span>set_alpha,</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Z=2"</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>    linear_model.predict(X<span class="op">=</span>X_matrix_count_charge_test.loc[ccs_df[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">3</span>,:]),</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>    ccs_df_test.loc[ccs_df[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">3</span>,<span class="st">"CCS"</span>],</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span>set_alpha,</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Z=3"</span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>    linear_model.predict(X<span class="op">=</span>X_matrix_count_charge_test.loc[ccs_df[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">4</span>,:]),</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>    ccs_df_test.loc[ccs_df[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">4</span>,<span class="st">"CCS"</span>],</span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span>set_alpha,</span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span>set_size,</span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Z=4"</span></span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot a diagonal the points should be one</span></span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="dv">300</span>,<span class="dv">1100</span>],[<span class="dv">300</span>,<span class="dv">1100</span>],c<span class="op">=</span><span class="st">"grey"</span>)</span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a>legend <span class="op">=</span> plt.legend()</span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> lh <span class="kw">in</span> legend.legendHandles:</span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a>    lh.set_sizes([<span class="dv">25</span>])</span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a>    lh.set_alpha(<span class="dv">1</span>)</span>
+<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the predictions and calculate performance metrics</span></span>
+<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a>predictions <span class="op">=</span> linear_model.predict(X<span class="op">=</span>X_matrix_count_charge_test)</span>
+<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a>mare <span class="op">=</span> <span class="bu">round</span>(<span class="bu">sum</span>((<span class="bu">abs</span>(predictions<span class="op">-</span>ccs_df_test.loc[:,<span class="st">"CCS"</span>])<span class="op">/</span>ccs_df_test.loc[:,<span class="st">"CCS"</span>])<span class="op">*</span><span class="dv">100</span>)<span class="op">/</span><span class="bu">len</span>(predictions),<span class="dv">3</span>)</span>
+<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a>pcc <span class="op">=</span> <span class="bu">round</span>(pearsonr(predictions,ccs_df_test.loc[:,<span class="st">"CCS"</span>])[<span class="dv">0</span>],<span class="dv">3</span>)</span>
+<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a>perc_95 <span class="op">=</span> <span class="bu">round</span>(np.percentile((<span class="bu">abs</span>(predictions<span class="op">-</span>ccs_df_test.loc[:,<span class="st">"CCS"</span>])<span class="op">/</span>ccs_df_test.loc[:,<span class="st">"CCS"</span>])<span class="op">*</span><span class="dv">100</span>,<span class="dv">95</span>)<span class="op">*</span><span class="dv">2</span>,<span class="dv">2</span>)</span>
+<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="ss">f"Linear model - PCC: </span><span class="sc">{</span>pcc<span class="sc">}</span><span class="ss"> - MARE: </span><span class="sc">{</span>mare<span class="sc">}</span><span class="ss">% - 95th percentile: </span><span class="sc">{</span>perc_95<span class="sc">}</span><span class="ss">%"</span>)</span>
+<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.gca()</span>
+<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a>ax.set_aspect(<span class="st">'equal'</span>)</span>
+<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Observed CCS (^2)"</span>)</span>
+<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Predicted CCS (^2)"</span>)</span>
+<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Meier_files/figure-html/cell-19-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>With this model we are capable to predict CCS values for all three charge states (maybe more; be careful with extrapolation). However, it also shows that both z3 and z4 are not optimally predicted. Especially z4 we can probably draw a line manually that provides better performance than the current model. The incapability of the model to correctly predict some of these values is largely due to the linear algorithm. With this algorithm we can only fit “simple” linear relations, but more complex relations are not modeled correctly. In the next section we will fit a non-linear model that is able to capture these complex relations better. However, keep in mind that more complex models are usually also able to overfit data better, resulting in poorer generalization performance.</p>
+</section>
+<section id="training-an-rf-non-linear-regression-model-for-ccs-prediction" class="level2">
+<h2 class="anchored" data-anchor-id="training-an-rf-non-linear-regression-model-for-ccs-prediction">Training an RF (non-linear) regression model for CCS prediction</h2>
+<p>In this section we will fit a random forest (RF) regression model. We hope to fit some of the non-linear relations present in the data. The RF algorithm fits multiple decision trees, but what makes these trees different is the random selection of instances (peptides) and/or features (amino acid count). The predictions between the forest of trees can be averaged to obtain a single prediction per peptide (instead of multiple for the same peptide). Later we will see that the algorithm might actually not be suitable for fitting this type of data.</p>
+<div class="cell" data-execution_count="201">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestRegressor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="202">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a new copy of feature matrix and add charge as a feature</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>X_matrix_count_charge_train <span class="op">=</span> X_matrix_count_train.copy()</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>X_matrix_count_charge_train[<span class="st">"charge"</span>] <span class="op">=</span> ccs_df_train[<span class="st">"Charge"</span>]</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>X_matrix_count_charge_test <span class="op">=</span> X_matrix_count_test.copy()</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>X_matrix_count_charge_test[<span class="st">"charge"</span>] <span class="op">=</span> ccs_df_test[<span class="st">"Charge"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="203">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize a RF object, note the hyperparameters that the model will follow</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>rf_model <span class="op">=</span> RandomForestRegressor(</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                max_depth<span class="op">=</span><span class="dv">20</span>,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>                n_estimators<span class="op">=</span><span class="dv">50</span>,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>                n_jobs<span class="op">=-</span><span class="dv">1</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the RF model</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>rf_model.fit(</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    X<span class="op">=</span>X_matrix_count_charge_train,</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>ccs_df_train.loc[:,<span class="st">"CCS"</span>]</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="203">
+<style>#sk-container-id-15 {color: black;background-color: white;}#sk-container-id-15 pre{padding: 0;}#sk-container-id-15 div.sk-toggleable {background-color: white;}#sk-container-id-15 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-15 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-15 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-15 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-15 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-15 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-15 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-15 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-15 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-15 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-15 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-15 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-15 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-15 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-15 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-15 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-15 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-15 div.sk-item {position: relative;z-index: 1;}#sk-container-id-15 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-15 div.sk-item::before, #sk-container-id-15 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-15 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-15 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-15 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-15 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-15 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-15 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-15 div.sk-label-container {text-align: center;}#sk-container-id-15 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-15 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-15" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>RandomForestRegressor(max_depth=20, n_estimators=50, n_jobs=-1)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-15" type="checkbox" checked=""><label for="sk-estimator-id-15" class="sk-toggleable__label sk-toggleable__label-arrow">RandomForestRegressor</label><div class="sk-toggleable__content"><pre>RandomForestRegressor(max_depth=20, n_estimators=50, n_jobs=-1)</pre></div></div></div></div></div>
+</div>
+</div>
+<div class="cell" data-execution_count="204">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">len</span>(ccs_df.index) <span class="op">&lt;</span> <span class="fl">1e4</span>:</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    set_alpha <span class="op">=</span> <span class="fl">0.2</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    set_size <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    set_alpha <span class="op">=</span> <span class="fl">0.05</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    set_size <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot the observations on the test set against the predictions on the same set</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    rf_model.predict(X<span class="op">=</span>X_matrix_count_charge_test.loc[ccs_df_test[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">2</span>,:]),</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    ccs_df_test.loc[ccs_df_test[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">2</span>,<span class="st">"CCS"</span>],</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span>set_alpha,</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span>set_size,</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Z=2"</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>    rf_model.predict(X<span class="op">=</span>X_matrix_count_charge_test.loc[ccs_df_test[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">3</span>,:]),</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>    ccs_df_test.loc[ccs_df_test[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">3</span>,<span class="st">"CCS"</span>],</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span>set_alpha,</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span>set_size,</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Z=3"</span></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>    rf_model.predict(X<span class="op">=</span>X_matrix_count_charge_test.loc[ccs_df_test[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">4</span>,:]),</span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>    ccs_df_test.loc[ccs_df_test[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">4</span>,<span class="st">"CCS"</span>],</span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span>set_alpha,</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span>set_size,</span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Z=4"</span></span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot a diagonal the points should be one</span></span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="dv">300</span>,<span class="dv">1100</span>],[<span class="dv">300</span>,<span class="dv">1100</span>],c<span class="op">=</span><span class="st">"grey"</span>)</span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a>legend <span class="op">=</span> plt.legend()</span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> lh <span class="kw">in</span> legend.legendHandles:</span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a>    lh.set_sizes([<span class="dv">25</span>])</span>
+<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a>    lh.set_alpha(<span class="dv">1</span>)</span>
+<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the predictions and calculate performance metrics</span></span>
+<span id="cb22-43"><a href="#cb22-43" aria-hidden="true" tabindex="-1"></a>predictions <span class="op">=</span> rf_model.predict(X<span class="op">=</span>X_matrix_count_charge_test)</span>
+<span id="cb22-44"><a href="#cb22-44" aria-hidden="true" tabindex="-1"></a>mare <span class="op">=</span> <span class="bu">round</span>(<span class="bu">sum</span>((<span class="bu">abs</span>(predictions<span class="op">-</span>ccs_df_test.loc[:,<span class="st">"CCS"</span>])<span class="op">/</span>ccs_df_test.loc[:,<span class="st">"CCS"</span>])<span class="op">*</span><span class="dv">100</span>)<span class="op">/</span><span class="bu">len</span>(predictions),<span class="dv">3</span>)</span>
+<span id="cb22-45"><a href="#cb22-45" aria-hidden="true" tabindex="-1"></a>pcc <span class="op">=</span> <span class="bu">round</span>(pearsonr(predictions,ccs_df_test.loc[:,<span class="st">"CCS"</span>])[<span class="dv">0</span>],<span class="dv">3</span>)</span>
+<span id="cb22-46"><a href="#cb22-46" aria-hidden="true" tabindex="-1"></a>perc_95 <span class="op">=</span> <span class="bu">round</span>(np.percentile((<span class="bu">abs</span>(predictions<span class="op">-</span>ccs_df_test.loc[:,<span class="st">"CCS"</span>])<span class="op">/</span>ccs_df_test.loc[:,<span class="st">"CCS"</span>])<span class="op">*</span><span class="dv">100</span>,<span class="dv">95</span>)<span class="op">*</span><span class="dv">2</span>,<span class="dv">2</span>)</span>
+<span id="cb22-47"><a href="#cb22-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="ss">f"RF - PCC: </span><span class="sc">{</span>pcc<span class="sc">}</span><span class="ss"> - MARE: </span><span class="sc">{</span>mare<span class="sc">}</span><span class="ss">% - 95th percentile: </span><span class="sc">{</span>perc_95<span class="sc">}</span><span class="ss">%"</span>)</span>
+<span id="cb22-49"><a href="#cb22-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-50"><a href="#cb22-50" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.gca()</span>
+<span id="cb22-51"><a href="#cb22-51" aria-hidden="true" tabindex="-1"></a>ax.set_aspect(<span class="st">'equal'</span>)</span>
+<span id="cb22-52"><a href="#cb22-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-53"><a href="#cb22-53" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Observed CCS (^2)"</span>)</span>
+<span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Predicted CCS (^2)"</span>)</span>
+<span id="cb22-55"><a href="#cb22-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-56"><a href="#cb22-56" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Meier_files/figure-html/cell-23-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>As can be observed the problem with z=4 splitting up is gone, probably due to the capability of RF to fit non-linear relations. However, we see quite a large deviation on the diagonal. One of the major causes of this problem is the exclusion of amino acid counts for the decision trees. Although this is fundamental to the inner workings of RF, it means that we cannot take the excluded amino acids into account and these values are likely to be replaced by average expected volume to other (non-excluded) amino acids. RF performs very well when features correlate, and predictions are not fully dependent on the inclusion of all features. Next we will look at a decision tree algorithm (XGBoost) that does not rely on the exclusion of features.</p>
+<p>PS note that you might be able to fit a much better model by using a much larger number of trees, but overall the problem largely remains, and it is better to choose an algorithm that respects/fits your data best.</p>
+</section>
+<section id="training-a-xgboost-non-linear-regression-model-for-ccs-prediction" class="level2">
+<h2 class="anchored" data-anchor-id="training-a-xgboost-non-linear-regression-model-for-ccs-prediction">Training a XGBoost (non-linear) regression model for CCS prediction</h2>
+<p>In this section we will fit a XGBoost regression model. This algorithm works by training a sequence of underfitted models. Each model in the sequence receives the output of the previous decision tree models. This combination of trees allows to fit the data well without greatly overfitting it.</p>
+<div class="cell" data-execution_count="205">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> xgboost <span class="im">import</span> XGBRegressor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="206">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a new copy of feature matrix and add charge as a feature</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>X_matrix_count_charge_train <span class="op">=</span> X_matrix_count_train.copy()</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>X_matrix_count_charge_train[<span class="st">"charge"</span>] <span class="op">=</span> ccs_df_train[<span class="st">"Charge"</span>]</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>X_matrix_count_charge_test <span class="op">=</span> X_matrix_count_test.copy()</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>X_matrix_count_charge_test[<span class="st">"charge"</span>] <span class="op">=</span> ccs_df_test[<span class="st">"Charge"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="207">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the XGB object</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>xgb_model <span class="op">=</span> XGBRegressor(</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                max_depth<span class="op">=</span><span class="dv">12</span>,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                n_estimators<span class="op">=</span><span class="dv">250</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the XGB model</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>xgb_model.fit(</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    X<span class="op">=</span>X_matrix_count_charge_train,</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>ccs_df_train.loc[:,<span class="st">"CCS"</span>]</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="207">
+<style>#sk-container-id-16 {color: black;background-color: white;}#sk-container-id-16 pre{padding: 0;}#sk-container-id-16 div.sk-toggleable {background-color: white;}#sk-container-id-16 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-16 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-16 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-16 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-16 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-16 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-16 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-16 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-16 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-16 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-16 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-16 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-16 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-16 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-16 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-16 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-16 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-16 div.sk-item {position: relative;z-index: 1;}#sk-container-id-16 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-16 div.sk-item::before, #sk-container-id-16 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-16 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-16 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-16 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-16 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-16 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-16 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-16 div.sk-label-container {text-align: center;}#sk-container-id-16 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-16 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-16" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>XGBRegressor(base_score=0.5, booster='gbtree', callbacks=None,
+             colsample_bylevel=1, colsample_bynode=1, colsample_bytree=1,
+             early_stopping_rounds=None, enable_categorical=False,
+             eval_metric=None, gamma=0, gpu_id=-1, grow_policy='depthwise',
+             importance_type=None, interaction_constraints='',
+             learning_rate=0.300000012, max_bin=256, max_cat_to_onehot=4,
+             max_delta_step=0, max_depth=12, max_leaves=0, min_child_weight=1,
+             missing=nan, monotone_constraints='()', n_estimators=250, n_jobs=0,
+             num_parallel_tree=1, predictor='auto', random_state=0, reg_alpha=0,
+             reg_lambda=1, ...)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-16" type="checkbox" checked=""><label for="sk-estimator-id-16" class="sk-toggleable__label sk-toggleable__label-arrow">XGBRegressor</label><div class="sk-toggleable__content"><pre>XGBRegressor(base_score=0.5, booster='gbtree', callbacks=None,
+             colsample_bylevel=1, colsample_bynode=1, colsample_bytree=1,
+             early_stopping_rounds=None, enable_categorical=False,
+             eval_metric=None, gamma=0, gpu_id=-1, grow_policy='depthwise',
+             importance_type=None, interaction_constraints='',
+             learning_rate=0.300000012, max_bin=256, max_cat_to_onehot=4,
+             max_delta_step=0, max_depth=12, max_leaves=0, min_child_weight=1,
+             missing=nan, monotone_constraints='()', n_estimators=250, n_jobs=0,
+             num_parallel_tree=1, predictor='auto', random_state=0, reg_alpha=0,
+             reg_lambda=1, ...)</pre></div></div></div></div></div>
+</div>
+</div>
+<div class="cell" data-execution_count="208">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">len</span>(ccs_df.index) <span class="op">&lt;</span> <span class="fl">1e4</span>:</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    set_alpha <span class="op">=</span> <span class="fl">0.2</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    set_size <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    set_alpha <span class="op">=</span> <span class="fl">0.05</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    set_size <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot the observations on the test set against the predictions on the same set</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    ccs_df_test.loc[ccs_df_test[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">2</span>,<span class="st">"CCS"</span>],</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    xgb_model.predict(X<span class="op">=</span>X_matrix_count_charge_test.loc[ccs_df_test[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">2</span>,:]),</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span>set_alpha,</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span>set_size,</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Z=2"</span>)</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>    xgb_model.predict(X<span class="op">=</span>X_matrix_count_charge_test.loc[ccs_df_test[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">3</span>,:]),</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>    ccs_df_test.loc[ccs_df_test[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">3</span>,<span class="st">"CCS"</span>],</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span>set_alpha,</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span>set_size,</span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Z=3"</span></span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>    xgb_model.predict(X<span class="op">=</span>X_matrix_count_charge_test.loc[ccs_df_test[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">4</span>,:]),</span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>    ccs_df_test.loc[ccs_df_test[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">4</span>,<span class="st">"CCS"</span>],</span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span>set_alpha,</span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span>set_size,</span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Z=4"</span></span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot a diagonal the points should be one</span></span>
+<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="dv">300</span>,<span class="dv">1100</span>],[<span class="dv">300</span>,<span class="dv">1100</span>],c<span class="op">=</span><span class="st">"grey"</span>)</span>
+<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a>legend <span class="op">=</span> plt.legend()</span>
+<span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-37"><a href="#cb26-37" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> lh <span class="kw">in</span> legend.legendHandles:</span>
+<span id="cb26-38"><a href="#cb26-38" aria-hidden="true" tabindex="-1"></a>    lh.set_sizes([<span class="dv">25</span>])</span>
+<span id="cb26-39"><a href="#cb26-39" aria-hidden="true" tabindex="-1"></a>    lh.set_alpha(<span class="dv">1</span>)</span>
+<span id="cb26-40"><a href="#cb26-40" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb26-41"><a href="#cb26-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the predictions and calculate performance metrics</span></span>
+<span id="cb26-42"><a href="#cb26-42" aria-hidden="true" tabindex="-1"></a>predictions <span class="op">=</span> xgb_model.predict(X_matrix_count_charge_test)</span>
+<span id="cb26-43"><a href="#cb26-43" aria-hidden="true" tabindex="-1"></a>mare <span class="op">=</span> <span class="bu">round</span>(<span class="bu">sum</span>((<span class="bu">abs</span>(predictions<span class="op">-</span>ccs_df_test.loc[:,<span class="st">"CCS"</span>])<span class="op">/</span>ccs_df_test.loc[:,<span class="st">"CCS"</span>])<span class="op">*</span><span class="dv">100</span>)<span class="op">/</span><span class="bu">len</span>(predictions),<span class="dv">3</span>)</span>
+<span id="cb26-44"><a href="#cb26-44" aria-hidden="true" tabindex="-1"></a>pcc <span class="op">=</span> <span class="bu">round</span>(pearsonr(predictions,ccs_df_test.loc[:,<span class="st">"CCS"</span>])[<span class="dv">0</span>],<span class="dv">3</span>)</span>
+<span id="cb26-45"><a href="#cb26-45" aria-hidden="true" tabindex="-1"></a>perc_95 <span class="op">=</span> <span class="bu">round</span>(np.percentile((<span class="bu">abs</span>(predictions<span class="op">-</span>ccs_df_test.loc[:,<span class="st">"CCS"</span>])<span class="op">/</span>ccs_df_test.loc[:,<span class="st">"CCS"</span>])<span class="op">*</span><span class="dv">100</span>,<span class="dv">95</span>)<span class="op">*</span><span class="dv">2</span>,<span class="dv">2</span>)</span>
+<span id="cb26-46"><a href="#cb26-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-47"><a href="#cb26-47" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="ss">f"XGBoost - PCC: </span><span class="sc">{</span>pcc<span class="sc">}</span><span class="ss"> - MARE: </span><span class="sc">{</span>mare<span class="sc">}</span><span class="ss">% - 95th percentile: </span><span class="sc">{</span>perc_95<span class="sc">}</span><span class="ss">%"</span>)</span>
+<span id="cb26-48"><a href="#cb26-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-49"><a href="#cb26-49" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.gca()</span>
+<span id="cb26-50"><a href="#cb26-50" aria-hidden="true" tabindex="-1"></a>ax.set_aspect(<span class="st">'equal'</span>)</span>
+<span id="cb26-51"><a href="#cb26-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-52"><a href="#cb26-52" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Observed CCS (^2)"</span>)</span>
+<span id="cb26-53"><a href="#cb26-53" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Predicted CCS (^2)"</span>)</span>
+<span id="cb26-54"><a href="#cb26-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-55"><a href="#cb26-55" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Meier_files/figure-html/cell-27-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="training-a-deep-learning-lstm-model-for-ccs-prediction" class="level2">
+<h2 class="anchored" data-anchor-id="training-a-deep-learning-lstm-model-for-ccs-prediction">Training a deep learning LSTM model for CCS prediction</h2>
+<p>The deviation on the diagonal has been decreased significantly. But… A decision tree based algorithm is usually not the best for a regression model. Since the target data is continuous a model that can respect this structure is likely to perform better. Furthermore, up till now we simply counted amino acids, but structure is important. So to get the most out of the data we need to use the exact positions of amino acids.</p>
+<p>Also… We have a lot of data it makes sense to use deep learning (DL). DL models are usually capable of learning more complex relations than traditional algorithms. Furthormore, for traditional ML algorithms we usually need to engineer features, while DL can usually work directly from raw data. DL is able to construct its own features.</p>
+<div class="cell" data-execution_count="209">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tensorflow.keras.layers <span class="im">import</span> Dense, concatenate, Input, Bidirectional, LSTM</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tensorflow.keras.models <span class="im">import</span> Model</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>As mentioned before, we want to use features that can also tell us something about the potential structure of the peptide. This means we need to take the sequence of the peptide into account and not just the amino acid counts. For this we will use a ‘one-hot encoding’, in this matrix each position in the peptide are the columns (number of columns equals the length of the peptide) and each amino acid per position has its own row (for the standard amino acids this is 20). So as a result we create a matrix that is the length of the peptide by the amount of unique amino acids in the whole data set. For each position we indicate the presence with a ‘1’ and absence with ‘0’. As a result the sum of each columnn is ‘1’ and the sum of the whole matrix equals the length of the peptide.</p>
+<div class="cell" data-execution_count="210">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> aa_seq_to_one_hot(seq,padding_length<span class="op">=</span><span class="dv">60</span>):</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Although padding is not needed for an LSTM, we might need it if we for example apply a CNN</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate how much padding is needed</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    seq_len <span class="op">=</span> <span class="bu">len</span>(seq)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> seq_len <span class="op">&gt;</span> padding_length:</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>        seq <span class="op">=</span> seq[<span class="dv">0</span>:padding_length]</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>        seq_len <span class="op">=</span> <span class="bu">len</span>(seq)</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add padding for peptides that are too short</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    padding <span class="op">=</span> <span class="st">""</span>.join([<span class="st">"X"</span>] <span class="op">*</span> (padding_length <span class="op">-</span> <span class="bu">len</span>(seq)))</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>    seq <span class="op">=</span> seq <span class="op">+</span> padding</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Initialize all feature matrix</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>    matrix_hc <span class="op">=</span> np.zeros(</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>        (<span class="bu">len</span>(aa_to_pos.keys()), <span class="bu">len</span>(seq)), dtype<span class="op">=</span>np.int8)</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Fill the one-hot matrix, when we encounter an 'X' it should be the end of the sequence</span></span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> idx,aa <span class="kw">in</span> <span class="bu">enumerate</span>(seq):</span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> aa <span class="op">==</span> <span class="st">"X"</span>:</span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>        matrix_hc[aa_to_pos[aa],idx] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> matrix_hc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="211">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the one-hot matrices and stack them</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Result is a 3D matrix where the first dimension is each peptide, and then the last two dims are the one-hot matrix</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>one_hot_encoded_train <span class="op">=</span> np.stack(ccs_df_train[<span class="st">"sequence"</span>].<span class="bu">apply</span>(aa_seq_to_one_hot).values)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>one_hot_encoded_test <span class="op">=</span> np.stack(ccs_df_test[<span class="st">"sequence"</span>].<span class="bu">apply</span>(aa_seq_to_one_hot).values)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-scrolled="true" data-execution_count="214">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">len</span>(ccs_df.index) <span class="op">&lt;</span> <span class="fl">1e4</span>:</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    epochs <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    num_lstm <span class="op">=</span> <span class="dv">12</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    batch_size <span class="op">=</span> <span class="dv">128</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    batch_size <span class="op">=</span> <span class="dv">1024</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    epochs <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    num_lstm <span class="op">=</span> <span class="dv">64</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>batch_size <span class="op">=</span> <span class="dv">128</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>v_split    <span class="op">=</span> <span class="fl">0.1</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>optimizer  <span class="op">=</span> <span class="st">"adam"</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>loss       <span class="op">=</span> <span class="st">"mean_squared_error"</span></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a><span class="co"># The architecture chosen consists of two inputs: (1) the one-hot matrix and (2) the charge</span></span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a><span class="co"># The first part is a biderectional LSTM (a), in paralel we have dense layers containing the charge (b)</span></span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Both a and b are concatenated to go through several dense layers (c)</span></span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>input_a <span class="op">=</span> Input(shape<span class="op">=</span>(<span class="va">None</span>, one_hot_encoded_train.shape[<span class="dv">2</span>]))</span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Bidirectional(LSTM(num_lstm,return_sequences<span class="op">=</span><span class="va">True</span>))(input_a)</span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Bidirectional(LSTM(num_lstm))(a)</span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Model(inputs<span class="op">=</span>input_a, outputs<span class="op">=</span>a)</span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a>input_b <span class="op">=</span> Input(shape<span class="op">=</span>(<span class="dv">1</span>,))</span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> Dense(<span class="dv">5</span>, activation<span class="op">=</span><span class="st">"relu"</span>)(input_b)</span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> Model(inputs<span class="op">=</span>input_b, outputs<span class="op">=</span>b)</span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> concatenate([a.output, b.output],axis<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> Dense(<span class="dv">64</span>, activation<span class="op">=</span><span class="st">"relu"</span>)(c)</span>
+<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> Dense(<span class="dv">32</span>, activation<span class="op">=</span><span class="st">"relu"</span>)(c)</span>
+<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> Dense(<span class="dv">1</span>, activation<span class="op">=</span><span class="st">"relu"</span>)(c)</span>
+<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-33"><a href="#cb30-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the model with specified inputs and outputs</span></span>
+<span id="cb30-34"><a href="#cb30-34" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Model(inputs<span class="op">=</span>[a.<span class="bu">input</span>, b.<span class="bu">input</span>], outputs<span class="op">=</span>c)</span>
+<span id="cb30-35"><a href="#cb30-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-36"><a href="#cb30-36" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">compile</span>(optimizer<span class="op">=</span>optimizer, loss<span class="op">=</span>loss)</span>
+<span id="cb30-37"><a href="#cb30-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-38"><a href="#cb30-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model on the training data</span></span>
+<span id="cb30-39"><a href="#cb30-39" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> model.fit(</span>
+<span id="cb30-40"><a href="#cb30-40" aria-hidden="true" tabindex="-1"></a>            (one_hot_encoded_train,ccs_df_train.loc[:,<span class="st">"Charge"</span>]),</span>
+<span id="cb30-41"><a href="#cb30-41" aria-hidden="true" tabindex="-1"></a>            ccs_df_train.loc[:,<span class="st">"CCS"</span>],</span>
+<span id="cb30-42"><a href="#cb30-42" aria-hidden="true" tabindex="-1"></a>            epochs<span class="op">=</span>epochs, </span>
+<span id="cb30-43"><a href="#cb30-43" aria-hidden="true" tabindex="-1"></a>            batch_size<span class="op">=</span>batch_size,</span>
+<span id="cb30-44"><a href="#cb30-44" aria-hidden="true" tabindex="-1"></a>            validation_split<span class="op">=</span>v_split</span>
+<span id="cb30-45"><a href="#cb30-45" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Epoch 1/10
+4550/4550 [==============================] - 108s 23ms/step - loss: 5536.7256 - val_loss: 467.1984
+Epoch 2/10
+4550/4550 [==============================] - 102s 22ms/step - loss: 436.4136 - val_loss: 403.9187
+Epoch 3/10
+4550/4550 [==============================] - 100s 22ms/step - loss: 395.7551 - val_loss: 384.5470
+Epoch 4/10
+4550/4550 [==============================] - 103s 23ms/step - loss: 376.4315 - val_loss: 382.0145
+Epoch 5/10
+4550/4550 [==============================] - 102s 23ms/step - loss: 364.8819 - val_loss: 395.8338
+Epoch 6/10
+4550/4550 [==============================] - 106s 23ms/step - loss: 357.4092 - val_loss: 355.8185
+Epoch 7/10
+4550/4550 [==============================] - 104s 23ms/step - loss: 342.5216 - val_loss: 312.9571
+Epoch 8/10
+4550/4550 [==============================] - 104s 23ms/step - loss: 275.4517 - val_loss: 274.8963
+Epoch 9/10
+4550/4550 [==============================] - 110s 24ms/step - loss: 253.2955 - val_loss: 252.0118
+Epoch 10/10
+4550/4550 [==============================] - 105s 23ms/step - loss: 240.6064 - val_loss: 260.1613</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="215">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict CCS values test set</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>ccs_df_test[<span class="st">"LSTM_predictions"</span>] <span class="op">=</span> model.predict((one_hot_encoded_test,ccs_df_test.loc[:,<span class="st">"Charge"</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>2247/2247 [==============================] - 20s 8ms/step</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="216">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">len</span>(ccs_df.index) <span class="op">&lt;</span> <span class="fl">1e4</span>:</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    set_alpha <span class="op">=</span> <span class="fl">0.2</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    set_size <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    set_alpha <span class="op">=</span> <span class="fl">0.05</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    set_size <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot the observations on the test set against the predictions on the same set</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>    ccs_df_test.loc[ccs_df_test[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">2</span>,<span class="st">"CCS"</span>],</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>    ccs_df_test.loc[ccs_df_test[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">2</span>,<span class="st">"LSTM_predictions"</span>],</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span>set_alpha,</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span>set_size,</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Z=2"</span></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>    ccs_df_test.loc[ccs_df_test[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">3</span>,<span class="st">"CCS"</span>],</span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>    ccs_df_test.loc[ccs_df_test[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">3</span>,<span class="st">"LSTM_predictions"</span>],</span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span>set_alpha,</span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span>set_size,</span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Z=3"</span></span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a>    ccs_df_test.loc[ccs_df_test[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">4</span>,<span class="st">"CCS"</span>],</span>
+<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a>    ccs_df_test.loc[ccs_df_test[<span class="st">"Charge"</span>]<span class="op">==</span><span class="dv">4</span>,<span class="st">"LSTM_predictions"</span>],</span>
+<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span>set_alpha,</span>
+<span id="cb34-29"><a href="#cb34-29" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span>set_size,</span>
+<span id="cb34-30"><a href="#cb34-30" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Z=4"</span></span>
+<span id="cb34-31"><a href="#cb34-31" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb34-32"><a href="#cb34-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-33"><a href="#cb34-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot a diagonal the points should be one</span></span>
+<span id="cb34-34"><a href="#cb34-34" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="dv">300</span>,<span class="dv">1100</span>],[<span class="dv">300</span>,<span class="dv">1100</span>],c<span class="op">=</span><span class="st">"grey"</span>)</span>
+<span id="cb34-35"><a href="#cb34-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-36"><a href="#cb34-36" aria-hidden="true" tabindex="-1"></a>legend <span class="op">=</span> plt.legend()</span>
+<span id="cb34-37"><a href="#cb34-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-38"><a href="#cb34-38" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> lh <span class="kw">in</span> legend.legendHandles:</span>
+<span id="cb34-39"><a href="#cb34-39" aria-hidden="true" tabindex="-1"></a>    lh.set_sizes([<span class="dv">25</span>])</span>
+<span id="cb34-40"><a href="#cb34-40" aria-hidden="true" tabindex="-1"></a>    lh.set_alpha(<span class="dv">1</span>)</span>
+<span id="cb34-41"><a href="#cb34-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-42"><a href="#cb34-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the predictions and calculate performance metrics</span></span>
+<span id="cb34-43"><a href="#cb34-43" aria-hidden="true" tabindex="-1"></a>predictions <span class="op">=</span> ccs_df_test[<span class="st">"LSTM_predictions"</span>]</span>
+<span id="cb34-44"><a href="#cb34-44" aria-hidden="true" tabindex="-1"></a>mare <span class="op">=</span> <span class="bu">round</span>(<span class="bu">sum</span>((<span class="bu">abs</span>(predictions<span class="op">-</span>ccs_df_test.loc[:,<span class="st">"CCS"</span>])<span class="op">/</span>ccs_df_test.loc[:,<span class="st">"CCS"</span>])<span class="op">*</span><span class="dv">100</span>)<span class="op">/</span><span class="bu">len</span>(predictions),<span class="dv">3</span>)</span>
+<span id="cb34-45"><a href="#cb34-45" aria-hidden="true" tabindex="-1"></a>pcc <span class="op">=</span> <span class="bu">round</span>(pearsonr(predictions,ccs_df_test.loc[:,<span class="st">"CCS"</span>])[<span class="dv">0</span>],<span class="dv">3</span>)</span>
+<span id="cb34-46"><a href="#cb34-46" aria-hidden="true" tabindex="-1"></a>perc_95 <span class="op">=</span> <span class="bu">round</span>(np.percentile((<span class="bu">abs</span>(predictions<span class="op">-</span>ccs_df_test.loc[:,<span class="st">"CCS"</span>])<span class="op">/</span>ccs_df_test.loc[:,<span class="st">"CCS"</span>])<span class="op">*</span><span class="dv">100</span>,<span class="dv">95</span>)<span class="op">*</span><span class="dv">2</span>,<span class="dv">2</span>)</span>
+<span id="cb34-47"><a href="#cb34-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-48"><a href="#cb34-48" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="ss">f"LSTM - PCC: </span><span class="sc">{</span>pcc<span class="sc">}</span><span class="ss"> - MARE: </span><span class="sc">{</span>mare<span class="sc">}</span><span class="ss">% - 95th percentile: </span><span class="sc">{</span>perc_95<span class="sc">}</span><span class="ss">%"</span>)</span>
+<span id="cb34-49"><a href="#cb34-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-50"><a href="#cb34-50" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.gca()</span>
+<span id="cb34-51"><a href="#cb34-51" aria-hidden="true" tabindex="-1"></a>ax.set_aspect(<span class="st">'equal'</span>)</span>
+<span id="cb34-52"><a href="#cb34-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-53"><a href="#cb34-53" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Observed CCS (^2)"</span>)</span>
+<span id="cb34-54"><a href="#cb34-54" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Predicted CCS (^2)"</span>)</span>
+<span id="cb34-55"><a href="#cb34-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-56"><a href="#cb34-56" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Meier_files/figure-html/cell-33-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>It is clear that the performance of this model is much better. But… Performance can be improved a lot more by for example tuning hyperparameters like the network architecture or number of epochs.</p>
+<p>Hope you enjoyed this tutorial! Feel free to edit it and make a pull request!</p>
+
+
+</section>
+</section>
+
+<p><small><i>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons CC-BY 4.0</a> license.</i></small></p></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/https:\/\/proteomicsml\.org/);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

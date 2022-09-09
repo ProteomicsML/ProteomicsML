@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.78">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Ralf Gabriels">
+<meta name="dcterms.date" content="2022-09-10">
+
+<title>ProteomicsML.org - NIST (part 1): Parsing the spectral library</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-VVRMZHT2W2"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+ 
+  gtag('consent', 'default', {
+    'ad_storage': 'denied',
+    'analytics_storage': 'denied'
+  });
+gtag('config', 'G-VVRMZHT2W2', { 'anonymize_ip': true});
+</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<meta property="og:title" content="ProteomicsML.org - NIST (part 1): Parsing the spectral library">
+<meta property="og:description" content="In bottom-up proteomics, a peptide fragmentation spectrum (MS2) is the most central source of information to identify a peptide (and the original protein by extend).">
+<meta property="og:site-name" content="ProteomicsML.org">
+<meta name="twitter:title" content="ProteomicsML.org - NIST (part 1): Parsing the spectral library">
+<meta name="twitter:description" content="In bottom-up proteomics, a peptide fragmentation spectrum (MS2) is the most central source of information to identify a peptide (and the original protein by extend).">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">ProteomicsML.org</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../../index.html" aria-current="page">Home</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../publication.html">Publication</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../tutorials/index.html">Tutorials</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../datasets/index.html">Datasets</a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/ProteomicsML"><i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/ProteomicsML"><i class="bi bi-twitter" role="img" aria-label="Twitter">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">NIST (part 1): Parsing the spectral library</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">Home</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../publication.html" class="sidebar-item-text sidebar-link">Publication</a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../tutorials/index.html" class="sidebar-item-text sidebar-link">Tutorials</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Fragmentation</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/fragmentation/nist-1-parsing-spectral-library.html" class="sidebar-item-text sidebar-link active">NIST (part 1): Parsing the spectral library</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/fragmentation/nist-2-traditional-ml-gradient-boosting.html" class="sidebar-item-text sidebar-link">NIST (part 2): Traditional ML: Gradient boosting</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/fragmentation/nist-3-deep-learning-lstm.html" class="sidebar-item-text sidebar-link">NIST (part 3): Deep learning: BiLSTM</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/fragmentation/proteometools-prosit.html" class="sidebar-item-text sidebar-link">Prosit-style GRU with ProteomeTools data</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">Ion mobility</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/ionmobility/Meier.html" class="sidebar-item-text sidebar-link">Tutorial - predicting CCS values for TIMS data</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">Retention time</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/retentiontime/DLomix Prosit.html" class="sidebar-item-text sidebar-link">DLOmix Prosit</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/retentiontime/Manual Embedding.html" class="sidebar-item-text sidebar-link">Manual embedding</a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../datasets/index.html" class="sidebar-item-text sidebar-link">Datasets</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">Fragmentation</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../datasets/fragmentation/NIST.html" class="sidebar-item-text sidebar-link">NIST Peptide libraries</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../datasets/fragmentation/ProteomeTools_FI.html" class="sidebar-item-text sidebar-link">ProteomeTools</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">Ion mobility</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../datasets/ionmobility/Meier_TIMS.html" class="sidebar-item-text sidebar-link">Meier et al.&nbsp;TIMS</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../datasets/ionmobility/VanPuyvelde_TWIMS.html" class="sidebar-item-text sidebar-link">Van Puyvelde et al.&nbsp;TWIMS</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">Retention time</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../datasets/retentiontime/DLOmix.html" class="sidebar-item-text sidebar-link">DLOmix</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../datasets/retentiontime/ProteomeTools_RT.html" class="sidebar-item-text sidebar-link">ProteomeTools</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../datasets/retentiontime/Sharma_HeLa_RT.html" class="sidebar-item-text sidebar-link">Sharma et al.&nbsp;HeLa</a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#finding-spectral-libraries" id="toc-finding-spectral-libraries" class="nav-link active" data-scroll-target="#finding-spectral-libraries">1.1 Finding spectral libraries</a></li>
+  <li><a href="#parsing-the-msp-spectral-library-file" id="toc-parsing-the-msp-spectral-library-file" class="nav-link" data-scroll-target="#parsing-the-msp-spectral-library-file">1.2 Parsing the MSP spectral library file</a></li>
+  <li><a href="#preparing-spectra-for-training" id="toc-preparing-spectra-for-training" class="nav-link" data-scroll-target="#preparing-spectra-for-training">1.3 Preparing spectra for training</a>
+  <ul>
+  <li><a href="#normalize-the-intensities" id="toc-normalize-the-intensities" class="nav-link" data-scroll-target="#normalize-the-intensities">1.3.1 Normalize the intensities</a></li>
+  <li><a href="#transform-the-intensities" id="toc-transform-the-intensities" class="nav-link" data-scroll-target="#transform-the-intensities">1.3.2 Transform the intensities</a></li>
+  <li><a href="#annotate-the-peaks" id="toc-annotate-the-peaks" class="nav-link" data-scroll-target="#annotate-the-peaks">1.3.3 Annotate the peaks</a></li>
+  <li><a href="#parse-the-relevant-peak-intensities-to-an-format-suitable-for-machine-learning" id="toc-parse-the-relevant-peak-intensities-to-an-format-suitable-for-machine-learning" class="nav-link" data-scroll-target="#parse-the-relevant-peak-intensities-to-an-format-suitable-for-machine-learning">1.3.4 Parse the relevant peak intensities to an format suitable for machine learning</a></li>
+  </ul></li>
+  <li><a href="#parse-the-full-spectral-library" id="toc-parse-the-full-spectral-library" class="nav-link" data-scroll-target="#parse-the-full-spectral-library">1.4 Parse the full spectral library</a>
+  <ul>
+  <li><a href="#exploring-basic-spectral-library-statistics" id="toc-exploring-basic-spectral-library-statistics" class="nav-link" data-scroll-target="#exploring-basic-spectral-library-statistics">1.4.1 Exploring basic spectral library statistics</a>
+  <ul class="collapse">
+  <li><a href="#total-number-of-spectra" id="toc-total-number-of-spectra" class="nav-link" data-scroll-target="#total-number-of-spectra">Total number of spectra</a></li>
+  <li><a href="#precursor-charge-state" id="toc-precursor-charge-state" class="nav-link" data-scroll-target="#precursor-charge-state">Precursor charge state</a></li>
+  <li><a href="#peptide-length" id="toc-peptide-length" class="nav-link" data-scroll-target="#peptide-length">Peptide length</a></li>
+  <li><a href="#collision-energy" id="toc-collision-energy" class="nav-link" data-scroll-target="#collision-energy">Collision energy</a></li>
+  <li><a href="#duplicate-entries" id="toc-duplicate-entries" class="nav-link" data-scroll-target="#duplicate-entries">Duplicate entries?</a></li>
+  </ul></li>
+  <li><a href="#selecting-data" id="toc-selecting-data" class="nav-link" data-scroll-target="#selecting-data">1.4.1 Selecting data</a></li>
+  <li><a href="#train-validation-test-split" id="toc-train-validation-test-split" class="nav-link" data-scroll-target="#train-validation-test-split">1.4.2 Train / validation / test split</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.dev/ProteomicsML/ProteomicsML/blob/main/tutorials/fragmentation/nist-1-parsing-spectral-library.ipynb" class="toc-action">Edit this page</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">NIST (part 1): Parsing the spectral library</h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliations</div>
+  
+    <div class="quarto-title-meta-contents">
+    Ralf Gabriels <a href="https://orcid.org/0000-0002-1679-1711" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            VIB-UGent Center for Medical Biotechnology, VIB, Belgium
+          </p>
+        <p class="affiliation">
+            Department of Biomolecular Medicine, Ghent University, Belgium
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 10, 2022</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>In bottom-up proteomics, a peptide fragmentation spectrum (MS2) is the most central source of information to identify a peptide (and the original protein by extend). In traditional peptide fragment spectrum identification workflows, only the presence and location (x-axis) of peaks in the spectrum are used to identify the peptide that generated the spectrum. The intensity of these peaks (y-axis) are, however, seldomly used in a comprehensive manner. At most, traditional approaches naively assume that higher intensity is always better. The lack of usage of peptide spectrum intensity patterns in the identification step is mainly due to their complexity. The location of certain peaks (e.g., b- and y-ions) are easily calculated based on their mass for any given peptide. Their intensity, however, follows complex yet predictable patterns that cannot be simply calculated. Nevertheless, they can be predicted with machine learning.</p>
+<p>In this tutorial you will learn the basic steps in developing a machine learning predictor for peptide fragmentation intensity prediction. The first chapter handles the preparation and parsing of training data and the second chapter first handles training a traditional machine learning model, and then a deep learning model.</p>
+<p>To avoid an overly complex tutorial, some aspects to intensity prediction are simplified or not handled. For example, the resulting models will only be able to predict singly charged b- and y-ions for unmodified peptides.</p>
+<div class="cell" data-executioninfo="{&quot;elapsed&quot;:4580,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1660217240665,&quot;user&quot;:{&quot;displayName&quot;:&quot;Ralf G&quot;,&quot;userId&quot;:&quot;10896823604442718497&quot;},&quot;user_tz&quot;:-120}" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Installing some required python packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ! pip install rich numpy pandas pyarrow matplotlib seaborn spectrum_utils==0.3.5 pyteomics sklearn hyperopt --quiet</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="finding-spectral-libraries" class="level2">
+<h2 class="anchored" data-anchor-id="finding-spectral-libraries">1.1 Finding spectral libraries</h2>
+<p>Training data for peptide fragmentation spectrum intensity prediction consists of spectra that were already identified. The most convenient source of such information are spectral libraries. These are datasets that were compiled from a collection of mass spectrometry runs and usually consist of a single representative spectrum for each peptide that was identified.</p>
+<p>Many precompiled spectral libraries are available online. You can also generate your own from a collection of proteomics experiments, using software such as SpectraST.</p>
+<p>Spectral libraries can be downloaded, for instance, from NIST, the <a href="https://chemdata.nist.gov/dokuwiki/doku.php?id=peptidew:cdownload">US National Institute of Standards and Technology</a> . For this part of the practical, we will download the <a href="https://chemdata.nist.gov/dokuwiki/doku.php?id=peptidew:lib:humanhcd20160503">2020 Human HCD library of “best” tryptic spectra</a>. For ease-of-use, we will download it in the text-based NIST MSP format.</p>
+<p>The following code cell automatically downloads and extracts the spectral library file using Linux commands. If you are working locally on a Windows machine, you can download and extract the files manually.</p>
+<p><em>Note the exclamation marks in the code cell below, which allow us to run Linux commands, instead of Python.</em></p>
+<div class="cell" data-executioninfo="{&quot;elapsed&quot;:70977,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1660217236092,&quot;user&quot;:{&quot;displayName&quot;:&quot;Ralf G&quot;,&quot;userId&quot;:&quot;10896823604442718497&quot;},&quot;user_tz&quot;:-120}" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># THIS CELL WORKS ONLY ON LINUX HOSTS (e.g. Google Colab)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># `wget` is a Linux command line tool to download files. </span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="op">!</span> wget <span class="op">-</span>q https:<span class="op">//</span>chemdata.nist.gov<span class="op">/</span>download<span class="op">/</span>peptide_library<span class="op">/</span>libraries<span class="op">/</span>human<span class="op">/</span>HCD<span class="op">/</span><span class="dv">2020_05_19</span><span class="op">/</span>human_hcd_tryp_best.msp.tar.gz</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Next, we need to unpack the .tar.gz file</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="op">!</span> tar <span class="op">-</span>xf human_hcd_tryp_best.msp.tar.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>'wget' is not recognized as an internal or external command,
+operable program or batch file.
+tar: Error opening archive: Failed to open 'human_hcd_tryp_best.msp.tar.gz'</code></pre>
+</div>
+</div>
+<p>Let’s explore the MSP spectral library file, using the Linux <code>head</code> command:</p>
+<div class="cell" data-executioninfo="{&quot;elapsed&quot;:11,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1660217236092,&quot;user&quot;:{&quot;displayName&quot;:&quot;Ralf G&quot;,&quot;userId&quot;:&quot;10896823604442718497&quot;},&quot;user_tz&quot;:-120}" data-outputid="93613723-f49a-4caa-d08a-bb36f125d6a2" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span> head human_hcd_tryp_best.msp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>'head' is not recognized as an internal or external command,
+operable program or batch file.</code></pre>
+</div>
+</div>
+<p>This shows the beginning of the first spectrum in the spectral library. Each spectrum entry consists of a header with identification data and metadata, and a peak list with three columns:</p>
+<ul>
+<li>m/z values</li>
+<li>intensity values</li>
+<li>peak annotation info</li>
+</ul>
+<p>As the sequence of the first peptide is <code>AAAAAAAAAAAAAAAGAGAGAK</code>, we can assume that this library is ordered alphabetically. You can read through the file to verify this assumption. This ordering will be important later on.</p>
+</section>
+<section id="parsing-the-msp-spectral-library-file" class="level2">
+<h2 class="anchored" data-anchor-id="parsing-the-msp-spectral-library-file">1.2 Parsing the MSP spectral library file</h2>
+<p><a href="https://pyteomics.readthedocs.io/">Pyteomics</a> is a Python package for proteomics that contains readers for many proteomics-related file formats. Unfortunately, MSP is not one of them. So first, we need a custom MSP reader function.</p>
+<div class="cell" data-executioninfo="{&quot;elapsed&quot;:5,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1660217240665,&quot;user&quot;:{&quot;displayName&quot;:&quot;Ralf G&quot;,&quot;userId&quot;:&quot;10896823604442718497&quot;},&quot;user_tz&quot;:-120}" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rich <span class="im">import</span> <span class="bu">print</span>, progress  <span class="co"># Rich is a pretty cool library. Google it ;)</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This function iterates over each line in the MSP file. Once it has gathered all information for a single spectrum, it uses <code>yield</code> to return a dictionary. This means that we can iterate over the function using a <code>for</code> loop, and process spectra one-by-one.</p>
+<p><em>If you do not fully understand the function, no problem! This is not the important part of the tutorial</em> 😉</p>
+<div class="cell" data-executioninfo="{&quot;elapsed&quot;:865,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1660228121570,&quot;user&quot;:{&quot;displayName&quot;:&quot;Ralf G&quot;,&quot;userId&quot;:&quot;10896823604442718497&quot;},&quot;user_tz&quot;:-120}" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> read_msp(filename):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Iterate over MSP spectral library file and return spectra as dicts."""</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    spectrum <span class="op">=</span> {}</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    mz <span class="op">=</span> []</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    intensity <span class="op">=</span> []</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    annotation <span class="op">=</span> []</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> line <span class="kw">in</span> <span class="bu">open</span>(filename, <span class="st">"rt"</span>):</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>        <span class="co"># `Name: ` is the first line of a new entry in the file</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> line.startswith(<span class="st">"Name: "</span>):</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> spectrum:</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Finalize and yield previous spectrum</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>                spectrum[<span class="st">"sequence"</span>] <span class="op">=</span> spectrum[<span class="st">"Fullname"</span>].split(<span class="st">"."</span>)[<span class="dv">1</span>]  <span class="co"># Remove the previous/next amino acids</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>                spectrum[<span class="st">"mz"</span>] <span class="op">=</span> np.array(mz, dtype<span class="op">=</span><span class="st">"float32"</span>)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>                spectrum[<span class="st">"intensity"</span>] <span class="op">=</span> np.array(intensity, dtype<span class="op">=</span><span class="st">"float32"</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>                spectrum[<span class="st">"annotation"</span>] <span class="op">=</span> np.array(annotation, dtype<span class="op">=</span><span class="st">"str"</span>)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>                <span class="cf">yield</span> spectrum</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Define new spectrum</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>                spectrum <span class="op">=</span> {}</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>                mz <span class="op">=</span> []</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>                intensity <span class="op">=</span> []</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>                annotation <span class="op">=</span> []</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Extract everything after `Name: `</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>            spectrum[<span class="st">"Name"</span>] <span class="op">=</span> line.strip()[<span class="dv">6</span>:]</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> line.startswith(<span class="st">"Comment: "</span>):</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Parse all comment items as metadata</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>            metadata <span class="op">=</span> [i.split(<span class="st">"="</span>) <span class="cf">for</span> i <span class="kw">in</span> line[<span class="dv">9</span>:].split(<span class="st">" "</span>)]</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> item <span class="kw">in</span> metadata:</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="bu">len</span>(item) <span class="op">==</span> <span class="dv">2</span>:</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>                    spectrum[item[<span class="dv">0</span>]] <span class="op">=</span> item[<span class="dv">1</span>]</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> line.startswith(<span class="st">"Num peaks: "</span>):</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>            spectrum[<span class="st">"Num peaks"</span>] <span class="op">=</span> <span class="bu">int</span>(line.strip()[<span class="dv">11</span>:])</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> <span class="bu">len</span>(line.split(<span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)) <span class="op">==</span> <span class="dv">3</span>:</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Parse peak list items one-by-one</span></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>            line <span class="op">=</span> line.strip().split(<span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>            mz.append(line[<span class="dv">0</span>])</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>            intensity.append(line[<span class="dv">1</span>])</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>            annotation.append(line[<span class="dv">2</span>].strip(<span class="st">'"'</span>))</span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Final spectrum</span></span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>    spectrum[<span class="st">"sequence"</span>] <span class="op">=</span> spectrum[<span class="st">"Fullname"</span>].split(<span class="st">"."</span>)[<span class="dv">1</span>]  <span class="co"># Remove the previous/next amino acids</span></span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>    spectrum[<span class="st">"mz"</span>] <span class="op">=</span> np.array(mz, dtype<span class="op">=</span><span class="st">"float32"</span>)</span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>    spectrum[<span class="st">"intensity"</span>] <span class="op">=</span> np.array(intensity, dtype<span class="op">=</span><span class="st">"float32"</span>)</span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>    spectrum[<span class="st">"annotation"</span>] <span class="op">=</span> np.array(annotation, dtype<span class="op">=</span><span class="st">"str"</span>)</span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>    <span class="cf">yield</span> spectrum</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s explore the first spectrum:</p>
+<div class="cell" data-executioninfo="{&quot;elapsed&quot;:10,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1660217241118,&quot;user&quot;:{&quot;displayName&quot;:&quot;Ralf G&quot;,&quot;userId&quot;:&quot;10896823604442718497&quot;},&quot;user_tz&quot;:-120}" data-outputid="bde358b1-20cc-4c4e-837a-af1e015242ab" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># break allows us to only stop after the first spectrum is defined</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> spectrum <span class="kw">in</span> read_msp(<span class="st">"human_hcd_tryp_best.msp"</span>):</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(spectrum[<span class="st">"Name"</span>])</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">break</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">AAAAAAAAAAAAAAAGAGAGAK/2_0
+</pre>
+</div>
+</div>
+<p>We can format the peak list as a Pandas DataFrame:</p>
+<div class="cell" data-executioninfo="{&quot;elapsed&quot;:8,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1660217241118,&quot;user&quot;:{&quot;displayName&quot;:&quot;Ralf G&quot;,&quot;userId&quot;:&quot;10896823604442718497&quot;},&quot;user_tz&quot;:-120}" data-outputid="9c9201d1-79ef-475a-a5e1-1e8567452600" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mz"</span>: spectrum[<span class="st">"mz"</span>],</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"intensity"</span>: spectrum[<span class="st">"intensity"</span>],</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"annotation"</span>: spectrum[<span class="st">"annotation"</span>],</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>mz</th>
+      <th>intensity</th>
+      <th>annotation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>110.071198</td>
+      <td>259243.203125</td>
+      <td>? 143/200</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>115.086403</td>
+      <td>97764.398438</td>
+      <td>a2/-1.6ppm 145/200</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>116.070396</td>
+      <td>26069.500000</td>
+      <td>? 80/200</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>120.080597</td>
+      <td>208924.406250</td>
+      <td>? 148/200</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>129.065704</td>
+      <td>25535.900391</td>
+      <td>Int/AG/-1.2ppm,Int/GA/-1.2ppm 86/200</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>112</th>
+      <td>1170.621338</td>
+      <td>442693.312500</td>
+      <td>y16/-1.1ppm 180/200</td>
+    </tr>
+    <tr>
+      <th>113</th>
+      <td>1171.624146</td>
+      <td>173247.703125</td>
+      <td>y16+i/-1.0ppm 133/200</td>
+    </tr>
+    <tr>
+      <th>114</th>
+      <td>1241.657959</td>
+      <td>264065.593750</td>
+      <td>y17/-1.3ppm 170/200</td>
+    </tr>
+    <tr>
+      <th>115</th>
+      <td>1242.660156</td>
+      <td>112235.101562</td>
+      <td>y17+i/-1.8ppm 125/200</td>
+    </tr>
+    <tr>
+      <th>116</th>
+      <td>1312.693848</td>
+      <td>74808.500000</td>
+      <td>y18/-2.3ppm 116/200</td>
+    </tr>
+  </tbody>
+</table>
+<p>117 rows × 3 columns</p>
+</div>
+</div>
+</div>
+<p>The left-most column denotes the peak annotation. This tells us which ion generated the peak, according to the search engine or library generation software. Note that many peaks — highlighted with a question mark — are not annotated, even though the spectrum was confidently identified.</p>
+<p>Using the Python package <a href="https://spectrum-utils.readthedocs.io/">spectrum_utils</a>, we can easily visualize the spectrum:</p>
+<div class="cell" data-executioninfo="{&quot;elapsed&quot;:8,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1660217241118,&quot;user&quot;:{&quot;displayName&quot;:&quot;Ralf G&quot;,&quot;userId&quot;:&quot;10896823604442718497&quot;},&quot;user_tz&quot;:-120}" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> spectrum_utils.spectrum <span class="im">as</span> sus</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> spectrum_utils.plot <span class="im">as</span> sup</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-executioninfo="{&quot;elapsed&quot;:406,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1660217241516,&quot;user&quot;:{&quot;displayName&quot;:&quot;Ralf G&quot;,&quot;userId&quot;:&quot;10896823604442718497&quot;},&quot;user_tz&quot;:-120}" data-outputid="faa153c6-6173-42b0-a047-93761078a4c3" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">6</span>))</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>sup.spectrum(</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    sus.MsmsSpectrum(</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>        identifier<span class="op">=</span>spectrum[<span class="st">"Name"</span>],</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        precursor_mz<span class="op">=</span><span class="bu">float</span>(spectrum[<span class="st">"Parent"</span>]),</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>        precursor_charge<span class="op">=</span><span class="bu">int</span>(spectrum[<span class="st">"Charge"</span>]),</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        mz<span class="op">=</span>spectrum[<span class="st">"mz"</span>],</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>        intensity<span class="op">=</span>spectrum[<span class="st">"intensity"</span>]</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="nist-1-parsing-spectral-library_files/figure-html/cell-10-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="preparing-spectra-for-training" class="level2">
+<h2 class="anchored" data-anchor-id="preparing-spectra-for-training">1.3 Preparing spectra for training</h2>
+<p>To use a peptide fragmentation spectrum such as this one as training <em>target</em> for a machine learning model, it needs some preparation and parsing. Usually this comprises of the following steps:</p>
+<ol type="1">
+<li>Normalize the intensities</li>
+<li>Transform the intensities</li>
+<li>Annotate the peaks</li>
+<li>Parse the relevant peak intensities to an format suitable for machine learning</li>
+</ol>
+<p>For each of these steps, we will write a function that can be reused later on in the tutorial.</p>
+<section id="normalize-the-intensities" class="level3">
+<h3 class="anchored" data-anchor-id="normalize-the-intensities">1.3.1 Normalize the intensities</h3>
+<p>Depending on the file format, peak intensities can range from 0 to 1, from 0 to 100, from 0 from 10 000… Machine learning algorithms require the target (and feature) values to be normalized in a specific range. For fragmentation spectra, there are two common options: total ion current (TIC) normalization and base peak normalization. For the former, all intensity values are divided by the total sum of all intensity values in the spectrum. The sum of all normalized intensities will be <code>1</code>. For the latter, all intensity values are divided by the most intense peak in the spectrum, resulting in that peak to have normalized intensity <code>1</code>. Here we will implement TIC-normalization.</p>
+<div class="cell" data-executioninfo="{&quot;elapsed&quot;:11,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1660217241516,&quot;user&quot;:{&quot;displayName&quot;:&quot;Ralf G&quot;,&quot;userId&quot;:&quot;10896823604442718497&quot;},&quot;user_tz&quot;:-120}" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> tic_normalize(msp_spectrum):</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    tic <span class="op">=</span> np.<span class="bu">sum</span>(msp_spectrum[<span class="st">"intensity"</span>])</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    msp_spectrum[<span class="st">"intensity"</span>] <span class="op">=</span> msp_spectrum[<span class="st">"intensity"</span>] <span class="op">/</span> tic</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> msp_spectrum</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-executioninfo="{&quot;elapsed&quot;:10,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1660217241516,&quot;user&quot;:{&quot;displayName&quot;:&quot;Ralf G&quot;,&quot;userId&quot;:&quot;10896823604442718497&quot;},&quot;user_tz&quot;:-120}" data-outputid="3351398f-93cc-4e88-922f-969960362033" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Before normalization</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>spectrum[<span class="st">"intensity"</span>][:<span class="dv">10</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>array([259243.2,  97764.4,  26069.5, 208924.4,  25535.9, 361336.8,
+       120990.5, 401263.5,  54146.8, 259764.2], dtype=float32)</code></pre>
+</div>
+</div>
+<div class="cell" data-executioninfo="{&quot;elapsed&quot;:7,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1660217241516,&quot;user&quot;:{&quot;displayName&quot;:&quot;Ralf G&quot;,&quot;userId&quot;:&quot;10896823604442718497&quot;},&quot;user_tz&quot;:-120}" data-outputid="ae4e7669-23af-4eaa-f942-d0e1b678c5fa" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>spectrum <span class="op">=</span> tic_normalize(spectrum)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># After normalization</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>spectrum[<span class="st">"intensity"</span>][:<span class="dv">10</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>array([0.00882945, 0.00332971, 0.00088789, 0.00711566, 0.00086972,
+       0.0123066 , 0.00412076, 0.01366645, 0.00184416, 0.00884719],
+      dtype=float32)</code></pre>
+</div>
+</div>
+</section>
+<section id="transform-the-intensities" class="level3">
+<h3 class="anchored" data-anchor-id="transform-the-intensities">1.3.2 Transform the intensities</h3>
+<p>The distribution of peak intensities shows us that most peptide fragmentation peaks have a relatively low intensity, while only a few peaks are more intense:</p>
+<div class="cell" data-executioninfo="{&quot;elapsed&quot;:389,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1660217241899,&quot;user&quot;:{&quot;displayName&quot;:&quot;Ralf G&quot;,&quot;userId&quot;:&quot;10896823604442718497&quot;},&quot;user_tz&quot;:-120}" data-outputid="da4e8167-6e1f-4193-efc2-805143e825fc" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">"whitegrid"</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Before transform</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>sns.displot(spectrum[<span class="st">"intensity"</span>], bins<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="nist-1-parsing-spectral-library_files/figure-html/cell-14-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>To make the intensities follow a more linear distribution — which is better for machine learning algorithms — we can transform the intensity values. Two methods are often used: square root-tranform, and log-transform. While both methods mostly have the same effect, we will here opt for square root transform, as log-transform results in negative values, which can be cumbersome to deal with.</p>
+<div class="cell" data-executioninfo="{&quot;elapsed&quot;:7,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1660217241900,&quot;user&quot;:{&quot;displayName&quot;:&quot;Ralf G&quot;,&quot;userId&quot;:&quot;10896823604442718497&quot;},&quot;user_tz&quot;:-120}" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sqrt_transform(msp_spectrum):</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    msp_spectrum[<span class="st">"intensity"</span>] <span class="op">=</span> np.sqrt(msp_spectrum[<span class="st">"intensity"</span>])</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> msp_spectrum</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-executioninfo="{&quot;elapsed&quot;:384,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1660217242278,&quot;user&quot;:{&quot;displayName&quot;:&quot;Ralf G&quot;,&quot;userId&quot;:&quot;10896823604442718497&quot;},&quot;user_tz&quot;:-120}" data-outputid="78cdfa83-62f0-4413-9d69-46d28d6a0da0" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>spectrum <span class="op">=</span> sqrt_transform(spectrum)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># After transform</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>sns.displot(spectrum[<span class="st">"intensity"</span>], bins<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="nist-1-parsing-spectral-library_files/figure-html/cell-16-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="annotate-the-peaks" class="level3">
+<h3 class="anchored" data-anchor-id="annotate-the-peaks">1.3.3 Annotate the peaks</h3>
+<p>With the NIST spectral libraries, this step is pretty easy, as peak annotations are already present. If this would not be the case, we can make use of spectrum_utils, which can annotate peaks given the peptide <em>sequence</em> and any <em>modifications</em>. See the <a href="https://spectrum-utils.readthedocs.io/en/latest/processing.html#peak-annotations">spectrum_utils documentation</a> for more info.</p>
+<div class="cell" data-executioninfo="{&quot;elapsed&quot;:560,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1660217242835,&quot;user&quot;:{&quot;displayName&quot;:&quot;Ralf G&quot;,&quot;userId&quot;:&quot;10896823604442718497&quot;},&quot;user_tz&quot;:-120}" data-outputid="8ded19a7-3026-4428-bf55-90f8de4e8c32" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">6</span>))</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>sup.spectrum(</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    sus.MsmsSpectrum(</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>        identifier<span class="op">=</span>spectrum[<span class="st">"Name"</span>],</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>        precursor_mz<span class="op">=</span><span class="bu">float</span>(spectrum[<span class="st">"Parent"</span>]),</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>        precursor_charge<span class="op">=</span><span class="bu">int</span>(spectrum[<span class="st">"Charge"</span>]),</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>        mz<span class="op">=</span>spectrum[<span class="st">"mz"</span>],</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>        intensity<span class="op">=</span>spectrum[<span class="st">"intensity"</span>],</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>        peptide<span class="op">=</span>spectrum[<span class="st">"sequence"</span>],</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    ).annotate_peptide_fragments(<span class="dv">25</span>, <span class="st">"ppm"</span>)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="nist-1-parsing-spectral-library_files/figure-html/cell-17-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="parse-the-relevant-peak-intensities-to-an-format-suitable-for-machine-learning" class="level3">
+<h3 class="anchored" data-anchor-id="parse-the-relevant-peak-intensities-to-an-format-suitable-for-machine-learning">1.3.4 Parse the relevant peak intensities to an format suitable for machine learning</h3>
+<p>Note in the visualization above that spectrum_utils only annotated b- and y-ions, while in the MSP file many other ion types are also annotated. For simplicity’s sake, in this tutorial we will train a model to only predict singly charged b- and y-ions.</p>
+<p>Let’s filter the spectrum for only those peaks. This can be done with regular expressions (regex) and numpy. TIP: <a href="https://regex101.com">regex101.com</a> is a great website for building and testing regular expressions. The regex <code>^(b|y)([0-9]+)\/</code> only matches peak annotations for singly charged b- and y-ions. You can investigate it at https://regex101.com/r/bgZ7EG/1.</p>
+<p>In the following function, <code>numpy.vectorize</code> is used. What does it do and why do we use it here?</p>
+<div class="cell" data-executioninfo="{&quot;elapsed&quot;:546,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1660217243377,&quot;user&quot;:{&quot;displayName&quot;:&quot;Ralf G&quot;,&quot;userId&quot;:&quot;10896823604442718497&quot;},&quot;user_tz&quot;:-120}" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> filter_peaks(msp_spectrum):</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Filter spectrum peaks to only charge 1 b- and y ions."""</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generate the boolean mask</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    get_mask <span class="op">=</span> np.vectorize(<span class="kw">lambda</span> x: <span class="bu">bool</span>(re.match(<span class="st">"^(b|y)([0-9]+)\/"</span>, x)))</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    mask <span class="op">=</span> get_mask(msp_spectrum[<span class="st">"annotation"</span>])</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Apply the mask to each peak array</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    msp_spectrum[<span class="st">"annotation"</span>] <span class="op">=</span> msp_spectrum[<span class="st">"annotation"</span>][mask]</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    msp_spectrum[<span class="st">"mz"</span>] <span class="op">=</span> msp_spectrum[<span class="st">"mz"</span>][mask]</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    msp_spectrum[<span class="st">"intensity"</span>] <span class="op">=</span> msp_spectrum[<span class="st">"intensity"</span>][mask]</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> msp_spectrum</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>spectrum <span class="op">=</span> filter_peaks(spectrum)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-executioninfo="{&quot;elapsed&quot;:12,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1660217243377,&quot;user&quot;:{&quot;displayName&quot;:&quot;Ralf G&quot;,&quot;userId&quot;:&quot;10896823604442718497&quot;},&quot;user_tz&quot;:-120}" data-outputid="47e29e14-aba7-4a37-fde3-569b4db5e512" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">6</span>))</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>sup.spectrum(</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    sus.MsmsSpectrum(</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>        identifier<span class="op">=</span>spectrum[<span class="st">"Name"</span>],</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>        precursor_mz<span class="op">=</span><span class="bu">float</span>(spectrum[<span class="st">"Parent"</span>]),</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>        precursor_charge<span class="op">=</span><span class="bu">int</span>(spectrum[<span class="st">"Charge"</span>]),</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>        mz<span class="op">=</span>spectrum[<span class="st">"mz"</span>],</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>        intensity<span class="op">=</span>spectrum[<span class="st">"intensity"</span>],</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>        peptide<span class="op">=</span>spectrum[<span class="st">"sequence"</span>]</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    ).annotate_peptide_fragments(<span class="dv">25</span>, <span class="st">"ppm"</span>)</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="nist-1-parsing-spectral-library_files/figure-html/cell-19-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>Now, the spectrum indeed only contains singly charged b- and y-ions. Note the nice gausian-like distributions of equally-distanced b- and y-ions. This is a feature specific for this peptide spectrum. Can you guess why? Tip: Take a look at the peptide sequence.</p>
+<p>Currently, all peaks are listed together in single numpy arrays, sorted by m/z values. For training a machine learning model, we need the intensity values in a more suitable structure. As we are planning to only predict simple singly charged b- and y-ions, we can create two arrays — one for each ion type — with the ions sorted by ion number:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>parsed_intensity <span class="op">=</span> {</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"b"</span>: [b1, b2, b3, b4 ... bN],</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"y"</span>: [y1, y2, y3, y4 ... yN]</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>where N is the total number of possible fragments for that peptide sequence. Quick question: What value will N have for our peptide with sequence <code>AAAAAAAAAAAAAAAGAGAGAK</code>?</p>
+<p>The following function builds upon the <code>filter_peaks</code> function to not only filter the correct ion types, but also order them properly:</p>
+<div class="cell" data-executioninfo="{&quot;elapsed&quot;:348,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1660227304200,&quot;user&quot;:{&quot;displayName&quot;:&quot;Ralf G&quot;,&quot;userId&quot;:&quot;10896823604442718497&quot;},&quot;user_tz&quot;:-120}" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> parse_peaks(msp_spectrum, ion_type):</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generate vectorized functions</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    get_ions <span class="op">=</span> np.vectorize(<span class="kw">lambda</span> x: <span class="bu">bool</span>(re.match(<span class="ss">f"^(</span><span class="sc">{</span>ion_type<span class="sc">}</span><span class="ss">)([0-9]+)\/"</span>, x)))</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    get_ion_order <span class="op">=</span> np.vectorize(<span class="kw">lambda</span> x: re.match(<span class="ss">f"^(</span><span class="sc">{</span>ion_type<span class="sc">}</span><span class="ss">)([0-9]+)\/"</span>, x)[<span class="dv">2</span>])</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get mask with requested ion types</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    mask <span class="op">=</span> get_ions(msp_spectrum[<span class="st">"annotation"</span>])</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create empty array with for all possible ions</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>    n_ions <span class="op">=</span> <span class="bu">len</span>(msp_spectrum[<span class="st">"sequence"</span>]) <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    parsed_intensity <span class="op">=</span> np.zeros(n_ions)</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check if any ions of this type are present</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> mask.<span class="bu">any</span>():</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Filter for ion type and sort</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>        ion_order <span class="op">=</span> get_ion_order(msp_spectrum[<span class="st">"annotation"</span>][mask]).astype(<span class="bu">int</span>) <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add ions to correct positions in new array</span></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>        parsed_intensity[ion_order] <span class="op">=</span> msp_spectrum[<span class="st">"intensity"</span>][mask]</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>        msp_spectrum[<span class="st">"parsed_intensity"</span>][ion_type] <span class="op">=</span> parsed_intensity</span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">KeyError</span>:</span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>        msp_spectrum[<span class="st">"parsed_intensity"</span>] <span class="op">=</span> {}</span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>        msp_spectrum[<span class="st">"parsed_intensity"</span>][ion_type] <span class="op">=</span> parsed_intensity</span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> msp_spectrum</span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>spectrum <span class="op">=</span> parse_peaks(spectrum, <span class="st">"b"</span>)</span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>spectrum <span class="op">=</span> parse_peaks(spectrum, <span class="st">"y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-executioninfo="{&quot;elapsed&quot;:2,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1660227305176,&quot;user&quot;:{&quot;displayName&quot;:&quot;Ralf G&quot;,&quot;userId&quot;:&quot;10896823604442718497&quot;},&quot;user_tz&quot;:-120}" data-outputid="472512c6-9fd5-4e38-937b-bd280d92e8c8" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>spectrum[<span class="st">'parsed_intensity'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<pre><code>{'b': array([0.        , 0.0940595 , 0.18064232, 0.20420307, 0.23347196,
+        0.2457854 , 0.23112106, 0.20064339, 0.16306745, 0.1246587 ,
+        0.08999325, 0.05416884, 0.        , 0.        , 0.        ,
+        0.        , 0.        , 0.        , 0.        , 0.        ,
+        0.        ]),
+ 'y': array([0.09027135, 0.03876459, 0.09092397, 0.07086667, 0.1299265 ,
+        0.09038813, 0.15890096, 0.13701038, 0.13768263, 0.14171469,
+        0.15388304, 0.16281605, 0.16425258, 0.15970773, 0.1443574 ,
+        0.12279043, 0.09483507, 0.05047642, 0.        , 0.        ,
+        0.        ])}</code></pre>
+</div>
+</div>
+<p>Great! These values are now ready to be used as prediction targets for a machine learning algorithm.</p>
+</section>
+</section>
+<section id="parse-the-full-spectral-library" class="level2">
+<h2 class="anchored" data-anchor-id="parse-the-full-spectral-library">1.4 Parse the full spectral library</h2>
+<p>Now that all functions for spectrum preparation are written, we can parse the full spectral library. Let’s first explore some of the basic statistics of this library.</p>
+<section id="exploring-basic-spectral-library-statistics" class="level3">
+<h3 class="anchored" data-anchor-id="exploring-basic-spectral-library-statistics">1.4.1 Exploring basic spectral library statistics</h3>
+<section id="total-number-of-spectra" class="level4">
+<h4 class="anchored" data-anchor-id="total-number-of-spectra">Total number of spectra</h4>
+<p>This one is easy, we quickly scan the number of lines starting with <code>Name:</code> in the file:</p>
+<div class="cell" data-executioninfo="{&quot;elapsed&quot;:15996,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1660228241148,&quot;user&quot;:{&quot;displayName&quot;:&quot;Ralf G&quot;,&quot;userId&quot;:&quot;10896823604442718497&quot;},&quot;user_tz&quot;:-120}" data-outputid="5137b8be-46ac-4930-f49f-55d0dc4883c3" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> msp_count_spectra(filename):</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Count number of spectra in MSP file."""</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    count <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> line <span class="kw">in</span> <span class="bu">open</span>(filename, <span class="st">"rt"</span>):</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> line.startswith(<span class="st">"Name: "</span>):</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>            count <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> count</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>n_spectra <span class="op">=</span> msp_count_spectra(<span class="st">"human_hcd_tryp_best.msp"</span>)</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(n_spectra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">398373</span>
+</pre>
+</div>
+</div>
+<p>For more statistics, we will have to read the full library. One advantage we have now, is that knowing the total number of spectra allows us to track the progress of reading the full MSP file (<code>progress.track</code>). To limit the amount of data we keep in memory (this full MSP file is almost 2GB!), we can process the intensity values of each spectrum while parsing and only keep the parsed data:</p>
+<div class="cell" data-outputid="0c96c0e4-a6a0-4b76-e1f0-6b4d2af7ee61" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>spectrum_list <span class="op">=</span> []</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> msp_spectrum <span class="kw">in</span> progress.track(</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    read_msp(<span class="st">"human_hcd_tryp_best.msp"</span>),</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    total<span class="op">=</span>n_spectra,</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    description<span class="op">=</span><span class="st">"Parsing  MSP file..."</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>):</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Process intensities</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    msp_spectrum <span class="op">=</span> tic_normalize(msp_spectrum)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    msp_spectrum <span class="op">=</span> sqrt_transform(msp_spectrum)</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    msp_spectrum <span class="op">=</span> parse_peaks(msp_spectrum, <span class="st">"b"</span>)  <span class="co"># Adds `parsed_intensity` &gt; `b`</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>    msp_spectrum <span class="op">=</span> parse_peaks(msp_spectrum, <span class="st">"y"</span>)  <span class="co"># Adds `parsed_intensity` &gt; `y`</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Parse metadata</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>    spectrum <span class="op">=</span> {</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">"sequence"</span>: msp_spectrum[<span class="st">"sequence"</span>],</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">"modifications"</span>: msp_spectrum[<span class="st">"Mods"</span>],</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">"charge"</span>: <span class="bu">int</span>(msp_spectrum[<span class="st">"Charge"</span>]),</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"nce"</span>: <span class="bu">float</span>(msp_spectrum[<span class="st">"NCE"</span>]),</span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"parsed_intensity"</span>: msp_spectrum[<span class="st">"parsed_intensity"</span>]</span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Append to list</span></span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>    spectrum_list.append(spectrum)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">c:\Users\ralfg\miniconda3\envs\proteomicsml\lib\site-packages\rich\live.py:229: UserWarning: install "ipywidgets" 
+for Jupyter support
+  warnings.warn('install "ipywidgets" for Jupyter support')
+</pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"></pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"></pre>
+</div>
+</div>
+<p>Generating a Pandas DataFrame from the list of spectrum dictionaries, allows us to easily explore the full dataset:</p>
+<div class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>spectrum_df <span class="op">=</span> pd.DataFrame(spectrum_list)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>spectrum_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>sequence</th>
+      <th>modifications</th>
+      <th>charge</th>
+      <th>nce</th>
+      <th>parsed_intensity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>AAAAAAAAAAAAAAAGAGAGAK</td>
+      <td>0</td>
+      <td>2</td>
+      <td>29.43</td>
+      <td>{'b': [0.0, 0.09405950456857681, 0.18064232170...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>AAAAAAAAAAAAAAAGAGAGAK</td>
+      <td>0</td>
+      <td>3</td>
+      <td>29.22</td>
+      <td>{'b': [0.0, 0.21546243131160736, 0.21998108923...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>AAAAAAAAAAAPPAPPEGASPGDSAR</td>
+      <td>0</td>
+      <td>2</td>
+      <td>27.80</td>
+      <td>{'b': [0.0, 0.0, 0.056045547127723694, 0.10302...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>AAAAAAAAAAAPPAPPEGASPGDSAR</td>
+      <td>0</td>
+      <td>3</td>
+      <td>30.00</td>
+      <td>{'b': [0.0, 0.04407356679439545, 0.07545641809...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>AAAAAAAAAASGAAIPPLIPPR</td>
+      <td>0</td>
+      <td>3</td>
+      <td>0.00</td>
+      <td>{'b': [0.0, 0.10330961644649506, 0.15637055039...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>398368</th>
+      <td>YYYYHR</td>
+      <td>0</td>
+      <td>2</td>
+      <td>30.20</td>
+      <td>{'b': [0.0, 0.14489535987377167, 0.0, 0.0, 0.0...</td>
+    </tr>
+    <tr>
+      <th>398369</th>
+      <td>YYYYHR</td>
+      <td>0</td>
+      <td>3</td>
+      <td>37.52</td>
+      <td>{'b': [0.018267542123794556, 0.076188296079635...</td>
+    </tr>
+    <tr>
+      <th>398370</th>
+      <td>YYYYMWK</td>
+      <td>0</td>
+      <td>2</td>
+      <td>31.00</td>
+      <td>{'b': [0.0, 0.22406582534313202, 0.11588517576...</td>
+    </tr>
+    <tr>
+      <th>398371</th>
+      <td>YYYYMWK</td>
+      <td>1(4,M,Oxidation)</td>
+      <td>2</td>
+      <td>30.00</td>
+      <td>{'b': [0.0, 0.14110229909420013, 0.0, 0.0, 0.0...</td>
+    </tr>
+    <tr>
+      <th>398372</th>
+      <td>YYYYWHLR</td>
+      <td>0</td>
+      <td>3</td>
+      <td>36.22</td>
+      <td>{'b': [0.0, 0.0886630266904831, 0.0, 0.0, 0.0,...</td>
+    </tr>
+  </tbody>
+</table>
+<p>398373 rows × 5 columns</p>
+</div>
+</div>
+</div>
+<p>Making a Pandas DataFrame out of <code>spectrum_list</code> is so simple because it is a list of consistent dictionaries.</p>
+</section>
+<section id="precursor-charge-state" class="level4">
+<h4 class="anchored" data-anchor-id="precursor-charge-state">Precursor charge state</h4>
+<p>A different precursor charge state can heavily alter peptide fragmentation. It is therefore important to have a representative amount of peptide spectra for each charge state in the spectral library.</p>
+<div class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>sns.countplot(data<span class="op">=</span>spectrum_df, x<span class="op">=</span><span class="st">"charge"</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="nist-1-parsing-spectral-library_files/figure-html/cell-25-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="peptide-length" class="level4">
+<h4 class="anchored" data-anchor-id="peptide-length">Peptide length</h4>
+<p>Idem for the length of the peptide sequence. It usually makes sense to filter the train dataset for peptides within a certain length range.</p>
+<div class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>sns.kdeplot(spectrum_df[<span class="st">"sequence"</span>].<span class="bu">str</span>.<span class="bu">len</span>())</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Sequence length"</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="nist-1-parsing-spectral-library_files/figure-html/cell-26-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>spectrum_df[<span class="st">"sequence"</span>].<span class="bu">str</span>.<span class="bu">len</span>().describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="27">
+<pre><code>count    398373.000000
+mean         15.541467
+std           6.506968
+min           6.000000
+25%          11.000000
+50%          14.000000
+75%          19.000000
+max          50.000000
+Name: sequence, dtype: float64</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>(spectrum_df[<span class="st">"sequence"</span>].<span class="bu">str</span>.<span class="bu">len</span>() <span class="op">&gt;</span> <span class="dv">35</span>).value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="28">
+<pre><code>False    393429
+True       4944
+Name: sequence, dtype: int64</code></pre>
+</div>
+</div>
+<p>For this dataset, the minimum peptide length is 6, while the maximum is 50. Nevertheless, only</p>
+<section id="peptide-modifications" class="level5">
+<h5 class="anchored" data-anchor-id="peptide-modifications">Peptide modifications</h5>
+<p>Likewise, peptide modifications can influence peptide fragmentation. How many of the spectra in our library come from modified peptides?</p>
+<div class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>modification_state <span class="op">=</span> (spectrum_df[<span class="st">"modifications"</span>] <span class="op">==</span> <span class="st">"0"</span>).<span class="bu">map</span>({<span class="va">True</span>: <span class="st">"Unmodified"</span>, <span class="va">False</span>: <span class="st">"Modified"</span>})</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>sns.countplot(x<span class="op">=</span>modification_state)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="nist-1-parsing-spectral-library_files/figure-html/cell-29-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="collision-energy" class="level4">
+<h4 class="anchored" data-anchor-id="collision-energy">Collision energy</h4>
+<div class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>sns.histplot(spectrum_df[<span class="st">"nce"</span>], bins<span class="op">=</span><span class="dv">30</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"NCE"</span>)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="nist-1-parsing-spectral-library_files/figure-html/cell-30-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>Note the range of the x-axis, which was automatically chosen by the plotting library. It seems to start at 0, which indicates that some values are very low…</p>
+<div class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>(spectrum_df[<span class="st">"nce"</span>] <span class="op">==</span> <span class="fl">0.0</span>).value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="31">
+<pre><code>False    398103
+True        270
+Name: nce, dtype: int64</code></pre>
+</div>
+</div>
+<p>Indeed, it seems that some peptide spectra have collision energy (CE) <code>0</code>, which most likely means that the true collision energy setting is not known. We can either opt to not use CE as a feature for training, or to remove these spectra from the dataset. Including these values would introduce unwanted noise in the training data.</p>
+</section>
+<section id="duplicate-entries" class="level4">
+<h4 class="anchored" data-anchor-id="duplicate-entries">Duplicate entries?</h4>
+<p>An important aspect to compiling training data for machine learning is whether or not entries are duplicated. With spectral libraries, matters are complicated by multiple levels of “uniqueness”:</p>
+<ul>
+<li>Peptide level: Unique sequence</li>
+<li>Peptidoform level: Unique sequence &amp; modifications</li>
+<li>Precursor level: Unique sequence &amp; modifications &amp; charge</li>
+</ul>
+<p>More parameters can be included for “uniqueness”, such as instrument and acquisition properties: CE, fragmentation method (beam-type CID (“HCD”), trap-type CID, ETD, EAD…), acquisition method (Orbitrap, ion trap, TOF…). In this tutorial, we are using only HCD Orbitrap data, which makes things a bit simpler. Nevertheless, this will impact the application domain of the final models.</p>
+<div class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Level"</span>: [</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Full library"</span>,</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Precursor"</span>,</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Peptidoform"</span>,</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Peptide"</span>,</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Count"</span>: [</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>        spectrum_df.shape[<span class="dv">0</span>],</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>        spectrum_df[[<span class="st">"sequence"</span>, <span class="st">"modifications"</span>, <span class="st">"charge"</span>]].drop_duplicates().shape[<span class="dv">0</span>],</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>        spectrum_df[[<span class="st">"sequence"</span>, <span class="st">"modifications"</span>]].drop_duplicates().shape[<span class="dv">0</span>],</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>        spectrum_df[<span class="st">"sequence"</span>].unique().shape[<span class="dv">0</span>],</span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>sns.barplot(data<span class="op">=</span>counts, x<span class="op">=</span><span class="st">"Level"</span>, y<span class="op">=</span><span class="st">"Count"</span>)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="nist-1-parsing-spectral-library_files/figure-html/cell-33-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>counts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="34">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Level</th>
+      <th>Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Full library</td>
+      <td>398373</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Precursor</td>
+      <td>398373</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Peptidoform</td>
+      <td>292061</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Peptide</td>
+      <td>257202</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Seems like this library was filtered for uniqueness on the precursor level.</p>
+</section>
+</section>
+<section id="selecting-data" class="level3">
+<h3 class="anchored" data-anchor-id="selecting-data">1.4.1 Selecting data</h3>
+<p>For selecting training data, we will apply some additional filters:</p>
+<ul>
+<li>While plain amino acid sequences are straightforward to encode, peptide modifications complicate matters. For simplicity’s sake, we will therefore not open the “can of modifications” in this tutorial.</li>
+<li>As we might want to use CE as a feature, we can remove the small amount of entries that are missing the a CE value</li>
+<li>To make the training task a bit less complex, we can limit peptide length to 35. Although the maximum peptide length in this library is 50, only 4944 spectra have a peptide length of over 35.</li>
+</ul>
+<div class="cell" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>spectrum_df <span class="op">=</span> spectrum_df[</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>    (modification_state <span class="op">==</span> <span class="st">"Unmodified"</span>) <span class="op">&amp;</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    (spectrum_df[<span class="st">"sequence"</span>].<span class="bu">str</span>.<span class="bu">len</span>() <span class="op">&lt;=</span> <span class="dv">35</span>) <span class="op">&amp;</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>    (spectrum_df[<span class="st">"nce"</span>] <span class="op">!=</span> <span class="dv">0</span>)</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s see how many spectra we retained:</p>
+<div class="cell" data-execution_count="36">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>spectrum_df.shape[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="36">
+<pre><code>270440</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="52">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>spectrum</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="52">
+<pre><code>{'sequence': 'YYYYWHLR',
+ 'modifications': '0',
+ 'charge': 3,
+ 'nce': 36.22,
+ 'parsed_intensity': {'b': array([0.        , 0.08866303, 0.        , 0.        , 0.        ,
+         0.        , 0.        ]),
+  'y': array([0.16996175, 0.12056533, 0.16980277, 0.20397678, 0.18093778,
+         0.09508998, 0.        ])}}</code></pre>
+</div>
+</div>
+</section>
+<section id="train-validation-test-split" class="level3">
+<h3 class="anchored" data-anchor-id="train-validation-test-split">1.4.2 Train / validation / test split</h3>
+<p>Now that we have our data, we can filter it to a final set for training and validation and a final set for testing. A small reminder of what these terms mean:</p>
+<ul>
+<li>Training data: For training the model</li>
+<li>Validation data: For validating the model while optimizing hyperparameters</li>
+<li>Testing data: For final testing of model that was trained with the best hyperparameters (according to the validation data), right before deployment</li>
+</ul>
+<p>The testing data cannot be used until a final model is trained, and serves as a last test before deployment. It should not be used before a final model is selected.</p>
+<div class="cell" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>np.random.seed()  <span class="co"># Why is this needed?</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>train_val_peptides, test_peptides <span class="op">=</span> train_test_split(spectrum_df[<span class="st">"sequence"</span>].unique(), train_size<span class="op">=</span><span class="fl">0.9</span>)</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>train_val_spectra <span class="op">=</span> spectrum_df[spectrum_df[<span class="st">"sequence"</span>].isin(train_val_peptides)]</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>test_spectra <span class="op">=</span> spectrum_df[spectrum_df[<span class="st">"sequence"</span>].isin(test_peptides)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Question: Why do we not apply <code>train_test_split()</code> directly on <code>spectrum_df</code>, but instead on <code>spectrum_df["sequence"].unique()</code>?</p>
+
+
+</section>
+</section>
+
+<p><small><i>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons CC-BY 4.0</a> license.</i></small></p></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/https:\/\/proteomicsml\.org/);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

@@ -1,0 +1,1827 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.78">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Ralf Gabriels">
+<meta name="dcterms.date" content="2022-09-10">
+
+<title>ProteomicsML.org - NIST (part 2): Traditional ML: Gradient boosting</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-VVRMZHT2W2"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+ 
+  gtag('consent', 'default', {
+    'ad_storage': 'denied',
+    'analytics_storage': 'denied'
+  });
+gtag('config', 'G-VVRMZHT2W2', { 'anonymize_ip': true});
+</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<meta property="og:title" content="ProteomicsML.org - NIST (part 2): Traditional ML: Gradient boosting">
+<meta property="og:description" content="Let’s test it with a single peptide:">
+<meta property="og:site-name" content="ProteomicsML.org">
+<meta name="twitter:title" content="ProteomicsML.org - NIST (part 2): Traditional ML: Gradient boosting">
+<meta name="twitter:description" content="Let’s test it with a single peptide:">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">ProteomicsML.org</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../../index.html" aria-current="page">Home</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../publication.html">Publication</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../tutorials/index.html">Tutorials</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../datasets/index.html">Datasets</a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/ProteomicsML"><i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/ProteomicsML"><i class="bi bi-twitter" role="img" aria-label="Twitter">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">NIST (part 2): Traditional ML: Gradient boosting</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">Home</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../publication.html" class="sidebar-item-text sidebar-link">Publication</a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../tutorials/index.html" class="sidebar-item-text sidebar-link">Tutorials</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Fragmentation</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/fragmentation/nist-1-parsing-spectral-library.html" class="sidebar-item-text sidebar-link">NIST (part 1): Parsing the spectral library</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/fragmentation/nist-2-traditional-ml-gradient-boosting.html" class="sidebar-item-text sidebar-link active">NIST (part 2): Traditional ML: Gradient boosting</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/fragmentation/nist-3-deep-learning-lstm.html" class="sidebar-item-text sidebar-link">NIST (part 3): Deep learning: BiLSTM</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/fragmentation/proteometools-prosit.html" class="sidebar-item-text sidebar-link">Prosit-style GRU with ProteomeTools data</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">Ion mobility</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/ionmobility/Meier.html" class="sidebar-item-text sidebar-link">Tutorial - predicting CCS values for TIMS data</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">Retention time</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/retentiontime/DLomix Prosit.html" class="sidebar-item-text sidebar-link">DLOmix Prosit</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/retentiontime/Manual Embedding.html" class="sidebar-item-text sidebar-link">Manual embedding</a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../datasets/index.html" class="sidebar-item-text sidebar-link">Datasets</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">Fragmentation</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../datasets/fragmentation/NIST.html" class="sidebar-item-text sidebar-link">NIST Peptide libraries</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../datasets/fragmentation/ProteomeTools_FI.html" class="sidebar-item-text sidebar-link">ProteomeTools</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">Ion mobility</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../datasets/ionmobility/Meier_TIMS.html" class="sidebar-item-text sidebar-link">Meier et al.&nbsp;TIMS</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../datasets/ionmobility/VanPuyvelde_TWIMS.html" class="sidebar-item-text sidebar-link">Van Puyvelde et al.&nbsp;TWIMS</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">Retention time</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../datasets/retentiontime/DLOmix.html" class="sidebar-item-text sidebar-link">DLOmix</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../datasets/retentiontime/ProteomeTools_RT.html" class="sidebar-item-text sidebar-link">ProteomeTools</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../datasets/retentiontime/Sharma_HeLa_RT.html" class="sidebar-item-text sidebar-link">Sharma et al.&nbsp;HeLa</a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#feature-engineering" id="toc-feature-engineering" class="nav-link active" data-scroll-target="#feature-engineering">2.1 Feature engineering</a></li>
+  <li><a href="#getting-the-target-intensities" id="toc-getting-the-target-intensities" class="nav-link" data-scroll-target="#getting-the-target-intensities">2.2 Getting the target intensities</a></li>
+  <li><a href="#hyperparameter-optimization-and-model-selection" id="toc-hyperparameter-optimization-and-model-selection" class="nav-link" data-scroll-target="#hyperparameter-optimization-and-model-selection">2.3 Hyperparameter optimization and model selection</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.dev/ProteomicsML/ProteomicsML/blob/main/tutorials/fragmentation/nist-2-traditional-ml-gradient-boosting.ipynb" class="toc-action">Edit this page</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">NIST (part 2): Traditional ML: Gradient boosting</h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliations</div>
+  
+    <div class="quarto-title-meta-contents">
+    Ralf Gabriels <a href="https://orcid.org/0000-0002-1679-1711" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            VIB-UGent Center for Medical Biotechnology, VIB, Belgium
+          </p>
+        <p class="affiliation">
+            Department of Biomolecular Medicine, Ghent University, Belgium
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 10, 2022</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<section id="feature-engineering" class="level2">
+<h2 class="anchored" data-anchor-id="feature-engineering">2.1 Feature engineering</h2>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>amino_acids <span class="op">=</span> <span class="bu">list</span>(<span class="st">"ACDEFGHIKLMNPQRSTVWY"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>aa_properties <span class="op">=</span> {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"basicity"</span>: np.array([<span class="dv">37</span>,<span class="dv">35</span>,<span class="dv">59</span>,<span class="dv">129</span>,<span class="dv">94</span>,<span class="dv">0</span>,<span class="dv">210</span>,<span class="dv">81</span>,<span class="dv">191</span>,<span class="dv">81</span>,<span class="dv">106</span>,<span class="dv">101</span>,<span class="dv">117</span>,<span class="dv">115</span>,<span class="dv">343</span>,<span class="dv">49</span>,<span class="dv">90</span>,<span class="dv">60</span>,<span class="dv">134</span>,<span class="dv">104</span>]),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"helicity"</span>: np.array([<span class="dv">68</span>,<span class="dv">23</span>,<span class="dv">33</span>,<span class="dv">29</span>,<span class="dv">70</span>,<span class="dv">58</span>,<span class="dv">41</span>,<span class="dv">73</span>,<span class="dv">32</span>,<span class="dv">73</span>,<span class="dv">66</span>,<span class="dv">38</span>,<span class="dv">0</span>,<span class="dv">40</span>,<span class="dv">39</span>,<span class="dv">44</span>,<span class="dv">53</span>,<span class="dv">71</span>,<span class="dv">51</span>,<span class="dv">55</span>]),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"hydrophobicity"</span>: np.array([<span class="dv">51</span>,<span class="dv">75</span>,<span class="dv">25</span>,<span class="dv">35</span>,<span class="dv">100</span>,<span class="dv">16</span>,<span class="dv">3</span>,<span class="dv">94</span>,<span class="dv">0</span>,<span class="dv">94</span>,<span class="dv">82</span>,<span class="dv">12</span>,<span class="dv">0</span>,<span class="dv">22</span>,<span class="dv">22</span>,<span class="dv">21</span>,<span class="dv">39</span>,<span class="dv">80</span>,<span class="dv">98</span>,<span class="dv">70</span>]),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pI"</span>: np.array([<span class="dv">32</span>,<span class="dv">23</span>,<span class="dv">0</span>,<span class="dv">4</span>,<span class="dv">27</span>,<span class="dv">32</span>,<span class="dv">48</span>,<span class="dv">32</span>,<span class="dv">69</span>,<span class="dv">32</span>,<span class="dv">29</span>,<span class="dv">26</span>,<span class="dv">35</span>,<span class="dv">28</span>,<span class="dv">79</span>,<span class="dv">29</span>,<span class="dv">28</span>,<span class="dv">31</span>,<span class="dv">31</span>,<span class="dv">28</span>]),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>properties_df <span class="op">=</span> pd.DataFrame(aa_properties, index<span class="op">=</span>amino_acids)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>properties_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>basicity</th>
+      <th>helicity</th>
+      <th>hydrophobicity</th>
+      <th>pI</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>A</th>
+      <td>37</td>
+      <td>68</td>
+      <td>51</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>C</th>
+      <td>35</td>
+      <td>23</td>
+      <td>75</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <th>D</th>
+      <td>59</td>
+      <td>33</td>
+      <td>25</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>E</th>
+      <td>129</td>
+      <td>29</td>
+      <td>35</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>F</th>
+      <td>94</td>
+      <td>70</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>G</th>
+      <td>0</td>
+      <td>58</td>
+      <td>16</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>H</th>
+      <td>210</td>
+      <td>41</td>
+      <td>3</td>
+      <td>48</td>
+    </tr>
+    <tr>
+      <th>I</th>
+      <td>81</td>
+      <td>73</td>
+      <td>94</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>K</th>
+      <td>191</td>
+      <td>32</td>
+      <td>0</td>
+      <td>69</td>
+    </tr>
+    <tr>
+      <th>L</th>
+      <td>81</td>
+      <td>73</td>
+      <td>94</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>M</th>
+      <td>106</td>
+      <td>66</td>
+      <td>82</td>
+      <td>29</td>
+    </tr>
+    <tr>
+      <th>N</th>
+      <td>101</td>
+      <td>38</td>
+      <td>12</td>
+      <td>26</td>
+    </tr>
+    <tr>
+      <th>P</th>
+      <td>117</td>
+      <td>0</td>
+      <td>0</td>
+      <td>35</td>
+    </tr>
+    <tr>
+      <th>Q</th>
+      <td>115</td>
+      <td>40</td>
+      <td>22</td>
+      <td>28</td>
+    </tr>
+    <tr>
+      <th>R</th>
+      <td>343</td>
+      <td>39</td>
+      <td>22</td>
+      <td>79</td>
+    </tr>
+    <tr>
+      <th>S</th>
+      <td>49</td>
+      <td>44</td>
+      <td>21</td>
+      <td>29</td>
+    </tr>
+    <tr>
+      <th>T</th>
+      <td>90</td>
+      <td>53</td>
+      <td>39</td>
+      <td>28</td>
+    </tr>
+    <tr>
+      <th>V</th>
+      <td>60</td>
+      <td>71</td>
+      <td>80</td>
+      <td>31</td>
+    </tr>
+    <tr>
+      <th>W</th>
+      <td>134</td>
+      <td>51</td>
+      <td>98</td>
+      <td>31</td>
+    </tr>
+    <tr>
+      <th>Y</th>
+      <td>104</td>
+      <td>55</td>
+      <td>70</td>
+      <td>28</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Peptide input</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Feature engineering settings</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>properties <span class="op">=</span> np.array([</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">37</span>,<span class="dv">35</span>,<span class="dv">59</span>,<span class="dv">129</span>,<span class="dv">94</span>,<span class="dv">0</span>,<span class="dv">210</span>,<span class="dv">81</span>,<span class="dv">191</span>,<span class="dv">81</span>,<span class="dv">106</span>,<span class="dv">101</span>,<span class="dv">117</span>,<span class="dv">115</span>,<span class="dv">343</span>,<span class="dv">49</span>,<span class="dv">90</span>,<span class="dv">60</span>,<span class="dv">134</span>,<span class="dv">104</span>],  <span class="co"># basicity</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">68</span>,<span class="dv">23</span>,<span class="dv">33</span>,<span class="dv">29</span>,<span class="dv">70</span>,<span class="dv">58</span>,<span class="dv">41</span>,<span class="dv">73</span>,<span class="dv">32</span>,<span class="dv">73</span>,<span class="dv">66</span>,<span class="dv">38</span>,<span class="dv">0</span>,<span class="dv">40</span>,<span class="dv">39</span>,<span class="dv">44</span>,<span class="dv">53</span>,<span class="dv">71</span>,<span class="dv">51</span>,<span class="dv">55</span>],  <span class="co"># helicity</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">51</span>,<span class="dv">75</span>,<span class="dv">25</span>,<span class="dv">35</span>,<span class="dv">100</span>,<span class="dv">16</span>,<span class="dv">3</span>,<span class="dv">94</span>,<span class="dv">0</span>,<span class="dv">94</span>,<span class="dv">82</span>,<span class="dv">12</span>,<span class="dv">0</span>,<span class="dv">22</span>,<span class="dv">22</span>,<span class="dv">21</span>,<span class="dv">39</span>,<span class="dv">80</span>,<span class="dv">98</span>,<span class="dv">70</span>],  <span class="co"># hydrophobicity</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">32</span>,<span class="dv">23</span>,<span class="dv">0</span>,<span class="dv">4</span>,<span class="dv">27</span>,<span class="dv">32</span>,<span class="dv">48</span>,<span class="dv">32</span>,<span class="dv">69</span>,<span class="dv">32</span>,<span class="dv">29</span>,<span class="dv">26</span>,<span class="dv">35</span>,<span class="dv">28</span>,<span class="dv">79</span>,<span class="dv">29</span>,<span class="dv">28</span>,<span class="dv">31</span>,<span class="dv">31</span>,<span class="dv">28</span>],  <span class="co"># pI</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>quantiles <span class="op">=</span> [<span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>]</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>aa_indices <span class="op">=</span> {aa: i <span class="cf">for</span> i, aa <span class="kw">in</span>  <span class="bu">enumerate</span>(<span class="st">"ACDEFGHIKLMNPQRSTVWY"</span>)}</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>aa_to_index <span class="op">=</span> np.vectorize(<span class="kw">lambda</span> aa: aa_indices[aa])</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> encode_peptide(sequence, charge):</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 4 properties * 5 quantiles * 3 ion types + 4 properties * 4 site + 2 global</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    n_features <span class="op">=</span> <span class="dv">78</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    n_ions <span class="op">=</span> <span class="bu">len</span>(sequence) <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Encode amino acids as integers to index amino acid properties for peptide sequence</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    peptide_indexed <span class="op">=</span> aa_to_index(np.array(<span class="bu">list</span>(sequence)))</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    peptide_properties <span class="op">=</span> properties[:, peptide_indexed]</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Empty peptide_features array</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    peptide_features <span class="op">=</span> np.full((n_ions, n_features), np.nan)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> b_ion_number <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n_ions <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Calculate quantiles of features across peptide, b-ion, and y-ion</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>        peptide_quantiles <span class="op">=</span> np.hstack(</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>            np.quantile(peptide_properties, quantiles, axis<span class="op">=</span><span class="dv">1</span>).transpose()</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>        b_ion_quantiles <span class="op">=</span> np.hstack(</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>            np.quantile(peptide_properties[:,:b_ion_number], quantiles, axis<span class="op">=</span><span class="dv">1</span>).transpose()</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>        y_ion_quantiles <span class="op">=</span> np.hstack(</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>            np.quantile(peptide_properties[:,b_ion_number:], quantiles, axis<span class="op">=</span><span class="dv">1</span>).transpose()</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Properties on specific sites: nterm, frag-1, frag+1, cterm</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>        specific_site_indexes <span class="op">=</span> np.array([<span class="dv">0</span>, b_ion_number <span class="op">-</span> <span class="dv">1</span>, b_ion_number, <span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>        specific_site_properties <span class="op">=</span> np.hstack(peptide_properties[:, specific_site_indexes].transpose())</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Global features: Length and charge</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>        global_features <span class="op">=</span> np.array([<span class="bu">len</span>(sequence), <span class="bu">int</span>(charge)])</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Assign to peptide_features array</span></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>        peptide_features[b_ion_number <span class="op">-</span> <span class="dv">1</span>, <span class="dv">0</span>:<span class="dv">20</span>] <span class="op">=</span> peptide_quantiles</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>        peptide_features[b_ion_number <span class="op">-</span> <span class="dv">1</span>, <span class="dv">20</span>:<span class="dv">40</span>] <span class="op">=</span> b_ion_quantiles</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>        peptide_features[b_ion_number <span class="op">-</span> <span class="dv">1</span>, <span class="dv">40</span>:<span class="dv">60</span>] <span class="op">=</span> y_ion_quantiles</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>        peptide_features[b_ion_number <span class="op">-</span> <span class="dv">1</span>, <span class="dv">60</span>:<span class="dv">76</span>] <span class="op">=</span> specific_site_properties</span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>        peptide_features[b_ion_number <span class="op">-</span> <span class="dv">1</span>, <span class="dv">76</span>:<span class="dv">78</span>] <span class="op">=</span> global_features</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> peptide_features</span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_feature_names():</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>    feature_names <span class="op">=</span> []</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> level <span class="kw">in</span> [<span class="st">"peptide"</span>, <span class="st">"b"</span>, <span class="st">"y"</span>]:</span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> aa_property <span class="kw">in</span> [<span class="st">"basicity"</span>, <span class="st">"helicity"</span>, <span class="st">"hydrophobicity"</span>, <span class="st">"pi"</span>]:</span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> quantile <span class="kw">in</span> [<span class="st">"min"</span>, <span class="st">"q1"</span>, <span class="st">"q2"</span>, <span class="st">"q3"</span>, <span class="st">"max"</span>]:</span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>                feature_names.append(<span class="st">"_"</span>.join([level, aa_property, quantile]))</span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> site <span class="kw">in</span> [<span class="st">"nterm"</span>, <span class="st">"fragmin1"</span>, <span class="st">"fragplus1"</span>, <span class="st">"cterm"</span>]:</span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> aa_property <span class="kw">in</span> [<span class="st">"basicity"</span>, <span class="st">"helicity"</span>, <span class="st">"hydrophobicity"</span>, <span class="st">"pi"</span>]:</span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>            feature_names.append(<span class="st">"_"</span>.join([site, aa_property]))</span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>    feature_names.extend([<span class="st">"length"</span>, <span class="st">"charge"</span>])</span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> feature_names</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s test it with a single peptide:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>peptide_features <span class="op">=</span> pd.DataFrame(encode_peptide(<span class="st">"RALFGARIELS"</span>, <span class="dv">2</span>), columns<span class="op">=</span>generate_feature_names())</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>peptide_features</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>peptide_basicity_min</th>
+      <th>peptide_basicity_q1</th>
+      <th>peptide_basicity_q2</th>
+      <th>peptide_basicity_q3</th>
+      <th>peptide_basicity_max</th>
+      <th>peptide_helicity_min</th>
+      <th>peptide_helicity_q1</th>
+      <th>peptide_helicity_q2</th>
+      <th>peptide_helicity_q3</th>
+      <th>peptide_helicity_max</th>
+      <th>...</th>
+      <th>fragplus1_basicity</th>
+      <th>fragplus1_helicity</th>
+      <th>fragplus1_hydrophobicity</th>
+      <th>fragplus1_pi</th>
+      <th>cterm_basicity</th>
+      <th>cterm_helicity</th>
+      <th>cterm_hydrophobicity</th>
+      <th>cterm_pi</th>
+      <th>length</th>
+      <th>charge</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.0</td>
+      <td>43.0</td>
+      <td>81.0</td>
+      <td>111.5</td>
+      <td>343.0</td>
+      <td>29.0</td>
+      <td>41.5</td>
+      <td>68.0</td>
+      <td>71.5</td>
+      <td>73.0</td>
+      <td>...</td>
+      <td>37.0</td>
+      <td>68.0</td>
+      <td>51.0</td>
+      <td>32.0</td>
+      <td>49.0</td>
+      <td>44.0</td>
+      <td>21.0</td>
+      <td>29.0</td>
+      <td>11.0</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.0</td>
+      <td>43.0</td>
+      <td>81.0</td>
+      <td>111.5</td>
+      <td>343.0</td>
+      <td>29.0</td>
+      <td>41.5</td>
+      <td>68.0</td>
+      <td>71.5</td>
+      <td>73.0</td>
+      <td>...</td>
+      <td>81.0</td>
+      <td>73.0</td>
+      <td>94.0</td>
+      <td>32.0</td>
+      <td>49.0</td>
+      <td>44.0</td>
+      <td>21.0</td>
+      <td>29.0</td>
+      <td>11.0</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.0</td>
+      <td>43.0</td>
+      <td>81.0</td>
+      <td>111.5</td>
+      <td>343.0</td>
+      <td>29.0</td>
+      <td>41.5</td>
+      <td>68.0</td>
+      <td>71.5</td>
+      <td>73.0</td>
+      <td>...</td>
+      <td>94.0</td>
+      <td>70.0</td>
+      <td>100.0</td>
+      <td>27.0</td>
+      <td>49.0</td>
+      <td>44.0</td>
+      <td>21.0</td>
+      <td>29.0</td>
+      <td>11.0</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.0</td>
+      <td>43.0</td>
+      <td>81.0</td>
+      <td>111.5</td>
+      <td>343.0</td>
+      <td>29.0</td>
+      <td>41.5</td>
+      <td>68.0</td>
+      <td>71.5</td>
+      <td>73.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>58.0</td>
+      <td>16.0</td>
+      <td>32.0</td>
+      <td>49.0</td>
+      <td>44.0</td>
+      <td>21.0</td>
+      <td>29.0</td>
+      <td>11.0</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.0</td>
+      <td>43.0</td>
+      <td>81.0</td>
+      <td>111.5</td>
+      <td>343.0</td>
+      <td>29.0</td>
+      <td>41.5</td>
+      <td>68.0</td>
+      <td>71.5</td>
+      <td>73.0</td>
+      <td>...</td>
+      <td>37.0</td>
+      <td>68.0</td>
+      <td>51.0</td>
+      <td>32.0</td>
+      <td>49.0</td>
+      <td>44.0</td>
+      <td>21.0</td>
+      <td>29.0</td>
+      <td>11.0</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.0</td>
+      <td>43.0</td>
+      <td>81.0</td>
+      <td>111.5</td>
+      <td>343.0</td>
+      <td>29.0</td>
+      <td>41.5</td>
+      <td>68.0</td>
+      <td>71.5</td>
+      <td>73.0</td>
+      <td>...</td>
+      <td>343.0</td>
+      <td>39.0</td>
+      <td>22.0</td>
+      <td>79.0</td>
+      <td>49.0</td>
+      <td>44.0</td>
+      <td>21.0</td>
+      <td>29.0</td>
+      <td>11.0</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.0</td>
+      <td>43.0</td>
+      <td>81.0</td>
+      <td>111.5</td>
+      <td>343.0</td>
+      <td>29.0</td>
+      <td>41.5</td>
+      <td>68.0</td>
+      <td>71.5</td>
+      <td>73.0</td>
+      <td>...</td>
+      <td>81.0</td>
+      <td>73.0</td>
+      <td>94.0</td>
+      <td>32.0</td>
+      <td>49.0</td>
+      <td>44.0</td>
+      <td>21.0</td>
+      <td>29.0</td>
+      <td>11.0</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.0</td>
+      <td>43.0</td>
+      <td>81.0</td>
+      <td>111.5</td>
+      <td>343.0</td>
+      <td>29.0</td>
+      <td>41.5</td>
+      <td>68.0</td>
+      <td>71.5</td>
+      <td>73.0</td>
+      <td>...</td>
+      <td>129.0</td>
+      <td>29.0</td>
+      <td>35.0</td>
+      <td>4.0</td>
+      <td>49.0</td>
+      <td>44.0</td>
+      <td>21.0</td>
+      <td>29.0</td>
+      <td>11.0</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.0</td>
+      <td>43.0</td>
+      <td>81.0</td>
+      <td>111.5</td>
+      <td>343.0</td>
+      <td>29.0</td>
+      <td>41.5</td>
+      <td>68.0</td>
+      <td>71.5</td>
+      <td>73.0</td>
+      <td>...</td>
+      <td>81.0</td>
+      <td>73.0</td>
+      <td>94.0</td>
+      <td>32.0</td>
+      <td>49.0</td>
+      <td>44.0</td>
+      <td>21.0</td>
+      <td>29.0</td>
+      <td>11.0</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0.0</td>
+      <td>43.0</td>
+      <td>81.0</td>
+      <td>111.5</td>
+      <td>343.0</td>
+      <td>29.0</td>
+      <td>41.5</td>
+      <td>68.0</td>
+      <td>71.5</td>
+      <td>73.0</td>
+      <td>...</td>
+      <td>49.0</td>
+      <td>44.0</td>
+      <td>21.0</td>
+      <td>29.0</td>
+      <td>49.0</td>
+      <td>44.0</td>
+      <td>21.0</td>
+      <td>29.0</td>
+      <td>11.0</td>
+      <td>2.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>10 rows × 78 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="getting-the-target-intensities" class="level2">
+<h2 class="anchored" data-anchor-id="getting-the-target-intensities">2.2 Getting the target intensities</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>peptide_targets <span class="op">=</span>  pd.DataFrame({</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"b_target"</span>: spectrum[<span class="st">"parsed_intensity"</span>][<span class="st">"b"</span>],</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"y_target"</span>: spectrum[<span class="st">"parsed_intensity"</span>][<span class="st">"y"</span>],</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>peptide_targets</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>b_target</th>
+      <th>y_target</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.000000</td>
+      <td>0.169962</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.088663</td>
+      <td>0.120565</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.000000</td>
+      <td>0.169803</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.000000</td>
+      <td>0.203977</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.000000</td>
+      <td>0.180938</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.000000</td>
+      <td>0.095090</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>peptide_targets <span class="op">=</span>  pd.DataFrame({</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"b_target"</span>: spectrum[<span class="st">"parsed_intensity"</span>][<span class="st">"b"</span>],</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"y_target"</span>: spectrum[<span class="st">"parsed_intensity"</span>][<span class="st">"y"</span>][::<span class="op">-</span><span class="dv">1</span>],</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>peptide_targets</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>b_target</th>
+      <th>y_target</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.088663</td>
+      <td>0.095090</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.000000</td>
+      <td>0.180938</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.000000</td>
+      <td>0.203977</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.000000</td>
+      <td>0.169803</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.000000</td>
+      <td>0.120565</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.000000</td>
+      <td>0.169962</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> encode_peptide(spectrum[<span class="st">"sequence"</span>], spectrum[<span class="st">"charge"</span>])</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>targets <span class="op">=</span> np.stack([spectrum[<span class="st">"parsed_intensity"</span>][<span class="st">"b"</span>], spectrum[<span class="st">"parsed_intensity"</span>][<span class="st">"y"</span>][::<span class="op">-</span><span class="dv">1</span>]], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>spectrum_id <span class="op">=</span> np.full(shape<span class="op">=</span>(targets.shape[<span class="dv">0</span>], <span class="dv">1</span>), fill_value<span class="op">=</span><span class="dv">1</span>, dtype<span class="op">=</span>np.uint32)  <span class="co"># Repeat id for all ions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(np.hstack([spectrum_id, features, targets]), columns<span class="op">=</span>[<span class="st">"spectrum_id"</span>] <span class="op">+</span> generate_feature_names() <span class="op">+</span> [<span class="st">"b_target"</span>,  <span class="st">"y_target"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>spectrum_id</th>
+      <th>peptide_basicity_min</th>
+      <th>peptide_basicity_q1</th>
+      <th>peptide_basicity_q2</th>
+      <th>peptide_basicity_q3</th>
+      <th>peptide_basicity_max</th>
+      <th>peptide_helicity_min</th>
+      <th>peptide_helicity_q1</th>
+      <th>peptide_helicity_q2</th>
+      <th>peptide_helicity_q3</th>
+      <th>...</th>
+      <th>fragplus1_hydrophobicity</th>
+      <th>fragplus1_pi</th>
+      <th>cterm_basicity</th>
+      <th>cterm_helicity</th>
+      <th>cterm_hydrophobicity</th>
+      <th>cterm_pi</th>
+      <th>length</th>
+      <th>charge</th>
+      <th>b_target</th>
+      <th>y_target</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.0</td>
+      <td>81.0</td>
+      <td>104.0</td>
+      <td>104.0</td>
+      <td>153.0</td>
+      <td>343.0</td>
+      <td>39.0</td>
+      <td>48.5</td>
+      <td>55.0</td>
+      <td>55.0</td>
+      <td>...</td>
+      <td>70.0</td>
+      <td>28.0</td>
+      <td>343.0</td>
+      <td>39.0</td>
+      <td>22.0</td>
+      <td>79.0</td>
+      <td>8.0</td>
+      <td>3.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.0</td>
+      <td>81.0</td>
+      <td>104.0</td>
+      <td>104.0</td>
+      <td>153.0</td>
+      <td>343.0</td>
+      <td>39.0</td>
+      <td>48.5</td>
+      <td>55.0</td>
+      <td>55.0</td>
+      <td>...</td>
+      <td>70.0</td>
+      <td>28.0</td>
+      <td>343.0</td>
+      <td>39.0</td>
+      <td>22.0</td>
+      <td>79.0</td>
+      <td>8.0</td>
+      <td>3.0</td>
+      <td>0.088663</td>
+      <td>0.095090</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.0</td>
+      <td>81.0</td>
+      <td>104.0</td>
+      <td>104.0</td>
+      <td>153.0</td>
+      <td>343.0</td>
+      <td>39.0</td>
+      <td>48.5</td>
+      <td>55.0</td>
+      <td>55.0</td>
+      <td>...</td>
+      <td>70.0</td>
+      <td>28.0</td>
+      <td>343.0</td>
+      <td>39.0</td>
+      <td>22.0</td>
+      <td>79.0</td>
+      <td>8.0</td>
+      <td>3.0</td>
+      <td>0.000000</td>
+      <td>0.180938</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.0</td>
+      <td>81.0</td>
+      <td>104.0</td>
+      <td>104.0</td>
+      <td>153.0</td>
+      <td>343.0</td>
+      <td>39.0</td>
+      <td>48.5</td>
+      <td>55.0</td>
+      <td>55.0</td>
+      <td>...</td>
+      <td>98.0</td>
+      <td>31.0</td>
+      <td>343.0</td>
+      <td>39.0</td>
+      <td>22.0</td>
+      <td>79.0</td>
+      <td>8.0</td>
+      <td>3.0</td>
+      <td>0.000000</td>
+      <td>0.203977</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1.0</td>
+      <td>81.0</td>
+      <td>104.0</td>
+      <td>104.0</td>
+      <td>153.0</td>
+      <td>343.0</td>
+      <td>39.0</td>
+      <td>48.5</td>
+      <td>55.0</td>
+      <td>55.0</td>
+      <td>...</td>
+      <td>3.0</td>
+      <td>48.0</td>
+      <td>343.0</td>
+      <td>39.0</td>
+      <td>22.0</td>
+      <td>79.0</td>
+      <td>8.0</td>
+      <td>3.0</td>
+      <td>0.000000</td>
+      <td>0.169803</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>1.0</td>
+      <td>81.0</td>
+      <td>104.0</td>
+      <td>104.0</td>
+      <td>153.0</td>
+      <td>343.0</td>
+      <td>39.0</td>
+      <td>48.5</td>
+      <td>55.0</td>
+      <td>55.0</td>
+      <td>...</td>
+      <td>94.0</td>
+      <td>32.0</td>
+      <td>343.0</td>
+      <td>39.0</td>
+      <td>22.0</td>
+      <td>79.0</td>
+      <td>8.0</td>
+      <td>3.0</td>
+      <td>0.000000</td>
+      <td>0.120565</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>1.0</td>
+      <td>81.0</td>
+      <td>104.0</td>
+      <td>104.0</td>
+      <td>153.0</td>
+      <td>343.0</td>
+      <td>39.0</td>
+      <td>48.5</td>
+      <td>55.0</td>
+      <td>55.0</td>
+      <td>...</td>
+      <td>22.0</td>
+      <td>79.0</td>
+      <td>343.0</td>
+      <td>39.0</td>
+      <td>22.0</td>
+      <td>79.0</td>
+      <td>8.0</td>
+      <td>3.0</td>
+      <td>0.000000</td>
+      <td>0.169962</td>
+    </tr>
+  </tbody>
+</table>
+<p>7 rows × 81 columns</p>
+</div>
+</div>
+</div>
+<p>Note the <code>[::-1]</code> after <code>spectrum["parsed_intensity"]["y"]</code>. Remember why we do this?</p>
+<p>Let’s get a full feature/target table for all spectra in our dataset. Note that this might take some time, sometimes up to 30 minutes. To skip this step, simple download the file with pre-encoded features and targets, and load in two cells below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>tables <span class="op">=</span> []</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, spectrum <span class="kw">in</span> progress.track(<span class="bu">enumerate</span>(spectrum_list)):</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    features <span class="op">=</span> encode_peptide(spectrum[<span class="st">"sequence"</span>], spectrum[<span class="st">"charge"</span>])</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    targets <span class="op">=</span> np.stack([spectrum[<span class="st">"parsed_intensity"</span>][<span class="st">"b"</span>], spectrum[<span class="st">"parsed_intensity"</span>][<span class="st">"y"</span>][::<span class="op">-</span><span class="dv">1</span>]], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    spectrum_id <span class="op">=</span> np.full(shape<span class="op">=</span>(targets.shape[<span class="dv">0</span>], i), fill_value<span class="op">=</span><span class="dv">1</span>, dtype<span class="op">=</span>np.uint32)  <span class="co"># Repeat id for all ions</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    table <span class="op">=</span> np.hstack([spectrum_id, features, targets])</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    tables.append(table)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>full_table <span class="op">=</span> np.vstack(tables)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>spectra_encoded <span class="op">=</span> pd.DataFrame(full_table, columns<span class="op">=</span>[<span class="st">"spectrum_id"</span>] <span class="op">+</span> generate_feature_names() <span class="op">+</span> [<span class="st">"b_target"</span>,  <span class="st">"y_target"</span>])</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>spectra_encoded.to_feather(<span class="st">"human_hcd_tryp_best_spectra_encoded.feather"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">c:\Users\ralfg\miniconda3\envs\proteomicsml\lib\site-packages\rich\live.py:229: UserWarning: install "ipywidgets" 
+for Jupyter support
+  warnings.warn('install "ipywidgets" for Jupyter support')
+</pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"></pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncomment this step to load in pre-encoded features from a file:</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># spectra_encoded = pd.read_feather("human_hcd_tryp_best_spectra_encoded.feather")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>spectra_encoded</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>spectrum_id</th>
+      <th>peptide_basicity_min</th>
+      <th>peptide_basicity_q1</th>
+      <th>peptide_basicity_q2</th>
+      <th>peptide_basicity_q3</th>
+      <th>peptide_basicity_max</th>
+      <th>peptide_helicity_min</th>
+      <th>peptide_helicity_q1</th>
+      <th>peptide_helicity_q2</th>
+      <th>peptide_helicity_q3</th>
+      <th>...</th>
+      <th>fragplus1_hydrophobicity</th>
+      <th>fragplus1_pi</th>
+      <th>cterm_basicity</th>
+      <th>cterm_helicity</th>
+      <th>cterm_hydrophobicity</th>
+      <th>cterm_pi</th>
+      <th>length</th>
+      <th>charge</th>
+      <th>b_target</th>
+      <th>y_target</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>37.0</td>
+      <td>37.0</td>
+      <td>37.0</td>
+      <td>191.0</td>
+      <td>32.0</td>
+      <td>68.0</td>
+      <td>68.0</td>
+      <td>68.0</td>
+      <td>...</td>
+      <td>51.0</td>
+      <td>32.0</td>
+      <td>191.0</td>
+      <td>32.0</td>
+      <td>0.0</td>
+      <td>69.0</td>
+      <td>22.0</td>
+      <td>2.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>37.0</td>
+      <td>37.0</td>
+      <td>37.0</td>
+      <td>191.0</td>
+      <td>32.0</td>
+      <td>68.0</td>
+      <td>68.0</td>
+      <td>68.0</td>
+      <td>...</td>
+      <td>51.0</td>
+      <td>32.0</td>
+      <td>191.0</td>
+      <td>32.0</td>
+      <td>0.0</td>
+      <td>69.0</td>
+      <td>22.0</td>
+      <td>2.0</td>
+      <td>0.094060</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>37.0</td>
+      <td>37.0</td>
+      <td>37.0</td>
+      <td>191.0</td>
+      <td>32.0</td>
+      <td>68.0</td>
+      <td>68.0</td>
+      <td>68.0</td>
+      <td>...</td>
+      <td>51.0</td>
+      <td>32.0</td>
+      <td>191.0</td>
+      <td>32.0</td>
+      <td>0.0</td>
+      <td>69.0</td>
+      <td>22.0</td>
+      <td>2.0</td>
+      <td>0.180642</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>37.0</td>
+      <td>37.0</td>
+      <td>37.0</td>
+      <td>191.0</td>
+      <td>32.0</td>
+      <td>68.0</td>
+      <td>68.0</td>
+      <td>68.0</td>
+      <td>...</td>
+      <td>51.0</td>
+      <td>32.0</td>
+      <td>191.0</td>
+      <td>32.0</td>
+      <td>0.0</td>
+      <td>69.0</td>
+      <td>22.0</td>
+      <td>2.0</td>
+      <td>0.204203</td>
+      <td>0.050476</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>37.0</td>
+      <td>37.0</td>
+      <td>37.0</td>
+      <td>191.0</td>
+      <td>32.0</td>
+      <td>68.0</td>
+      <td>68.0</td>
+      <td>68.0</td>
+      <td>...</td>
+      <td>51.0</td>
+      <td>32.0</td>
+      <td>191.0</td>
+      <td>32.0</td>
+      <td>0.0</td>
+      <td>69.0</td>
+      <td>22.0</td>
+      <td>2.0</td>
+      <td>0.233472</td>
+      <td>0.094835</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>5792923</th>
+      <td>1.0</td>
+      <td>81.0</td>
+      <td>104.0</td>
+      <td>104.0</td>
+      <td>153.0</td>
+      <td>343.0</td>
+      <td>39.0</td>
+      <td>48.5</td>
+      <td>55.0</td>
+      <td>55.0</td>
+      <td>...</td>
+      <td>70.0</td>
+      <td>28.0</td>
+      <td>343.0</td>
+      <td>39.0</td>
+      <td>22.0</td>
+      <td>79.0</td>
+      <td>8.0</td>
+      <td>3.0</td>
+      <td>0.000000</td>
+      <td>0.180938</td>
+    </tr>
+    <tr>
+      <th>5792924</th>
+      <td>1.0</td>
+      <td>81.0</td>
+      <td>104.0</td>
+      <td>104.0</td>
+      <td>153.0</td>
+      <td>343.0</td>
+      <td>39.0</td>
+      <td>48.5</td>
+      <td>55.0</td>
+      <td>55.0</td>
+      <td>...</td>
+      <td>98.0</td>
+      <td>31.0</td>
+      <td>343.0</td>
+      <td>39.0</td>
+      <td>22.0</td>
+      <td>79.0</td>
+      <td>8.0</td>
+      <td>3.0</td>
+      <td>0.000000</td>
+      <td>0.203977</td>
+    </tr>
+    <tr>
+      <th>5792925</th>
+      <td>1.0</td>
+      <td>81.0</td>
+      <td>104.0</td>
+      <td>104.0</td>
+      <td>153.0</td>
+      <td>343.0</td>
+      <td>39.0</td>
+      <td>48.5</td>
+      <td>55.0</td>
+      <td>55.0</td>
+      <td>...</td>
+      <td>3.0</td>
+      <td>48.0</td>
+      <td>343.0</td>
+      <td>39.0</td>
+      <td>22.0</td>
+      <td>79.0</td>
+      <td>8.0</td>
+      <td>3.0</td>
+      <td>0.000000</td>
+      <td>0.169803</td>
+    </tr>
+    <tr>
+      <th>5792926</th>
+      <td>1.0</td>
+      <td>81.0</td>
+      <td>104.0</td>
+      <td>104.0</td>
+      <td>153.0</td>
+      <td>343.0</td>
+      <td>39.0</td>
+      <td>48.5</td>
+      <td>55.0</td>
+      <td>55.0</td>
+      <td>...</td>
+      <td>94.0</td>
+      <td>32.0</td>
+      <td>343.0</td>
+      <td>39.0</td>
+      <td>22.0</td>
+      <td>79.0</td>
+      <td>8.0</td>
+      <td>3.0</td>
+      <td>0.000000</td>
+      <td>0.120565</td>
+    </tr>
+    <tr>
+      <th>5792927</th>
+      <td>1.0</td>
+      <td>81.0</td>
+      <td>104.0</td>
+      <td>104.0</td>
+      <td>153.0</td>
+      <td>343.0</td>
+      <td>39.0</td>
+      <td>48.5</td>
+      <td>55.0</td>
+      <td>55.0</td>
+      <td>...</td>
+      <td>22.0</td>
+      <td>79.0</td>
+      <td>343.0</td>
+      <td>39.0</td>
+      <td>22.0</td>
+      <td>79.0</td>
+      <td>8.0</td>
+      <td>3.0</td>
+      <td>0.000000</td>
+      <td>0.169962</td>
+    </tr>
+  </tbody>
+</table>
+<p>5792928 rows × 81 columns</p>
+</div>
+</div>
+</div>
+<p>This is the data we will use for training. Note that each spectrum comprises of multiple lines: One line per b/y-ion couple. The only thing left to do is to split the data into train, validation, and test sets, according to the peptide-level split we made earlier.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>spectra_encoded_trainval <span class="op">=</span> spectra_encoded[spectra_encoded.index.isin(train_val_spectra.index)]</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>spectra_encoded_test <span class="op">=</span> spectra_encoded[spectra_encoded.index.isin(test_spectra.index)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="hyperparameter-optimization-and-model-selection" class="level2">
+<h2 class="anchored" data-anchor-id="hyperparameter-optimization-and-model-selection">2.3 Hyperparameter optimization and model selection</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> GradientBoostingRegressor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>reg <span class="op">=</span>  GradientBoostingRegressor()</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> spectra_encoded_trainval.drop(columns<span class="op">=</span>[<span class="st">"spectrum_id"</span>, <span class="st">"b_target"</span>,  <span class="st">"y_target"</span>])</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> spectra_encoded_trainval[<span class="st">"b_target"</span>]</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> spectra_encoded_test.drop(columns<span class="op">=</span>[<span class="st">"spectrum_id"</span>, <span class="st">"b_target"</span>,  <span class="st">"y_target"</span>])</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>y_test <span class="op">=</span> spectra_encoded_test[<span class="st">"b_target"</span>]</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>reg.fit(X_test, y_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>GradientBoostingRegressor()</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>y_test_pred <span class="op">=</span> reg.predict(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>np.corrcoef(y_test, y_test_pred)[<span class="dv">0</span>][<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>0.7504125450838988</code></pre>
+</div>
+</div>
+<p>Let’s see if we can do better by optimizing some hyperparameters!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> hyperopt <span class="im">import</span> fmin, hp, tpe, Trials, space_eval, STATUS_OK</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> objective(n_estimators):</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define algorithm</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    reg <span class="op">=</span>  GradientBoostingRegressor(n_estimators<span class="op">=</span>n_estimators)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Fit model</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    reg.fit(X_test, y_test)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Test model</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    y_test_pred <span class="op">=</span> reg.predict(X_test)</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    correlation <span class="op">=</span> np.corrcoef(y_test, y_test_pred)[<span class="dv">0</span>][<span class="dv">1</span>]</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="st">'loss'</span>: <span class="op">-</span>correlation, <span class="st">'status'</span>: STATUS_OK}</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>best_params <span class="op">=</span> fmin(</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  fn<span class="op">=</span>objective,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  space<span class="op">=</span>hp.randint(<span class="st">'n_estimators'</span>, <span class="dv">10</span>, <span class="dv">1000</span>),</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  algo<span class="op">=</span>tpe.suggest,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  max_evals<span class="op">=</span><span class="dv">10</span>,</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>100%|██████████| 10/10 [08:50&lt;00:00, 53.01s/trial, best loss: -0.8465849146319573]</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>best_params</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>{'n_estimators': 874}</code></pre>
+</div>
+</div>
+<p>Success! Initially, the default value of 100 estimators was used. According to this hyperopt run, using 874 estimators results in a more performant model.</p>
+
+
+</section>
+
+<p><small><i>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons CC-BY 4.0</a> license.</i></small></p></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/https:\/\/proteomicsml\.org/);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

@@ -1,0 +1,26 @@
+[
+  {
+    "listing": "/datasets/index.html",
+    "items": [
+      "/datasets/fragmentation/NIST.html",
+      "/datasets/fragmentation/ProteomeTools_FI.html",
+      "/datasets/ionmobility/Meier_TIMS.html",
+      "/datasets/ionmobility/VanPuyvelde_TWIMS.html",
+      "/datasets/retentiontime/DLOmix.html",
+      "/datasets/retentiontime/ProteomeTools_RT.html",
+      "/datasets/retentiontime/Sharma_HeLa_RT.html"
+    ]
+  },
+  {
+    "listing": "/tutorials/index.html",
+    "items": [
+      "/tutorials/fragmentation/nist-1-parsing-spectral-library.html",
+      "/tutorials/fragmentation/nist-2-traditional-ml-gradient-boosting.html",
+      "/tutorials/fragmentation/nist-3-deep-learning-lstm.html",
+      "/tutorials/fragmentation/proteometools-prosit.html",
+      "/tutorials/ionmobility/Meier.html",
+      "/tutorials/retentiontime/DLomix Prosit.html",
+      "/tutorials/retentiontime/Manual Embedding.html"
+    ]
+  }
+]

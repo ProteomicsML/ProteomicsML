@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.78">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>ProteomicsML.org – proteometools-prosit</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-VVRMZHT2W2"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+ 
+  gtag('consent', 'default', {
+    'ad_storage': 'denied',
+    'analytics_storage': 'denied'
+  });
+gtag('config', 'G-VVRMZHT2W2', { 'anonymize_ip': true});
+</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">ProteomicsML.org</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../../index.html" aria-current="page">Home</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../publication.html">Publication</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../tutorials/index.html">Tutorials</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../datasets/index.html">Datasets</a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/ProteomicsML"><i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/ProteomicsML"><i class="bi bi-twitter" role="img" aria-label="Twitter">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">(Untitled)</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">Home</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../publication.html" class="sidebar-item-text sidebar-link">Publication</a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../tutorials/index.html" class="sidebar-item-text sidebar-link">Tutorials</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Fragmentation</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/fragmentation/nist-1-parsing-spectral-library.html" class="sidebar-item-text sidebar-link">NIST (part 1): Parsing the spectral library</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/fragmentation/nist-2-traditional-ml-gradient-boosting.html" class="sidebar-item-text sidebar-link">NIST (part 2): Traditional ML: Gradient boosting</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/fragmentation/nist-3-deep-learning-lstm.html" class="sidebar-item-text sidebar-link">NIST (part 3): Deep learning: BiLSTM</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/fragmentation/proteometools-prosit.html" class="sidebar-item-text sidebar-link active">Prosit-style GRU with ProteomeTools data</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">Ion mobility</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/ionmobility/Meier.html" class="sidebar-item-text sidebar-link">Tutorial - predicting CCS values for TIMS data</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">Retention time</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/retentiontime/DLomix Prosit.html" class="sidebar-item-text sidebar-link">DLOmix Prosit</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/retentiontime/Manual Embedding.html" class="sidebar-item-text sidebar-link">Manual embedding</a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../datasets/index.html" class="sidebar-item-text sidebar-link">Datasets</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">Fragmentation</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../datasets/fragmentation/NIST.html" class="sidebar-item-text sidebar-link">NIST Peptide libraries</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../datasets/fragmentation/ProteomeTools_FI.html" class="sidebar-item-text sidebar-link">ProteomeTools</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">Ion mobility</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../datasets/ionmobility/Meier_TIMS.html" class="sidebar-item-text sidebar-link">Meier et al.&nbsp;TIMS</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../datasets/ionmobility/VanPuyvelde_TWIMS.html" class="sidebar-item-text sidebar-link">Van Puyvelde et al.&nbsp;TWIMS</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">Retention time</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../datasets/retentiontime/DLOmix.html" class="sidebar-item-text sidebar-link">DLOmix</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../datasets/retentiontime/ProteomeTools_RT.html" class="sidebar-item-text sidebar-link">ProteomeTools</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../datasets/retentiontime/Sharma_HeLa_RT.html" class="sidebar-item-text sidebar-link">Sharma et al.&nbsp;HeLa</a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#prosit-style-gru-with-proteometools-data" id="toc-prosit-style-gru-with-proteometools-data" class="nav-link active" data-scroll-target="#prosit-style-gru-with-proteometools-data">Prosit-style GRU with ProteomeTools data</a>
+  <ul>
+  <li><a href="#download-and-prepare-training-data" id="toc-download-and-prepare-training-data" class="nav-link" data-scroll-target="#download-and-prepare-training-data">Download and prepare training data</a></li>
+  <li><a href="#inspecting-data-distributions" id="toc-inspecting-data-distributions" class="nav-link" data-scroll-target="#inspecting-data-distributions">Inspecting data distributions</a></li>
+  <li><a href="#dataset-preparation" id="toc-dataset-preparation" class="nav-link" data-scroll-target="#dataset-preparation">Dataset preparation</a></li>
+  <li><a href="#model-setup-and-training" id="toc-model-setup-and-training" class="nav-link" data-scroll-target="#model-setup-and-training">Model setup and training</a></li>
+  <li><a href="#model-evaluation" id="toc-model-evaluation" class="nav-link" data-scroll-target="#model-evaluation">Model evaluation</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.dev/ProteomicsML/ProteomicsML/blob/main/tutorials/fragmentation/proteometools-prosit.ipynb" class="toc-action">Edit this page</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="prosit-style-gru-with-proteometools-data" class="level1">
+<h1>Prosit-style GRU with ProteomeTools data</h1>
+<section id="download-and-prepare-training-data" class="level2">
+<h2 class="anchored" data-anchor-id="download-and-prepare-training-data">Download and prepare training data</h2>
+<div class="cell" data-outputid="ccaaa34a-2d15-41e6-ec36-06bdf0fa9f50">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load ProteomeTools data from Figshare</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>wget https:<span class="op">//</span>figshare.com<span class="op">/</span>ndownloader<span class="op">/</span>files<span class="op">/</span><span class="dv">12506534</span> </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>mv <span class="dv">12506534</span> prosit_2018_holdout.hdf5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>--2022-09-01 12:36:41--  https://figshare.com/ndownloader/files/12506534
+Resolving figshare.com (figshare.com)... 52.30.192.85, 52.30.212.171, 2a05:d018:1f4:d000:d7f8:e0ce:c23a:78f4, ...
+Connecting to figshare.com (figshare.com)|52.30.192.85|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/12506534/holdout_hcd.hdf5?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIYCQYOYV5JSSROOA/20220901/eu-west-1/s3/aws4_request&amp;X-Amz-Date=20220901T123642Z&amp;X-Amz-Expires=10&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=5cca5e85e0d84c4fccac3f88796a15debbe65ee4585b0b39534eccc6c11117c8 [following]
+--2022-09-01 12:36:42--  https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/12506534/holdout_hcd.hdf5?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIYCQYOYV5JSSROOA/20220901/eu-west-1/s3/aws4_request&amp;X-Amz-Date=20220901T123642Z&amp;X-Amz-Expires=10&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=5cca5e85e0d84c4fccac3f88796a15debbe65ee4585b0b39534eccc6c11117c8
+Resolving s3-eu-west-1.amazonaws.com (s3-eu-west-1.amazonaws.com)... 52.218.96.162
+Connecting to s3-eu-west-1.amazonaws.com (s3-eu-west-1.amazonaws.com)|52.218.96.162|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 262781348 (251M) [application/octet-stream]
+Saving to: ‘12506534’
+
+12506534            100%[===================&gt;] 250.61M  13.8MB/s    in 20s     
+
+2022-09-01 12:37:03 (12.7 MB/s) - ‘12506534’ saved [262781348/262781348]
+</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import packages</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> h5py <span class="im">as</span> h5</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the alphabet as defined in Prosit: </span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># https://github.com/kusterlab/prosit/blob/master/prosit/constants.py#L21-L43</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>PROSIT_ALHABET <span class="op">=</span> {</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"A"</span>: <span class="dv">1</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"C"</span>: <span class="dv">2</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"D"</span>: <span class="dv">3</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"E"</span>: <span class="dv">4</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"F"</span>: <span class="dv">5</span>,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"G"</span>: <span class="dv">6</span>,</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"H"</span>: <span class="dv">7</span>,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"I"</span>: <span class="dv">8</span>,</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"K"</span>: <span class="dv">9</span>,</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"L"</span>: <span class="dv">10</span>,</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"M"</span>: <span class="dv">11</span>,</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"N"</span>: <span class="dv">12</span>,</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"P"</span>: <span class="dv">13</span>,</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Q"</span>: <span class="dv">14</span>,</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"R"</span>: <span class="dv">15</span>,</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"S"</span>: <span class="dv">16</span>,</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"T"</span>: <span class="dv">17</span>,</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">"V"</span>: <span class="dv">18</span>,</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">"W"</span>: <span class="dv">19</span>,</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Y"</span>: <span class="dv">20</span>,</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">"M(ox)"</span>: <span class="dv">21</span>,</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>PROSIT_INDEXED_ALPHABET <span class="op">=</span> {i: c <span class="cf">for</span> c, i <span class="kw">in</span> PROSIT_ALHABET.items()}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the downloaded data to a dataframe</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> h5.File(<span class="st">'prosit_2018_holdout.hdf5'</span>, <span class="st">'r'</span>) <span class="im">as</span> f:</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  KEY_ARRAY <span class="op">=</span> [<span class="st">"sequence_integer"</span>, <span class="st">"precursor_charge_onehot"</span>, <span class="st">"intensities_raw"</span>]</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  KEY_SCALAR <span class="op">=</span> [<span class="st">"collision_energy_aligned_normed"</span>, <span class="st">"collision_energy"</span>]</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  df <span class="op">=</span> pd.DataFrame({key: <span class="bu">list</span>(f[key][...]) <span class="cf">for</span> key <span class="kw">in</span> KEY_ARRAY})</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> key <span class="kw">in</span> KEY_SCALAR:</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    df[key] <span class="op">=</span> f[key][...]</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Add convenience columns</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'precursor_charge'</span>] <span class="op">=</span> df.precursor_charge_onehot.<span class="bu">map</span>(<span class="kw">lambda</span> a: a.argmax() <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'sequence_maxquant'</span>] <span class="op">=</span> df.sequence_integer.<span class="bu">map</span>(<span class="kw">lambda</span> s: <span class="st">""</span>.join(PROSIT_INDEXED_ALPHABET[i] <span class="cf">for</span> i <span class="kw">in</span> s <span class="cf">if</span> i <span class="op">!=</span> <span class="dv">0</span>))</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'sequence_length'</span>] <span class="op">=</span> df.sequence_integer.<span class="bu">map</span>(<span class="kw">lambda</span> s: np.count_nonzero(s))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="inspecting-data-distributions" class="level2">
+<h2 class="anchored" data-anchor-id="inspecting-data-distributions">Inspecting data distributions</h2>
+<div class="cell" data-outputid="cc8a8ef5-92f0-4742-af55-90c578073380">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'precursor_charge'</span>].hist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f8d450cac50&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="proteometools-prosit_files/figure-html/cell-5-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-outputid="4527ef1e-a31a-480e-ff5e-9a98a8a56937">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'collision_energy'</span>].hist(bins<span class="op">=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f8d44fc4110&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="proteometools-prosit_files/figure-html/cell-6-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-outputid="00d78e9a-7daa-4ec6-fa48-7d7588c24ce7">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'sequence_length'</span>].hist(bins<span class="op">=</span><span class="dv">30</span><span class="op">-</span><span class="dv">7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f8d44b09190&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="proteometools-prosit_files/figure-html/cell-7-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="dataset-preparation" class="level2">
+<h2 class="anchored" data-anchor-id="dataset-preparation">Dataset preparation</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the data into training, validation, and test</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> random <span class="im">import</span> shuffle</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> split_dataframe(df, </span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>                    unique_column, </span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>                    ratio_training<span class="op">=</span><span class="fl">0.8</span>, </span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>                    ratio_validation<span class="op">=</span><span class="fl">0.1</span>, </span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>                    ratio_test<span class="op">=</span><span class="fl">0.1</span>):</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">"""</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co">  This function splits the dataframe in three splits and makes sure that values</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co">  of `unique_column` are unique to each of the splits. This is helpful if, for </span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co">  example, you have non-unique sequence in `unique_column` but want to ensure </span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co">  that a sequence value is unique to one of the splits.</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="co">  """</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">assert</span> ratio_training <span class="op">+</span> ratio_validation <span class="op">+</span> ratio_test <span class="op">==</span> <span class="dv">1</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>  unique <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(df[unique_column]))</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  n_unique <span class="op">=</span> <span class="bu">len</span>(unique)</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  shuffle(unique)</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>  train_split <span class="op">=</span> <span class="bu">int</span>(n_unique <span class="op">*</span> ratio_training)</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>  val_split <span class="op">=</span> <span class="bu">int</span>(n_unique <span class="op">*</span> (ratio_training <span class="op">+</span> ratio_validation))</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>  unique_train <span class="op">=</span> unique[:train_split]</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>  unique_validation <span class="op">=</span> unique[train_split:val_split]</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>  unique_test <span class="op">=</span> unique[val_split:]</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>  <span class="cf">assert</span> <span class="bu">len</span>(unique_train) <span class="op">+</span> <span class="bu">len</span>(unique_validation) <span class="op">+</span> <span class="bu">len</span>(unique_test) <span class="op">==</span> n_unique</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>  df_train <span class="op">=</span> df[df[unique_column].isin(unique_train)]</span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>  df_validation <span class="op">=</span> df[df[unique_column].isin(unique_validation)]</span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>  df_test <span class="op">=</span> df[df[unique_column].isin(unique_test)]</span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>  <span class="cf">assert</span> <span class="bu">len</span>(df_train) <span class="op">+</span> <span class="bu">len</span>(df_validation) <span class="op">+</span> <span class="bu">len</span>(df_test) <span class="op">==</span> <span class="bu">len</span>(df)</span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> df_train, df_validation, df_test</span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>df_train, df_validation, df_test <span class="op">=</span> split_dataframe(df, unique_column<span class="op">=</span><span class="st">'sequence_maxquant'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare the training data</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>INPUT_COLUMNS <span class="op">=</span> (<span class="st">'sequence_integer'</span>, <span class="st">'precursor_charge_onehot'</span>, <span class="st">'collision_energy_aligned_normed'</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>OUTPUT_COLUMN <span class="op">=</span> <span class="st">'intensities_raw'</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>x_train <span class="op">=</span> [np.vstack(df_train[column]) <span class="cf">for</span> column <span class="kw">in</span> INPUT_COLUMNS]</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> np.vstack(df_train[OUTPUT_COLUMN])</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>x_validation <span class="op">=</span> [np.vstack(df_validation[column]) <span class="cf">for</span> column <span class="kw">in</span> INPUT_COLUMNS]</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>y_validation <span class="op">=</span> np.vstack(df_validation[OUTPUT_COLUMN])</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>x_test <span class="op">=</span> [np.vstack(df_test[column]) <span class="cf">for</span> column <span class="kw">in</span> INPUT_COLUMNS]</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>y_test <span class="op">=</span> np.vstack(df_test[OUTPUT_COLUMN])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="model-setup-and-training" class="level2">
+<h2 class="anchored" data-anchor-id="model-setup-and-training">Model setup and training</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Setup model and trainig parameters</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>DIM_LATENT <span class="op">=</span> <span class="dv">124</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>DIM_EMBEDDING_IN <span class="op">=</span> <span class="bu">max</span>(PROSIT_ALHABET.values()) <span class="op">+</span> <span class="dv">1</span>  <span class="co"># max value + zero for padding</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>DIM_EMBEDDING_OUT <span class="op">=</span> <span class="dv">32</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>EPOCHS <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>BATCH_SIZE <span class="op">=</span> <span class="dv">256</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-outputid="ad64bbc2-59fb-4b2c-c9e1-0e63b7a98d66">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tensorflow.keras.layers <span class="im">import</span> Input, Dense, GRU, Embedding, Multiply</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tensorflow.keras.models <span class="im">import</span> Model</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tensorflow.keras <span class="im">import</span> backend <span class="im">as</span> k</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Build the model with input layers for sequence, precursor charge, and collision energy</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>in_sequence <span class="op">=</span> Input(shape<span class="op">=</span>[x_train[<span class="dv">0</span>].shape[<span class="dv">1</span>]], name<span class="op">=</span><span class="st">"in_sequence"</span>)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>in_precursor_charge <span class="op">=</span> Input(shape<span class="op">=</span>[x_train[<span class="dv">1</span>].shape[<span class="dv">1</span>]], name<span class="op">=</span><span class="st">"in_precursor_charge"</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>in_collision_energy <span class="op">=</span> Input(shape<span class="op">=</span>[x_train[<span class="dv">2</span>].shape[<span class="dv">1</span>]], name<span class="op">=</span><span class="st">"in_collision_energy"</span>)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>x_s <span class="op">=</span> Embedding(input_dim<span class="op">=</span>DIM_EMBEDDING_IN, output_dim<span class="op">=</span>DIM_EMBEDDING_OUT)(in_sequence)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>x_s <span class="op">=</span> GRU(DIM_LATENT)(x_s)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>x_z <span class="op">=</span> Dense(DIM_LATENT)(in_precursor_charge)</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>x_e <span class="op">=</span> Dense(DIM_LATENT)(in_collision_energy)</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> Multiply()([x_s, x_z, x_e])</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>out_intensities <span class="op">=</span> Dense(y_train.shape[<span class="dv">1</span>])(x)</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Model([in_sequence, in_precursor_charge, in_collision_energy], out_intensities)</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>model.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Model: "model"
+__________________________________________________________________________________________________
+ Layer (type)                   Output Shape         Param #     Connected to                     
+==================================================================================================
+ in_sequence (InputLayer)       [(None, 30)]         0           []                               
+                                                                                                  
+ embedding (Embedding)          (None, 30, 32)       704         ['in_sequence[0][0]']            
+                                                                                                  
+ in_precursor_charge (InputLaye  [(None, 6)]         0           []                               
+ r)                                                                                               
+                                                                                                  
+ in_collision_energy (InputLaye  [(None, 1)]         0           []                               
+ r)                                                                                               
+                                                                                                  
+ gru (GRU)                      (None, 124)          58776       ['embedding[0][0]']              
+                                                                                                  
+ dense (Dense)                  (None, 124)          868         ['in_precursor_charge[0][0]']    
+                                                                                                  
+ dense_1 (Dense)                (None, 124)          248         ['in_collision_energy[0][0]']    
+                                                                                                  
+ multiply (Multiply)            (None, 124)          0           ['gru[0][0]',                    
+                                                                  'dense[0][0]',                  
+                                                                  'dense_1[0][0]']                
+                                                                                                  
+ dense_2 (Dense)                (None, 174)          21750       ['multiply[0][0]']               
+                                                                                                  
+==================================================================================================
+Total params: 82,346
+Trainable params: 82,346
+Non-trainable params: 0
+__________________________________________________________________________________________________</code></pre>
+</div>
+</div>
+<div class="cell" data-outputid="88159e01-2c38-4072-ebdc-5bc70ef149ff">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> masked_spectral_distance(true, pred):</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># This is the spectral angle implementation as used in Prosit</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># See https://github.com/kusterlab/prosit/blob/master/prosit/losses.py#L4-L16</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Note, fragment ions that cannot exists (i.e. y20 for a 7mer) must have the value  -1.</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> keras.backend <span class="im">as</span> k</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    epsilon <span class="op">=</span> k.epsilon()</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    pred_masked <span class="op">=</span> ((true <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> pred) <span class="op">/</span> (true <span class="op">+</span> <span class="dv">1</span> <span class="op">+</span> epsilon)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    true_masked <span class="op">=</span> ((true <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> true) <span class="op">/</span> (true <span class="op">+</span> <span class="dv">1</span> <span class="op">+</span> epsilon)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    pred_norm <span class="op">=</span> k.l2_normalize(true_masked, axis<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    true_norm <span class="op">=</span> k.l2_normalize(pred_masked, axis<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    product <span class="op">=</span> k.<span class="bu">sum</span>(pred_norm <span class="op">*</span> true_norm, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    arccos <span class="op">=</span> tf.acos(product)</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">2</span> <span class="op">*</span> arccos <span class="op">/</span> np.pi</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">compile</span>(optimizer<span class="op">=</span><span class="st">'Adam'</span>, loss<span class="op">=</span>masked_spectral_distance)</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> model.fit(x<span class="op">=</span>x_train, y<span class="op">=</span>y_train, epochs<span class="op">=</span>EPOCHS, batch_size<span class="op">=</span>BATCH_SIZE, validation_data<span class="op">=</span>(x_validation, y_validation))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Epoch 1/5
+2356/2356 [==============================] - 26s 8ms/step - loss: 0.4982 - val_loss: 0.4505
+Epoch 2/5
+2356/2356 [==============================] - 16s 7ms/step - loss: 0.4173 - val_loss: 0.3895
+Epoch 3/5
+2356/2356 [==============================] - 17s 7ms/step - loss: 0.3626 - val_loss: 0.3452
+Epoch 4/5
+2356/2356 [==============================] - 16s 7ms/step - loss: 0.3246 - val_loss: 0.3130
+Epoch 5/5
+2356/2356 [==============================] - 16s 7ms/step - loss: 0.2970 - val_loss: 0.2921</code></pre>
+</div>
+</div>
+</section>
+<section id="model-evaluation" class="level2">
+<h2 class="anchored" data-anchor-id="model-evaluation">Model evaluation</h2>
+<div class="cell" data-outputid="ac1e238c-a842-462b-b401-2e1eb770c802">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the training history </span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>plt.plot(<span class="bu">range</span>(EPOCHS), history.history[<span class="st">'loss'</span>], <span class="st">'-'</span>, color<span class="op">=</span><span class="st">'r'</span>, label<span class="op">=</span><span class="st">'Training loss'</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>plt.plot(<span class="bu">range</span>(EPOCHS), history.history[<span class="st">'val_loss'</span>], <span class="st">'--'</span>, color<span class="op">=</span><span class="st">'r'</span>, label<span class="op">=</span><span class="st">'Validation loss'</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="ss">f'Training and validation loss across epochs'</span>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Epochs'</span>)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Loss'</span>)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="proteometools-prosit_files/figure-html/cell-13-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-outputid="cd67c5a1-05f4-415f-97a4-bed2417ef655">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>test_spectral_angle <span class="op">=</span> model.evaluate(x_test, y_test)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>test_spectral_angle</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>2376/2376 [==============================] - 8s 3ms/step - loss: 0.2921</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>0.29212045669555664</code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+
+<p><small><i>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons CC-BY 4.0</a> license.</i></small></p></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/https:\/\/proteomicsml\.org/);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
