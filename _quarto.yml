@@ -2,8 +2,7 @@ project:
   type: website
 
 website:
-  title: "ProteomicsML.org"
-  site-url: "https://proteomicsml.org"
+  title: "ProteomicsML"
   navbar:
     background: teal
     right:
@@ -38,6 +37,7 @@ website:
       - section: Datasets
         file: datasets/index.qmd
         contents: "datasets/**"
+  site-url: "https://www.proteomicsml.org"
   repo-url: https://github.com/ProteomicsML/ProteomicsML
   repo-actions: [edit, issue]
   body-footer	: |
@@ -57,3 +57,5 @@ format:
     smooth-scroll: true
     link-external-icon: false
     link-external-newwindow: true
+
+resources: ["CNAME"]
