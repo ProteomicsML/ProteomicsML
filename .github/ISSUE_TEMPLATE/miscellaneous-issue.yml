@@ -1,0 +1,23 @@
+name: Miscellaneous issue
+description: You want to open an issue that does not fit any other category.
+body:
+  - type: checkboxes
+    attributes:
+      label: Pre-issue creation checklist
+      description: Please ensure you can tick all boxes before submitting this issue.
+      options:
+        - label: "No duplicates of this issue have already been created."
+          required: true
+        - label: "This issue does not fit any of the other categories."
+          required: true
+
+  - type: textarea
+    attributes:
+      label: Describe your issue
+      description: A clear and concise description of your issue.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Additional context

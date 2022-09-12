@@ -1,0 +1,68 @@
+name: Tutorial bug report
+description: Something in the tutorials is not working as expected.
+body:
+  - type: checkboxes
+    attributes:
+      label: Pre-issue creation checklist
+      description: Please ensure you can tick all boxes before submitting this issue.
+      options:
+        - label: "No duplicates of this issue have already been created."
+          required: true
+        - label: "The issue persists when the notebook is restarted and is executed in order from top to bottom."
+          required: true
+        - label: "My setup meets the [tutorial prerequisites](https://proteomicsml.org/#tutorial-prerequisites)"
+          required: true
+
+  - type: input
+    attributes:
+      label: Name of the tutorial
+      description: Category and name of the tutorial, or path to the tutorial file.
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: To reproduce
+      description: Steps to reproduce the behavior.
+      placeholder: |
+        1. Go to '...'
+        2. Click on '....'
+        3. Scroll down to '....'
+        4. See error
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Expected behavior
+      description: A clear and concise description of what you expected to happen.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Screenshots
+      description: If applicable, add screenshots to help explain your problem.
+
+  - type: textarea
+    attributes:
+      label: Notebook editor setup
+      description: Please complete the following information.
+      value: |
+        - OS: [e.g., Windows]
+        - Python version [e,g, 3.7.14]:
+        - Notebook editor [e.g., Google Colab, JupyterLab, VSCode]:
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Additional context
+      description: Add any other context about the problem here.
