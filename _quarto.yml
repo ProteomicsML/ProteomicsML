@@ -23,8 +23,7 @@ website:
       - text: Datasets
         file: datasets/index.qmd
   sidebar:
-    style: "docked"
-    search: true
+    style: "floating"
     collapse-level: 2
     contents:
       - text: "Home"
@@ -32,11 +31,15 @@ website:
       - text: Publication
         file: publication.qmd
       - "---"
-      - auto: tutorials
+      - section: Tutorials
+        file: tutorials/index.qmd
+        contents: "tutorials/**"
       - "---"
-      - auto: "datasets"
+      - section: Datasets
+        file: datasets/index.qmd
+        contents: "datasets/**"
   repo-url: https://github.com/ProteomicsML/ProteomicsML
-  repo-actions: [edit]
+  repo-actions: [edit, issue]
   body-footer	: |
     <small><i>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons CC-BY 4.0</a> license.</i></small>
   google-analytics:
