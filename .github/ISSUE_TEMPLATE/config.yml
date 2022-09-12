@@ -3,8 +3,9 @@ contact_links:
   - name: Ask a question about the tutorials
     url: https://github.com/ProteomicsML/ProteomicsML/discussions/categories/tutorials-q-a
     about: Please ask and answer questions in our Discussion board
-  - name: Discuss the existing and/or potential new datasets
+  - name: Discuss the datasets
     url: https://github.com/ProteomicsML/ProteomicsML/discussions/categories/dataset-discussions
+    about: Discuss the datasets or potentially adding a new dataset
   - name: Start a discussion on ProteomicsML
     url: https://github.com/ProteomicsML/ProteomicsML/discussions/
     about: Discuss anything else related to ProteomicsML in our Discussion board
