@@ -1,0 +1,43 @@
+on:
+  push:
+    branches: [main]
+
+name: Update notebook copies
+
+jobs:
+  generate-copies:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install jupyter
+
+      - name: Generate copies of all notebooks without code output
+        run: python .github/workflows/scripts/remove_notebook_output.py
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          commit-message: Update notebook copies without output
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          branch: notebooks-removed-output
+          delete-branch: true
+          title: 'Update notebook copies without output'
+          body: |
+            This automated PR generates new copies of all notebooks without output.
+            The automatically generated versions are prepended with an underscore
+            and can be used to open in Colab for interactive usage.
+          labels: |
+            notebook copies
+            automated pr

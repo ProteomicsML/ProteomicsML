@@ -1,20 +1,22 @@
 on:
   workflow_dispatch:
   push:
-    branches: main
+    branches: [main]
   pull_request:
 
-name: Quarto Publish
+name: Test website rendering
 
 jobs:
-  build-deploy:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: "1.2.90"
 
       - name: Test rendering Quarto Project
         uses: quarto-dev/quarto-actions/render@v2

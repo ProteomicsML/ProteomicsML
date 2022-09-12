@@ -1,9 +1,9 @@
 on:
   workflow_dispatch:
   push:
-    branches: main
+    branches: [main]
 
-name: Quarto Publish
+name: Publish website
 
 jobs:
   build-deploy:
@@ -11,15 +11,38 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
+      - name: Checkout source repo
+        uses: actions/checkout@v3
+        with:
+          path: ./source-repo
+
+      - name: Checkout target repo
+        uses: actions/checkout@v3
+        with:
+          repository: ProteomicsML/proteomicsml.github.io
+          path: ./target-repo
+          ssh-key: ${{ secrets.SSH_DEPLOY_KEY }}
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
-
-      - name: Render and Publish
-        uses: quarto-dev/quarto-actions/publish@v2
         with:
-          target: gh-pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          version: "1.2.90"
+
+      - name: Render website
+        uses: quarto-dev/quarto-actions/render@v2
+        with:
+          path: ./source-repo
+
+      - name: Copy files to target repo
+        run: |
+          rm -r ./target-repo/*
+          mv source-repo/_site/* ./target-repo
+
+      - name: Add, commit, and push to target repo
+        run: |
+          cd ./target-repo
+          git add .
+          git config user.name "${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>"
+          git config user.email "noreply@github.com"
+          git commit -am "Update from ProteomicsML/ProteomicsML@${{ github.sha }}"
+          git push
