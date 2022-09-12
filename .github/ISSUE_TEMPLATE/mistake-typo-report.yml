@@ -1,0 +1,31 @@
+name: Mistake or typo report
+description: A tutorial or dataset contains incorrect information or typos
+body:
+  - type: checkboxes
+    attributes:
+      label: Pre-issue creation checklist
+      description: Please ensure you can tick all boxes before submitting this issue.
+      options:
+        - label: "No duplicates of this issue have already been created."
+          required: true
+
+  - type: input
+    attributes:
+      label: Name of the tutorial/dataset
+      description: Category and name of, or path to the tutorial/dataset.
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Describe the mistake or typo
+      description: >
+        A clear and concise description of what is wrong. If you can, link to the
+        relevant source code lines on GitHub.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Additional context
+      description: Add any other context about the problem here.
