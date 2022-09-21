@@ -30,6 +30,7 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
+          token: ${{ secrets.GH_PR_TOKEN }}
           commit-message: Update notebook copies without output
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
@@ -55,5 +56,6 @@ jobs:
         if: (steps.cpr.outputs.pull-request-operation == 'created' ||	steps.cpr.outputs.pull-request-operation == 'updated')
         uses: peter-evans/enable-pull-request-automerge@v2
         with:
+          token: ${{ secrets.GH_PR_TOKEN }}
           pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
           merge-method: squash
