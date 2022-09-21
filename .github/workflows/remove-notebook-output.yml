@@ -53,7 +53,7 @@ jobs:
 
       - name: Merge pull request
         if: (steps.cpr.outputs.pull-request-operation == 'created' ||	steps.cpr.outputs.pull-request-operation == 'updated')
-        uses: peter-evans/enable-pull-request-automerge@v2.2
+        uses: peter-evans/enable-pull-request-automerge@v2
         with:
           pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
           merge-method: squash
