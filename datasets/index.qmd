@@ -31,8 +31,8 @@ listing:
 
 ---
 
-[TODO: Add dataset introduction]
-
+On ProteomicsML you will find datasets for beginners and experts in the field alike.
+Download, and explore the intricate nature of mass spectrometry data.
 
 ## Fragmentation
 

@@ -6,6 +6,10 @@ website:
   navbar:
     background: teal
     right:
+      - text: Contributing
+        file: CONTRIBUTING.md
+      - text: Code of Conduct
+        file: CODE_OF_CONDUCT.md
       - icon: github
         href: https://github.com/ProteomicsML
         aria-label: GitHub
@@ -23,23 +27,25 @@ website:
         file: datasets/index.qmd
   sidebar:
     style: "floating"
-    collapse-level: 2
+    collapse-level: 1
     contents:
-      - text: "Home"
+      - text: Home
         file: index.qmd
       - text: Publication
         file: publication.qmd
-      - "---"
       - section: Tutorials
         file: tutorials/index.qmd
         contents: "tutorials/**"
-      - "---"
       - section: Datasets
         file: datasets/index.qmd
         contents: "datasets/**"
+      - text: Contributing
+        file: CONTRIBUTING.md
+      - text: Code of Conduct
+        file: CODE_OF_CONDUCT.md
   site-url: "https://www.proteomicsml.org"
   repo-url: https://github.com/ProteomicsML/ProteomicsML
-  repo-actions: [edit, issue]
+  repo-actions: [source, edit]
   body-footer	: |
     <small><i>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons CC-BY 4.0</a> license.</i></small>
   google-analytics:
@@ -51,6 +57,7 @@ website:
 
 format:
   html:
+    css: "static/custom-styles.css"
     theme: cosmo
     toc: true
     toc-depth: 4
