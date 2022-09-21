@@ -1,0 +1,4 @@
+.quarto-figure>figure {
+    max-width: 100%;
+    width: auto;
+}
