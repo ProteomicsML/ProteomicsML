@@ -2,6 +2,11 @@
 title: DLOmix
 date: last-modified
 ---
+### Download
+[![](https://img.shields.io/badge/download-training%20dataset-008080?style=flat-square)](https://github.com/wilhelm-lab/dlomix/blob/develop/example_dataset/proteomTools_test.csv?raw=true)<br>
+[![](https://img.shields.io/badge/download-validation%20dataset-008080?style=flat-square)](https://github.com/wilhelm-lab/dlomix/blob/develop/example_dataset/proteomTools_train.csv?raw=true)<br>
+[![](https://img.shields.io/badge/download-train/val%20dataset-008080?style=flat-square)](https://github.com/wilhelm-lab/dlomix/blob/develop/example_dataset/proteomTools_train_val.csv?raw=true)<br>
+[![](https://img.shields.io/badge/download-testing%20dataset-008080?style=flat-square)](https://github.com/wilhelm-lab/dlomix/blob/develop/example_dataset/proteomTools_val.csv?raw=true)<br>
 
 ### Attributes
 - data type: Peptide retention time
@@ -11,7 +16,7 @@ date: last-modified
 - ML publication: <unknown>
 - source dataset identifier: <unknown>
 - species: Homo sapiens (human)
-- size: 27200 peptides in train, 6000 in test
+- size: 27160 in train, 6800 in validation, 6000 in test, and 27200 in train/val
 - format: CSV
 - columns: peptide sequence, iRT calibrated retention time (~minutes)
 - chromatography_column_type: <unknown>
