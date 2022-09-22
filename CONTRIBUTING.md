@@ -104,11 +104,11 @@ these rules and conventions:
        For example:
 
        ```md
-       [![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.oogle.com/github/ProteomicsML/ProteomicsML/blob/main/tutorials/fragmentation/nist-1-parsing-spectral-library.ipynb)
+       [![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ProteomicsML/ProteomicsML/blob/main/tutorials/fragmentation/_nist-1-parsing-spectral-library.ipynb)
        ```
        renders as
 
-       [![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.oogle.com/github/ProteomicsML/ProteomicsML/blob/main/tutorials/fragmentation/nist-1-parsing-spectral-library.ipynb)
+       [![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ProteomicsML/ProteomicsML/blob/main/tutorials/fragmentation/_nist-1-parsing-spectral-library.ipynb)
 
        :::{.callout-note}
        The URL will not work (or be updated) until the pull request adding or updating
