@@ -11,6 +11,13 @@ date: last-modified
 [![](https://img.shields.io/badge/download-mixed%20dataset-008080?style=flat-square)](https://github.com/ProteomicsML/ProteomicsML/raw/main/datasets/retentiontime/ProteomeTools/Mixed.csv.gz)<br>
 [![](https://img.shields.io/badge/download-oxidation%20dataset-008080?style=flat-square)](https://github.com/ProteomicsML/ProteomicsML/raw/main/datasets/retentiontime/ProteomeTools/Oxidation.csv.gz)<br>
 
+### Dataset Descriptions
+The full data contains 1.000.000 unmodified peptides and 150.000 oxidized peptides all with MaxQuant scores > 100 split into five groups.
+- Small: Containing 100.000 unmodified peptides (good for teaching)
+- Medium: Containing 250.000 unmodified peptides (good for validating)
+- Large: Containing 250.000 unmodified peptides (good for training)
+- Oxidized: Containing 150.000 all oxidized peptides.
+- Mixed: Containing 150.000 oxidized and 150.000 unmodified peptides.
 
 ### Attributes
 - data type: Peptide retention time
@@ -20,7 +27,6 @@ date: last-modified
 - ML publication: [https://doi.org/10.1038/s41592-019-0426-7](https://doi.org/10.1038/nmeth.4153)
 - source dataset identifier: PXD004732
 - species: Homo sapiens (human)
-- size: 100.000 (small), 250.000 (medium), 2.000.000 (large), 250.000 (oxidation), 500.000 (mixed)
 - format: CSV
 - columns: index, retention time, sequence, modified sequence
 - mass modifications: unmodified & oxidation
