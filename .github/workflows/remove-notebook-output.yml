@@ -6,7 +6,7 @@ name: Update notebook copies
 
 jobs:
   generate-copies:
-    if: "! contains(github.event.head_commit.message, 'ProteomicsML/notebooks-removed-output')"
+    if: "! contains(github.event.head_commit.message, 'Update notebook copies without output')"
     runs-on: ubuntu-latest
     permissions:
       contents: write
