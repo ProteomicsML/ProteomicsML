@@ -2,6 +2,9 @@
 title: ProteomeTools
 date: last-modified
 ---
+### Downloads
+[![](https://img.shields.io/badge/download-training%20dataset-008080?style=flat-square)](https://figshare.com/ndownloader/files/12506534)<br>
+[![](https://img.shields.io/badge/download-holdout%20dataset-008080?style=flat-square)](https://figshare.com/ndownloader/files/12785291)
 
 ### Attributes
 - data type: Fragmentation intensity
@@ -11,7 +14,7 @@ date: last-modified
 - ML publication: https://doi.org/10.1038/s41592-019-0426-7
 - source dataset identifier: PXD004732
 - species: Homo sapiens (human)
-- size: Train (4.87 GB). Holdout (250 MB)
+- size: Subset: Train (4.87 GB). Holdout (250 MB). Non-Tryptic:  
 - format: hdf5
 - columns:
 - mass modifications: unmodified & oxidation
@@ -37,5 +40,6 @@ readout and HCD spectra were recorded at 6 different collision energies.
 LC-MS runs were individually analyzed using MaxQuant 1.5.3.30.
 
 ### Comments
-- Data on [FigShare](https://figshare.com/articles/dataset/ProteomeTools_-_Prosit_fragmentation_-_Data/6860261)
-
+- Subset [FigShare](https://figshare.com/articles/dataset/ProteomeTools_-_Prosit_fragmentation_-_Data/6860261)
+- Full [FigShare](https://figshare.com/articles/dataset/ProteomeTools_non_tryptic_-_Prosit_fragmentation_-_Data/12937092)
+- Trained Model [FigShare](https://figshare.com/articles/dataset/Prosit_-_Model_-_Fragmentation/6965753)
