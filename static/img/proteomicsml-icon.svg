@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg 
+   width="162pt"
+   height="107.040001pt"
+   viewBox="0 0 162 107.040001"
+   version="1.1"
+   id="svg11"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg" content="%3Cmxfile%20host%3D%22www.draw.io%22%20modified%3D%222022-09-21T15%3A42%3A58.844Z%22%20agent%3D%225.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64)%20AppleWebKit%2F537.36%20(KHTML%2C%20like%20Gecko)%20Chrome%2F105.0.0.0%20Safari%2F537.36%20Edg%2F105.0.1343.42%22%20version%3D%2220.3.3%22%20etag%3D%22SrOd-tVsy5CqSxTE0cRt%22%20type%3D%22device%22%3E%3Cdiagram%20id%3D%22V6_iZkzm8A4nAQYaoMX-%22%3EpVXJjqMwEP2aHNvyiuHYSSczl5FaymHOHnAANeDIONt8%2FRTYbIkm6lYjxdjPVfWqnstkxTb19YdVx%2BKXyXS1oji7rtjbilJKJIdXh9w8Irn0QG7LzENkAvblXx1AHNBTmel2YeiMqVx5XIKpaRqdOo8FX2WtubQL6GCqJetR5foB2KeqekR%2Fl5krPBpTOeE%2FdZkXgZmQKPE7f1T6kVtzagJfYxrtd2o1hAlJtYXKzGUGse2Kbawxzs%2Fq60ZXnayDYt5v95%2FdMWWrG%2FcZB%2Bodzqo6hapDXu42yKCb7LVTE1Z9IWxduLqCFYFperJnnYVF66z5GLWKADmYxm1MZWwfivHtJtlGo%2BV8R65lH6Pz2Km6rLqm2ZuTTUE6vFdNC693a4JJ2GFvhXPQDlSwVxigzG7oDFqUG5NXWh3LFqWm7jfStjfdHTwBTEcKQdeeBCaexguhs4cmmbQl44nBJdCm1s5CVHyZukWEcy5mjTJgVlfKledleBWaNh%2FDjQzvpgRiisMFeyE4QRwLJiThNIYx8iHCdWMEI5lwQmTEJRZxvCRo%2B8JDzHmH3NEkMcLgzcLzNRKnbK7dAwn0k7rNzI6dQfukVJkgLEC44SF3SVDUcVMmaJdL%2FLSgFx6jKEkirxmMy4oIE8%2FdKetUF4mgLMYwcvGNZKhEJKY8GR55L%2B9XggmKuIwE%2FEiCu3ERi%2FII0flR8afBJEUSbINGIpKfTwwm%2FoSH1ex2TFD%2FJRqW0xfPm0%2F%2FKGz7Dw%3D%3D%3C%2Fdiagram%3E%3C%2Fmxfile%3E">
+  <defs
+     id="defs5">
+    <clipPath
+       id="clip-0">
+      <path
+         clip-rule="nonzero"
+         d="M 0 0 L 162 0 L 162 105.75 L 0 105.75 Z M 0 0 "
+         id="path2" />
+    </clipPath>
+  </defs>
+  <g
+     clip-path="url(#clip-0)"
+     id="g9">
+    <path
+       fill="none"
+       stroke-width="6"
+       stroke-linecap="butt"
+       stroke-linejoin="miter"
+       stroke="#47b7d1"
+       stroke-opacity="1"
+       stroke-miterlimit="10"
+       d="m 3.588542,134.79167 c 20.239584,0.84375 35.416668,-28.23958 45.531252,-87.260418 10.119792,-59.020836 19.395834,-59.020836 27.828126,0 8.427084,59.020838 21.072917,88.531258 37.94271,88.531258 16.85937,0 29.50521,-10.96355 37.9375,-32.88021 8.4375,-21.927088 16.02083,-21.927088 22.76042,0 6.75,21.91666 18.55729,32.45312 35.42187,31.60937"
+       transform="scale(0.75)"
+       id="path7" />
+  </g>
+</svg>

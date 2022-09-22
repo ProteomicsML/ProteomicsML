@@ -3,8 +3,14 @@ project:
 
 website:
   title: "ProteomicsML"
+  favicon: "static/img/proteomicsml-icon.svg"
+
   navbar:
-    background: teal
+    logo: "static/img/proteomicsml-logo-inverse.svg"
+    logo-alt: ProteomicsML logo
+    title: false
+    foreground: "#FFFFFF"
+    background: "#205380"
     right:
       - text: Contributing
         file: CONTRIBUTING.md
@@ -46,8 +52,8 @@ website:
   site-url: "https://www.proteomicsml.org"
   repo-url: https://github.com/ProteomicsML/ProteomicsML
   repo-actions: [source, edit]
-  body-footer	: |
-    <small><i>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons CC-BY 4.0</a> license.</i></small>
+  page-footer: |
+    <small>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons CC-BY 4.0</a> license.</small>
   google-analytics:
     tracking-id: G-VVRMZHT2W2
     storage: none
@@ -57,12 +63,13 @@ website:
 
 format:
   html:
-    css: "static/custom-styles.css"
+    css: "static/css/custom-styles.css"
     theme: cosmo
     toc: true
     toc-depth: 4
     smooth-scroll: true
     link-external-icon: false
     link-external-newwindow: true
+    linkcolor: "#205380"
 
 resources: ["CNAME"]

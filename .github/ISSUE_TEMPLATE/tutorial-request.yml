@@ -31,9 +31,10 @@ body:
       label: Data type
       description: Select the data type the tutorial uses (or will use).
       options:
-        - fragmentation
-        - ion mobility
-        - retention time
+        - Fragmentation
+        - Ion mobility
+        - Protein visibility
+        - Retention time
         - Other type (describe below)
     validations:
       required: true

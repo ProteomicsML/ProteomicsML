@@ -2,3 +2,6 @@
     max-width: 100%;
     width: auto;
 }
+.navbar-logo {
+    max-height: 48px;
+}

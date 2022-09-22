@@ -1,6 +1,4 @@
-# ProteomicsML
-
-*Community-curated tutorials and datasets for ML in proteomics*
+# <img src="static/img/proteomicsml-logo.svg" alt="ProteomicsML logo" width="360">
 
 ProteomicsML provides ready-made datasets for machine learning models accompanied by
 tutorials on how to work with even the most complex data types in the field of
