@@ -19,6 +19,15 @@ listing:
     filter-ui: false
     sort:
         - "title asc"
+  - id: proteinvisibility-listing
+    contents: "proteinvisibility/**/*.md"
+    type: table
+    table-hover: true
+    fields: [title, author, date]
+    sort-ui: false
+    filter-ui: false
+    sort:
+        - "title asc"
   - id: retentiontime-listing
     contents: "retentiontime/*.ipynb"
     type: table
@@ -46,6 +55,12 @@ badge to interact with the notebooks in a userfriendly coding environment.
 ## Ion mobility
 
 ::: {#ionmobility-listing}
+:::
+
+
+## Protein visibility
+
+::: {#proteinvisibility-listing}
 :::
 
 
