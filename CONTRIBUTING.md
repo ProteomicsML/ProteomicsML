@@ -62,10 +62,9 @@ these rules and conventions:
 
 1. Title, filename, metadata, and subheadings
 
-    a. Tutorials are grouped by data type: `Fragmentation`, `Ion mobility`, or
-       `Retention time`. Place your tutorial notebook in the appropriate directory in
-       the repository. E.g., `tutorials/fragmentation`. If your tutorial is part of a
-       new data type group, please open a new
+    a. Tutorials are grouped by data type: `Fragmentation`, `Ion mobility`,
+       `Protein visibility`, and `Retention time`. Place your tutorial notebook in the appropriate directory in the repository. E.g., `tutorials/fragmentation`. If your
+       tutorial is part of a new data type group, please open a new
        [discussion thread](https://github.com/ProteomicsML/ProteomicsML/discussions)
        first.
 
@@ -130,7 +129,9 @@ these rules and conventions:
        each tutorial is sufficiently different from the others in terms of methodology
        and/or datasets used.
 
-    e. References
+    e. All original publications that describe the methodologies, datasets, or tools
+       that are used in the tutorial should be properly cited following to scientific
+       publishing conventions. [TODO: add methodology]
 
 
 3. Code cells and programming language
@@ -191,14 +192,15 @@ a dataset, please follow these rules and conventions:
       iii. Files that are already publicly and persistently stored elsewhere, can be
            represented by solely the markdown file. In this case, all tutorials using
            this dataset should start from the file(s) as is and include any required
-           preprocessing steps.
+           preprocessing steps.[TODO: List supported platforms]
 
 
 2. Title, filename, and metadata:
-   a. Datasets are grouped by data type: `Fragmentation`, `Ion mobility`, or
-      `Retention time`. Place your dataset and markdown description in the appropriate
-      directory in the repository. E.g., `tutorials/fragmentation`. If your dataset is
-      part of a new data type group, please open a new
+   a. Datasets are grouped by data type: `Fragmentation`, `Ion mobility`,
+      `Protein visibility`, or `Retention time`. Place your dataset and markdown
+      description in the appropriate directory in the repository. E.g.,
+      `tutorials/fragmentation`. If your dataset is part of a new data type group,
+      please open a new
       [discussion thread](https://github.com/ProteomicsML/ProteomicsML/discussions)
       first.
 

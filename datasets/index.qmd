@@ -19,6 +19,15 @@ listing:
     filter-ui: false
     sort:
         - "title asc"
+  - id: proteinvisibility-listing
+    contents: "proteinvisibility/**/*.md"
+    type: table
+    table-hover: true
+    fields: [title, date]
+    sort-ui: false
+    filter-ui: false
+    sort:
+        - "title asc"
   - id: retentiontime-listing
     contents: "retentiontime/**/*.md"
     type: table
@@ -43,6 +52,12 @@ Download, and explore the intricate nature of mass spectrometry data.
 ## Ion mobility
 
 ::: {#ionmobility-listing}
+:::
+
+
+## Protein visibility
+
+::: {#proteinvisibility-listing}
 :::
 
 

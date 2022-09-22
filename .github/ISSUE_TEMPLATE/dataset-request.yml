@@ -33,6 +33,7 @@ body:
       options:
         - Fragmentation
         - Ion mobility
+        - Protein visibility
         - Retention time
         - Other type (describe below)
     validations:
