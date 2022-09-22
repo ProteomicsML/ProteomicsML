@@ -4,12 +4,12 @@ title: "Home"
 
 ProteomicsML provides ready-made datasets for machine learning models accompanied by
 tutorials on how to work with even the most complex data types in the field of
-proteomics. The resource is setup to evolve together with the field, and we welcome
+proteomics. The resource is set up to evolve together with the field, and we welcome
 everyone to contribute to the project by adding new datasets and accompanying notebooks.
 
 ProteomicsML was set up as a joint effort of [SDU][sdu], [CompOmics][compomics],
 [LUMC][lumc], [PeptideAtlas][peptideatlas], [NIST][nist], [PRIDE][pride],
-and [MSAID][msaid]. We believe that ProteomicsML is solid step for the field towards
+and [MSAID][msaid]. We believe that ProteomicsML is solid step forward for the field towards
 more open and reproducible science!
 
 [sdu]: https://www.sdu.dk/
