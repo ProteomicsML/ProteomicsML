@@ -3,18 +3,21 @@ title: DLOmix
 date: last-modified
 ---
 ### Download
-[![](https://img.shields.io/badge/download-training%20dataset-008080?style=flat-square)](https://github.com/wilhelm-lab/dlomix/blob/develop/example_dataset/proteomTools_test.csv?raw=true)<br>
-[![](https://img.shields.io/badge/download-validation%20dataset-008080?style=flat-square)](https://github.com/wilhelm-lab/dlomix/blob/develop/example_dataset/proteomTools_train.csv?raw=true)<br>
-[![](https://img.shields.io/badge/download-train/val%20dataset-008080?style=flat-square)](https://github.com/wilhelm-lab/dlomix/blob/develop/example_dataset/proteomTools_train_val.csv?raw=true)<br>
-[![](https://img.shields.io/badge/download-testing%20dataset-008080?style=flat-square)](https://github.com/wilhelm-lab/dlomix/blob/develop/example_dataset/proteomTools_val.csv?raw=true)<br>
+[![](https://img.shields.io/badge/download-training%20dataset-205380?style=flat-square)](https://github.com/wilhelm-lab/dlomix/blob/develop/example_dataset/proteomTools_test.csv?raw=true)<br>
+[![](https://img.shields.io/badge/download-validation%20dataset-205380?style=flat-square)](https://github.com/wilhelm-lab/dlomix/blob/develop/example_dataset/proteomTools_train.csv?raw=true)<br>
+[![](https://img.shields.io/badge/download-testing%20dataset-205380?style=flat-square)](https://github.com/wilhelm-lab/dlomix/blob/develop/example_dataset/proteomTools_val.csv?raw=true)<br>
+[![](https://img.shields.io/badge/download-train/val%20dataset-205380?style=flat-square)](https://github.com/wilhelm-lab/dlomix/blob/develop/example_dataset/proteomTools_train_val.csv?raw=true)<br>
 
-### Dataset Descriptions
-This is a direct subset of the ProteomeTools dataset with computed iRTs instead of retention times. 
-The total data contains ~27.200 peptides and is mainly useful for teaching purposes
-- Training: Containing 27.160 peptides
-- Validation: Containing 6.800 peptides
-- Testing: Containing 6.000 peptides
-- Train/val: Containing 27.200 peptides.
+### Dataset Description
+
+This is a direct subset of the ProteomeTools dataset with computed iRTs instead of retention times.
+The total data contains ~27.200 peptides and is mainly useful for teaching purposes:
+
+- Training: 27.160 peptides
+- Validation: 6.800 peptides
+- Testing: 6.000 peptides
+- Train/val: 27.200 peptides
+
 
 ### Attributes
 - data type: Peptide retention time

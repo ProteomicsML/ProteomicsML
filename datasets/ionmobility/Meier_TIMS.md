@@ -3,21 +3,23 @@ title: Meier et al. TIMS
 date: last-modified
 ---
 
-### Attributes
+## Attributes
 - data type: Peptide ion mobility
-- title: Deep learning the collisional cross sections of the peptide universe from a million experimental values
+- title: Deep learning the collisional cross sections of the peptide universe from a
+million experimental values
 - tag: Meier_IM_CCS
-- data publication: https://doi.org/10.1074/mcp.tir118.000900
-- ML publication: https://doi.org/10.1038/s41467-021-21352-8
+- data publication: [https://doi.org/10.1074/mcp.tir118.000900](https://doi.org/10.1074/mcp.tir118.000900)
+- ML publication: [https://doi.org/10.1038/s41467-021-21352-8](https://doi.org/10.1038/s41467-021-21352-8)
 - source dataset identifier: PXD010012, PXD019086, PXD017703
 - species: Homo sapiens (Human), Saccharomyces cerevisiae (Baker's yeast)
 - size: 718.917 (large)
 - format: CSV
-- columns: index, Modified sequence, Charge, Mass, Intensity, Retention time, CCS, PT
-- mass modifications: unmodified & oxidation & acetylation & carbamidomethyl
-- ionmobility_type: TIMS
+- columns: `index`, `Modified sequence`, `Charge`, `Mass`, `Intensity`,
+`Retention time`, `CCS`, `PT`
+- mass modifications: unmodified, oxidation, acetylation, carbamidomethyl
+- ionmobility type: TIMS
 
-### Data description
+## Data description
 MS raw files were analyzed with MaxQuant version 1.6.5.0, which extracts 4D isotope patterns
 (‘features’) and associated MS/MS spectra. The built-in search engine Andromeda74 was used
 to match observed fragment ions to theoretical peptide fragment ion masses derived from in
@@ -40,7 +42,7 @@ replacing experimental ion mobility values in the spectral library with our pred
 charged peptide precursors were excluded from this analysis as the neural network was exclusively
 trained with multiply charged peptides.
 
-### Sample protocol description
+## Sample protocol description
 In bottom-up proteomics, peptides are separated by liquid chromatography with elution
 peak widths in the range of seconds, while mass spectra are acquired in about 100 microseconds
 with time-of-fight (TOF) instruments. This allows adding ion mobility as a third dimension of
@@ -62,9 +64,8 @@ sections can be acquired on a large scale (R > 0.99). PASEF on the timsTOF Pro i
 to the technological toolbox in proteomics, with a number of unique operating modes that are only
 beginning to be explored.
 
-### Data analysis protocol
+## Data analysis protocol
 See [Data description](#data-description)
 
-### Comments
-- #
-
+## Comments
+/

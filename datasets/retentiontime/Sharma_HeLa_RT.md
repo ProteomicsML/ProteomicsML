@@ -4,7 +4,7 @@ date: last-modified
 ---
 ### Download
 
-[![](https://img.shields.io/badge/download-full%20dataset-008080?style=flat-square)](https://www.kaggle.com/datasets/kirillpe/proteomics-retention-time-prediction/download?datasetVersionNumber=1)
+[![](https://img.shields.io/badge/download-full%20dataset-205380?style=flat-square)](https://www.kaggle.com/datasets/kirillpe/proteomics-retention-time-prediction/download?datasetVersionNumber=1)
 
 ### Attributes
 - data type: Peptide retention time
