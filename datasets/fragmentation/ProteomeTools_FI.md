@@ -3,8 +3,8 @@ title: ProteomeTools
 date: last-modified
 ---
 ### Downloads
-[![](https://img.shields.io/badge/download-training%20dataset-008080?style=flat-square)](https://figshare.com/ndownloader/files/12506534)<br>
-[![](https://img.shields.io/badge/download-holdout%20dataset-008080?style=flat-square)](https://figshare.com/ndownloader/files/12785291)
+[![](https://img.shields.io/badge/download-training%20dataset-205380?style=flat-square)](https://figshare.com/ndownloader/files/12506534)<br>
+[![](https://img.shields.io/badge/download-holdout%20dataset-205380?style=flat-square)](https://figshare.com/ndownloader/files/12785291)
 
 ### Attributes
 - data type: Fragmentation intensity
@@ -14,7 +14,7 @@ date: last-modified
 - ML publication: https://doi.org/10.1038/s41592-019-0426-7
 - source dataset identifier: PXD004732
 - species: Homo sapiens (human)
-- size: Subset: Train (4.87 GB). Holdout (250 MB). Non-Tryptic:  
+- size: Subset: Train (4.87 GB). Holdout (250 MB). Non-Tryptic:
 - format: hdf5
 - columns:
 - mass modifications: unmodified & oxidation

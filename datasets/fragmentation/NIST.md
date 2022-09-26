@@ -5,7 +5,7 @@ date: last-modified
 
 ### Downloads
 
-[![](https://img.shields.io/badge/download-full%20dataset-008080?style=flat-square)](https://chemdata.nist.gov/dokuwiki/doku.php?id=peptidew:lib:humanhcd20160503)
+[![](https://img.shields.io/badge/download-full%20dataset-205380?style=flat-square)](https://chemdata.nist.gov/dokuwiki/doku.php?id=peptidew:lib:humanhcd20160503)
 
 ### Attributes
 - data type: Fragmentation intensity

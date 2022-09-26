@@ -62,8 +62,9 @@ these rules and conventions:
 
 1. Title, filename, metadata, and subheadings
 
-    a. Tutorials are grouped by data type: `Fragmentation`, `Ion mobility`,
-       `Protein visibility`, and `Retention time`. Place your tutorial notebook in the appropriate directory in the repository. E.g., `tutorials/fragmentation`. If your
+    a. Tutorials are grouped by data type: `Detectability`, `Fragmentation`,
+       `Ion mobility`, and `Retention time`. Place your tutorial notebook in the
+       appropriate directory in the repository. E.g., `tutorials/fragmentation`. If your
        tutorial is part of a new data type group, please open a new
        [discussion thread](https://github.com/ProteomicsML/ProteomicsML/discussions)
        first.
@@ -197,7 +198,7 @@ a dataset, please follow these rules and conventions:
 
 2. Title, filename, and metadata:
    a. Datasets are grouped by data type: `Fragmentation`, `Ion mobility`,
-      `Protein visibility`, or `Retention time`. Place your dataset and markdown
+      `Detectability`, or `Retention time`. Place your dataset and markdown
       description in the appropriate directory in the repository. E.g.,
       `tutorials/fragmentation`. If your dataset is part of a new data type group,
       please open a new

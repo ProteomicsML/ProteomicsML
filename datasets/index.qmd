@@ -1,6 +1,15 @@
 ---
 title: Datasets
 listing:
+  - id: detectability-listing
+    contents: "detectability/**/*.md"
+    type: table
+    table-hover: true
+    fields: [title, date]
+    sort-ui: false
+    filter-ui: false
+    sort:
+        - "title asc"
   - id: fragmentation-listing
     contents: "fragmentation/**/*@(.md)"
     type: table
@@ -12,15 +21,6 @@ listing:
         - "title asc"
   - id: ionmobility-listing
     contents: "ionmobility/**/*.md"
-    type: table
-    table-hover: true
-    fields: [title, date]
-    sort-ui: false
-    filter-ui: false
-    sort:
-        - "title asc"
-  - id: proteinvisibility-listing
-    contents: "proteinvisibility/**/*.md"
     type: table
     table-hover: true
     fields: [title, date]
@@ -55,9 +55,9 @@ Download, and explore the intricate nature of mass spectrometry data.
 :::
 
 
-## Protein visibility
+## Detectability
 
-::: {#proteinvisibility-listing}
+::: {#detectability-listing}
 :::
 
 
