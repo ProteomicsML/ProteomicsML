@@ -1,6 +1,15 @@
 ---
 title: Tutorials
 listing:
+  - id: detectability-listing
+    contents: "detectability/**/*.md"
+    type: table
+    table-hover: true
+    fields: [title, author, date]
+    sort-ui: false
+    filter-ui: false
+    sort:
+        - "title asc"
   - id: fragmentation-listing
     contents: "fragmentation/*.ipynb"
     type: table
@@ -12,15 +21,6 @@ listing:
         - "title asc"
   - id: ionmobility-listing
     contents: "ionmobility/*.ipynb"
-    type: table
-    table-hover: true
-    fields: [title, author, date]
-    sort-ui: false
-    filter-ui: false
-    sort:
-        - "title asc"
-  - id: proteinvisibility-listing
-    contents: "proteinvisibility/**/*.md"
     type: table
     table-hover: true
     fields: [title, author, date]
@@ -58,9 +58,9 @@ badge to interact with the notebooks in a userfriendly coding environment.
 :::
 
 
-## Protein visibility
+## Detectability
 
-::: {#proteinvisibility-listing}
+::: {#detectability-listing}
 :::
 
 

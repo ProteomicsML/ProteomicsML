@@ -31,9 +31,9 @@ body:
       label: Data type
       description: Select the data type the tutorial uses (or will use).
       options:
+        - Detectability
         - Fragmentation
         - Ion mobility
-        - Protein visibility
         - Retention time
         - Other type (describe below)
     validations:
