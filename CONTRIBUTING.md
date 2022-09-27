@@ -222,11 +222,11 @@ a dataset, please follow these rules and conventions:
 
 3. Dataset description
 
-   Download the readme template and fill out the details<br>
-   - [Retention time](https://github.com/ProteomicsML/ProteomicsML/datasets/_templates/retention-time-template.md)<br>
-   - [Fragmentation Intensity](https://github.com/ProteomicsML/ProteomicsML/datasets/_templates/fragmentation-intensity-template.md)<br>
-   - [Ion Mobility](https://github.com/ProteomicsML/ProteomicsML/datasets/_templates/ion-mobility-template.md)<br>
-   - [Detectability](https://github.com/ProteomicsML/ProteomicsML/datasets/_templates/protein-detectability-template.md)<br>
+   Download the readme template, fill out the details, and add download links<br>
+   - [Retention time](https://github.com/ProteomicsML/ProteomicsML/tree/main/datasets/_templates/retention-time-template.md?raw=true)<br>
+   - [Fragmentation Intensity](https://github.com/ProteomicsML/tree/main/ProteomicsML/datasets/_templates/fragmentation-intensity-template.md?raw=true)<br>
+   - [Ion Mobility](https://github.com/ProteomicsML/ProteomicsML/tree/main/datasets/_templates/ion-mobility-template.md?raw=true)<br>
+   - [Detectability](https://github.com/ProteomicsML/ProteomicsML/tree/main/datasets/_templates/protein-detectability-template.md?raw=true)<br>
 
 
 ### Opening a pull request to add your contributions
