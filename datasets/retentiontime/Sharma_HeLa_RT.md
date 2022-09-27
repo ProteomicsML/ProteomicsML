@@ -15,15 +15,14 @@ The data contains 14.361 peptides from an unknown source, and is used as a kaggl
 - **data publication**:  <unknown>
 - **machine learning publication**: <unknown>
 - **data source identifier**: <unknown>
-
 - **data type**: retention time
 - **format**: TSV
 - **columns**: `peptide` `sequence` `uncalibrated elution time`
-- **[instrument]**:  <unknown>
-- **[organism]**: Homo sapiens (human)
-- **[fixed modifications]**: <unknown>
-- **[variable modification]**: <unknown>
-- **[chromatography separation]**:  <unknown>
+- **instrument**:  <unknown>
+- **organism**: Homo sapiens (human)
+- **fixed modifications**: <unknown>
+- **variable modification**: <unknown>
+- **chromatography separation**:  <unknown>
 - **peak measurement**: <unknown>
 
 
@@ -47,13 +46,3 @@ The pedigree of the data is not well known.
 - This may possibly be the unmodified peptides from PXD000612
 - This may possibly be the unmodified peptides from https://pubmed.ncbi.nlm.nih.gov/25159151/
 - This is a phospho-enriched dataset. Perhaps only the unmodified peptides are offered
-
-
-[instrument]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1000463
-[organism]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FOBI_0100026
-[fixed modifications]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1003021
-[variable modification]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1003022
-[dissociation method]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1000044
-[collision energy]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1000045 
-[mass analyzer type]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1000443&lang=en&viewMode=All&siblings=false
-[chromatography separation]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1002270&lang=en&viewMode=All&siblings=false

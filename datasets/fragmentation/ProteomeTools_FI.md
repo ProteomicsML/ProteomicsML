@@ -15,18 +15,16 @@ The dataset has been divided up into training (250 MB) and holdout (4.87GB) of a
 - **data publication**: [ProteomeTools](https://doi.org/10.1038/nmeth.4153)
 - **machine learning publication**: [Prosit](https://doi.org/10.1038/nmeth.4153)
 - **data source identifier**: PXD004732
-
-
 - **data type**: fragmentation intensity
 - **format**: hdf5
 - **columns**: <unknown>
-- **[instrument]**: Orbitrap Fusion ETD
-- **[organism]**: Homo sapiens (human)
-- **[fixed modifications]**: <unknown>
-- **[variable modification]**: unmodified
-- **[dissociation method]**: <unknown>
-- **[collision energy]**: 35 and 28
-- **[mass analyzer type]**: ion and orbitrap
+- **instrument**: Orbitrap Fusion ETD
+- **organism**: Homo sapiens (human)
+- **fixed modifications**: <unknown>
+- **variable modification**: unmodified
+- **dissociation method**: <unknown>
+- **collision energy**: 35 and 28
+- **mass analyzer type**: ion and orbitrap
 - **spectra encoding**: prosit annotation pipeline 
 
 ### Sample protocol description
@@ -50,13 +48,3 @@ LC-MS runs were individually analyzed using MaxQuant 1.5.3.30.
 - Subset [FigShare](https://figshare.com/articles/dataset/ProteomeTools_-_Prosit_fragmentation_-_Data/6860261)
 - Full [FigShare](https://figshare.com/articles/dataset/ProteomeTools_non_tryptic_-_Prosit_fragmentation_-_Data/12937092)
 - Trained Model [FigShare](https://figshare.com/articles/dataset/Prosit_-_Model_-_Fragmentation/6965753)
-
-
-[instrument]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1000463
-[organism]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FOBI_0100026
-[fixed modifications]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1003021
-[variable modification]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1003022
-[dissociation method]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1000044
-[collision energy]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1000045 
-[mass analyzer type]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1000443&lang=en&viewMode=All&siblings=false
-[chromatography separation]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1002270&lang=en&viewMode=All&siblings=false

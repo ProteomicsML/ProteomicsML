@@ -16,15 +16,13 @@ The data consists of 6.268 PSMs.
 - **data publication**: [Scientific Data](https://doi.org/10.1038/s41597-022-01216-6)
 - **machine learning publication**: <unknown>
 - **data source identifier**: PXD028735
-
-
 - **data type**: ion mobility
 - **format**: TSV
 - **columns**: `Modified sequence` `Charge` `CCS` `Ion Mobility` `Ion Mobility Units` `High Energy` `Ion Mobility Offset`
-- **[instrument]**: maXis, timsTOF Pro, 
-- **[organism]**: Homo sapiens (Human), Saccharomyces cerevisiae (Baker's yeast), Escherichia coli (E. coli)
-- **[fixed modifications]**: <unknown>
-- **[variable modification]**:unmodified & oxidation & acetylation & carbamidomethyl
+- **instrument**: maXis, timsTOF Pro, 
+- **organism**: Homo sapiens (Human), Saccharomyces cerevisiae (Baker's yeast), Escherichia coli (E. coli)
+- **fixed modifications**: <unknown>
+- **variable modification**:unmodified & oxidation & acetylation & carbamidomethyl
 - **ionmobility type**: TWIMS
 - **css calibration compounds**: <unknown>
 
@@ -60,13 +58,3 @@ temperature 350 °C, cone gas 80 L/hr, desolvation gas 350 L/hr, and nebul
 
 ### Comments:
 - #
-
-
-[instrument]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1000463
-[organism]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FOBI_0100026
-[fixed modifications]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1003021
-[variable modification]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1003022
-[dissociation method]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1000044
-[collision energy]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1000045 
-[mass analyzer type]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1000443&lang=en&viewMode=All&siblings=false
-[chromatography separation]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1002270&lang=en&viewMode=All&siblings=false
