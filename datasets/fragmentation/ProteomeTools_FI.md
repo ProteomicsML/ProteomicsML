@@ -6,27 +6,28 @@ date: last-modified
 [![](https://img.shields.io/badge/download-training%20dataset-008080?style=flat-square)](https://figshare.com/ndownloader/files/12506534)<br>
 [![](https://img.shields.io/badge/download-holdout%20dataset-008080?style=flat-square)](https://figshare.com/ndownloader/files/12785291)
 
-### Attributes
-- data type: Fragmentation intensity
-- title: ProteomeTools synthetic peptides
-- tag: ProteomeTools
-- data publication: https://doi.org/10.1038/nmeth.4153
-- ML publication: https://doi.org/10.1038/s41592-019-0426-7
-- source dataset identifier: PXD004732
-- species: Homo sapiens (human)
-- size: Subset: Train (4.87 GB). Holdout (250 MB). Non-Tryptic:  
-- format: hdf5
-- columns:
-- mass modifications: unmodified & oxidation
-- chromatography_column_type: <unknown>
+### Dataset Description
+The dataset has been divided up into training (250 MB) and holdout (4.87GB) of annotated ms2 spectra.
 
-### Data description
-The ProteomeTools project aims to derive molecular and digital
-tools from the human proteome to facilitate biomedical and life science research.
-Here, we describe the generation and multimodal LC-MS/MS analysis of >350,000
-synthetic tryptic peptides representing nearly all canonical human gene products. This
-resource will be extended to 1.4 million peptides within two years and all data will be
-made available to the public in ProteomicsDB.
+### Attributes
+- **title**: ProteomeTools synthetic peptides
+- **dataset tag**: ProteomeTools_FI
+- **data publication**: [ProteomeTools](https://doi.org/10.1038/nmeth.4153)
+- **machine learning publication**: [Prosit](https://doi.org/10.1038/nmeth.4153)
+- **data source identifier**: PXD004732
+
+
+- **data type**: fragmentation intensity
+- **format**: hdf5
+- **columns**: <unknown>
+- **[instrument]**: Orbitrap Fusion ETD
+- **[organism]**: Homo sapiens (human)
+- **[fixed modifications]**: <unknown>
+- **[variable modification]**: unmodified
+- **[dissociation method]**: <unknown>
+- **[collision energy]**: 35 and 28
+- **[mass analyzer type]**: ion and orbitrap
+- **spectra encoding**: prosit annotation pipeline 
 
 ### Sample protocol description
 Tryptic peptides were individually synthesized by solid
@@ -37,9 +38,25 @@ fragmentation methods (HCD, CID, ETD, EThCD, ETciD) with ion trap or Orbitrap
 readout and HCD spectra were recorded at 6 different collision energies.
 
 ### Data analysis protocol
+The ProteomeTools project aims to derive molecular and digital
+tools from the human proteome to facilitate biomedical and life science research.
+Here, we describe the generation and multimodal LC-MS/MS analysis of >350,000
+synthetic tryptic peptides representing nearly all canonical human gene products. This
+resource will be extended to 1.4 million peptides within two years and all data will be
+made available to the public in ProteomicsDB.
 LC-MS runs were individually analyzed using MaxQuant 1.5.3.30.
 
 ### Comments
 - Subset [FigShare](https://figshare.com/articles/dataset/ProteomeTools_-_Prosit_fragmentation_-_Data/6860261)
 - Full [FigShare](https://figshare.com/articles/dataset/ProteomeTools_non_tryptic_-_Prosit_fragmentation_-_Data/12937092)
 - Trained Model [FigShare](https://figshare.com/articles/dataset/Prosit_-_Model_-_Fragmentation/6965753)
+
+
+[instrument]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1000463
+[organism]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FOBI_0100026
+[fixed modifications]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1003021
+[variable modification]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1003022
+[dissociation method]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1000044
+[collision energy]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1000045 
+[mass analyzer type]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1000443&lang=en&viewMode=All&siblings=false
+[chromatography separation]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1002270&lang=en&viewMode=All&siblings=false

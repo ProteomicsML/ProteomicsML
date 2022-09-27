@@ -1,40 +1,38 @@
 ---
-title: ProteomeTools
+title: DLOmix
 date: last-modified
 ---
+### Download
+[![](https://img.shields.io/badge/download-training%20dataset-008080?style=flat-square)](https://github.com/wilhelm-lab/dlomix/blob/develop/example_dataset/proteomTools_test.csv?raw=true)<br>
+[![](https://img.shields.io/badge/download-validation%20dataset-008080?style=flat-square)](https://github.com/wilhelm-lab/dlomix/blob/develop/example_dataset/proteomTools_train.csv?raw=true)<br>
+[![](https://img.shields.io/badge/download-train/val%20dataset-008080?style=flat-square)](https://github.com/wilhelm-lab/dlomix/blob/develop/example_dataset/proteomTools_train_val.csv?raw=true)<br>
+[![](https://img.shields.io/badge/download-testing%20dataset-008080?style=flat-square)](https://github.com/wilhelm-lab/dlomix/blob/develop/example_dataset/proteomTools_val.csv?raw=true)<br>
 
-### Downloads
-[![](https://img.shields.io/badge/download-small%20dataset-008080?style=flat-square)](https://github.com/ProteomicsML/ProteomicsML/raw/main/datasets/retentiontime/ProteomeTools/Small.csv.gz)<br>
-[![](https://img.shields.io/badge/download-medium%20dataset-008080?style=flat-square)](https://github.com/ProteomicsML/ProteomicsML/raw/main/datasets/retentiontime/ProteomeTools/Medium.csv.gz)<br>
-[![](https://img.shields.io/badge/download-large%20dataset-008080?style=flat-square)](hhttps://github.com/ProteomicsML/ProteomicsML/raw/main/datasets/retentiontime/ProteomeTools/Large.csv.gz)<br>
-[![](https://img.shields.io/badge/download-mixed%20dataset-008080?style=flat-square)](https://github.com/ProteomicsML/ProteomicsML/raw/main/datasets/retentiontime/ProteomeTools/Mixed.csv.gz)<br>
-[![](https://img.shields.io/badge/download-oxidation%20dataset-008080?style=flat-square)](https://github.com/ProteomicsML/ProteomicsML/raw/main/datasets/retentiontime/ProteomeTools/Oxidation.csv.gz)<br>
-
-### Dataset Descriptions
-The full data contains 1.000.000 unmodified peptides and 150.000 oxidized peptides all with MaxQuant scores > 100 (as described in Prosit paper) split into five groups. <br>
-- Small: Containing 100.000 unmodified peptides (good for teaching) <br>
-- Medium: Containing 250.000 unmodified peptides (good for validating) <br>
-- Large: Containing 250.000 unmodified peptides (good for training) <br>
-- Oxidized: Containing 150.000 all oxidized peptides. <br>
-- Mixed: Containing 150.000 oxidized and 150.000 unmodified peptides. <br>
+### Dataset Description
+This is a direct subset of the ProteomeTools dataset with computed iRTs based on the PROCAL. 
+The total data contains ~27.200 peptides and is mainly useful for teaching purposes
+- Training: Containing 27.160 peptides
+- Validation: Containing 6.800 peptides
+- Testing: Containing 6.000 peptides
+- Train/val: Containing 27.200 peptides.
 
 ### Attributes
-- **title**: ProteomeTools synthetic peptides and iRT calibrated retention times
-- **dataset tag**: ProteomeTools_RT
+- **title**: DLOmix deep learning in proteomics python framework for retention time
+- **dataset tag**: DLOmix_RT
 - **data publication**: [ProteomeTools](https://doi.org/10.1038/nmeth.4153)
 - **machine learning publication**: [Prosit](https://doi.org/10.1038/nmeth.4153)
-- **data source identifier**: PXD004732 
+- **data source identifier**: PXD004732
+
 
 - **data type**: retention time
 - **format**: CSV
-- **columns**: index, retention time, sequence, modified sequence
+- **columns**: peptide sequence, iRT calibrated retention time
 - **[instrument]**: Orbitrap Fusion ETD
 - **[organism]**: Homo sapiens (human)
-- **[variable modification]**: unmodified & oxidation
+- **[variable modification]**: unmodified
 - **[chromatography separation]**: <unknown>
 - **peak measurement**: <unknown>
 
- 
 ### Sample Protocol
 Tryptic peptides were individually synthesized by solid
 phase synthesis, combined into pools of ~1,000 peptides and measured on an Orbitrap
@@ -52,7 +50,8 @@ resource will be extended to 1.4 million peptides within two years and all data 
 made available to the public in ProteomicsDB.
 
 ### Comments
-- #
+- Internal DLOmix tutorial [![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/wilhelm-lab/dlomix/blob/develop/notebooks/Example_RTModel_Walkthrough_colab.ipynb)
+- DLOmix [GitHub](https://github.com/wilhelm-lab/dlomix)
 
 
 [instrument]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1000463
