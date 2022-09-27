@@ -3,46 +3,32 @@ title: Meier et al. TIMS
 date: last-modified
 ---
 
-## Attributes
-- data type: Peptide ion mobility
-- title: Deep learning the collisional cross sections of the peptide universe from a
-million experimental values
-- tag: Meier_IM_CCS
-- data publication: [https://doi.org/10.1074/mcp.tir118.000900](https://doi.org/10.1074/mcp.tir118.000900)
-- ML publication: [https://doi.org/10.1038/s41467-021-21352-8](https://doi.org/10.1038/s41467-021-21352-8)
-- source dataset identifier: PXD010012, PXD019086, PXD017703
-- species: Homo sapiens (Human), Saccharomyces cerevisiae (Baker's yeast)
-- size: 718.917 (large)
-- format: CSV
-- columns: `index`, `Modified sequence`, `Charge`, `Mass`, `Intensity`,
-`Retention time`, `CCS`, `PT`
-- mass modifications: unmodified, oxidation, acetylation, carbamidomethyl
-- ionmobility type: TIMS
+### Downloads
+[![](https://img.shields.io/badge/download-full%20dataset-008080?style=flat-square)](https://github.com/ProteomicsML/ProteomicsML/raw/main/datasets/ionmobility/Meier_IM_CCS/combined_sm.zip)
 
-## Data description
-MS raw files were analyzed with MaxQuant version 1.6.5.0, which extracts 4D isotope patterns
-(‘features’) and associated MS/MS spectra. The built-in search engine Andromeda74 was used
-to match observed fragment ions to theoretical peptide fragment ion masses derived from in
-silico digests of a reference proteome and a list of 245 potential contaminants using the
-appropriate digestion rules for each proteolytic enzyme (trypsin, LysC or LysN). We allowed
-a maximum of two missing values and required a minimum sequence length of 7 amino acids while
-limiting the maximum peptide mass to 4600 Da. Carbamidomethylation of cysteine was defined as
-a fixed modification, and oxidation of methionine and acetylation of protein N-termini were
-included in the search as variable modifications. Reference proteomes for each organism including
-isoforms were accessed from UniProt (Homo sapiens: 91,618 entries, 2019/05; E. coli: 4403 entries,
-2019/01; C. elegans: 28,403 entries, 2019/01; S. cerevisiae: 6049 entries, 2019/01; D. melanogaster:
-23,304 entries, 2019/01). The synthetic peptide library (ProteomeTools54) was searched against
-the entire human reference proteome. The maximum mass tolerances were set to 20 and 40 ppm for
-precursor and fragment ions, respectively. False discovery rates were controlled at 1% on both
-the peptide spectrum match and protein level with a target-decoy approach. The analyses were
-performed separately for each organism and each set of synthetic peptides (‘proteotypic set’,
-‘SRM atlas’, and ‘missing gene set’). To demonstrate the utility of CCS prediction, we re-analyzed
-three diaPASEF experiments from Meier et al.55 with Spectronaut 14.7.201007.47784 (Biognosys AG),
-replacing experimental ion mobility values in the spectral library with our predictions. Singly
-charged peptide precursors were excluded from this analysis as the neural network was exclusively
-trained with multiply charged peptides.
+### Dataset Description
+The data consists of 718.917 PSMs.
 
-## Sample protocol description
+### Attributes
+- **title**: Deep learning the collisional cross-sections of the peptide universe from a million experimental values
+- **dataset tag**: Meier_IM_CCS
+- **data publication**: [MSP](https://doi.org/10.1074/mcp.tir118.000900)
+- **machine learning publication**: [Nature Communications](https://doi.org/10.1038/s41467-021-21352-8)
+- **data source identifier**: PXD010012, PXD019086, PXD017703
+
+
+- **data type**: ion mobility
+- **format**: CSV
+- **columns**: `index` `Modified sequence` `Charge` `Mass` `Intensity` `Retention time` `CCS` `PT`
+- **[instrument]**: maXis, timsTOF Pro, 
+- **[organism]**: Homo sapiens (Human), Saccharomyces cerevisiae (Baker's yeast)
+- **[fixed modifications]**: <unknown>
+- **[variable modification]**:unmodified & oxidation & acetylation & carbamidomethyl
+- **ionmobility type**: TIMS
+- **css calibration compounds**: <unknown>
+
+
+### Sample Protocol
 In bottom-up proteomics, peptides are separated by liquid chromatography with elution
 peak widths in the range of seconds, while mass spectra are acquired in about 100 microseconds
 with time-of-fight (TOF) instruments. This allows adding ion mobility as a third dimension of
@@ -64,8 +50,38 @@ sections can be acquired on a large scale (R > 0.99). PASEF on the timsTOF Pro i
 to the technological toolbox in proteomics, with a number of unique operating modes that are only
 beginning to be explored.
 
-## Data analysis protocol
-See [Data description](#data-description)
+### Data Analysis Protocol
+MS raw files were analyzed with MaxQuant version 1.6.5.0, which extracts 4D isotope patterns
+(‘features’) and associated MS/MS spectra. The built-in search engine Andromeda74 was used
+to match observed fragment ions to theoretical peptide fragment ion masses derived from in
+silico digests of a reference proteome and a list of 245 potential contaminants using the
+appropriate digestion rules for each proteolytic enzyme (trypsin, LysC or LysN). We allowed
+a maximum of two missing values and required a minimum sequence length of 7 amino acids while
+limiting the maximum peptide mass to 4600 Da. Carbamidomethylation of cysteine was defined as
+a fixed modification, and oxidation of methionine and acetylation of protein N-termini were
+included in the search as variable modification. Reference proteomes for each organism including
+isoforms were accessed from UniProt (Homo sapiens: 91,618 entries, 2019/05; E. coli: 4403 entries,
+2019/01; C. elegans: 28,403 entries, 2019/01; S. cerevisiae: 6049 entries, 2019/01; D. melanogaster:
+23,304 entries, 2019/01). The synthetic peptide library (ProteomeTools54) was searched against
+the entire human reference proteome. The maximum mass tolerances were set to 20 and 40 ppm for
+precursor and fragment ions, respectively. False discovery rates were controlled at 1% on both
+the peptide spectrum match and protein level with a target-decoy approach. The analyses were
+performed separately for each organism and each set of synthetic peptides (‘proteotypic set’,
+‘SRM atlas’, and ‘missing gene set’). To demonstrate the utility of CCS prediction, we re-analyzed
+three diaPASEF experiments from Meier et al.55 with Spectronaut 14.7.201007.47784 (Biognosys AG),
+replacing experimental ion mobility values in the spectral library with our predictions. Singly
+charged peptide precursors were excluded from this analysis as the neural network was exclusively
+trained with multiply charged peptides.
 
-## Comments
-/
+### Comments
+- #
+
+
+[instrument]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1000463
+[organism]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FOBI_0100026
+[fixed modifications]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1003021
+[variable modification]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1003022
+[dissociation method]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1000044
+[collision energy]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1000045 
+[mass analyzer type]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1000443&lang=en&viewMode=All&siblings=false
+[chromatography separation]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1002270&lang=en&viewMode=All&siblings=false

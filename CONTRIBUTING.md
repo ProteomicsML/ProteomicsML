@@ -222,14 +222,11 @@ a dataset, please follow these rules and conventions:
 
 3. Dataset description
 
-   a. Attributes
-      [TODO]
-
-   b. Description categories
-      [TODO]
-
-
-
+   Download the readme template and fill out the details<br>
+   - [Retention time](https://github.com/ProteomicsML/ProteomicsML/datasets/_templates/retention-time-template.md)<br>
+   - [Fragmentation Intensity](https://github.com/ProteomicsML/ProteomicsML/datasets/_templates/fragmentation-intensity-template.md)<br>
+   - [Ion Mobility](https://github.com/ProteomicsML/ProteomicsML/datasets/_templates/ion-mobility-template.md)<br>
+   - [Detectability](https://github.com/ProteomicsML/ProteomicsML/datasets/_templates/protein-detectability-template.md)<br>
 
 
 ### Opening a pull request to add your contributions
