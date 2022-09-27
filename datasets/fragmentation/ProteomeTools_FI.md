@@ -10,24 +10,24 @@ date: last-modified
 The dataset has been divided up into training (250 MB) and holdout (4.87GB) of annotated ms2 spectra.
 
 ### Attributes
-- title: ProteomeTools synthetic peptides
-- dataset tag: ProteomeTools_FI
-- data publication: [ProteomeTools](https://doi.org/10.1038/nmeth.4153)
-- machine learning publication: [Prosit](https://doi.org/10.1038/nmeth.4153)
-- data source identifier: PXD004732
+- **title**: ProteomeTools synthetic peptides
+- **dataset tag**: ProteomeTools_FI
+- **data publication**: [ProteomeTools](https://doi.org/10.1038/nmeth.4153)
+- **machine learning publication**: [Prosit](https://doi.org/10.1038/nmeth.4153)
+- **data source identifier**: PXD004732
 
 
-- data type: fragmentation intensity
-- format: hdf5
-- columns: <unknown>
-- [instrument]\: Orbitrap Fusion ETD
-- [organism]\: Homo sapiens (human)
-- [fixed modifications]\: <unknown>
-- [variable modification]\: unmodified
-- [dissociation method]\: <unknown>
-- [collision energy]\: 35 and 28
-- [mass analyzer type]\: ion and orbitrap
-- spectra encoding: prosit annotation pipeline 
+- **data type**: fragmentation intensity
+- **format**: hdf5
+- **columns**: <unknown>
+- **[instrument]**: Orbitrap Fusion ETD
+- **[organism]**: Homo sapiens (human)
+- **[fixed modifications]**: <unknown>
+- **[variable modification]**: unmodified
+- **[dissociation method]**: <unknown>
+- **[collision energy]**: 35 and 28
+- **[mass analyzer type]**: ion and orbitrap
+- **spectra encoding**: prosit annotation pipeline 
 
 ### Sample protocol description
 Tryptic peptides were individually synthesized by solid

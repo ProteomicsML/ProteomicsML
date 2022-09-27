@@ -10,22 +10,22 @@ date: last-modified
 Describe the data post-processing steps, as well as possible data splits and filtering
 
 ### Attributes
-- title: 
-- dataset tag: 
-- data publication: 
-- machine learning publication: 
-- data source identifier: 
+- **title**: 
+- **dataset tag**: 
+- **data publication**: 
+- **machine learning publication**: 
+- **data source identifier**: 
 
 
-- data type: ion mobility
-- format: 
-- columns: 
-- [instrument]\: 
-- [organism]\: 
-- [fixed modifications]\:
-- [variable modification]\:
-- ionmobility type: 
-- css calibration compounds: 
+- **data type**: ion mobility
+- **format**: 
+- **columns**: 
+- **[instrument]**: 
+- **[organism]:**: 
+- **[fixed modifications]**:
+- **[variable modification]**:
+- **ionmobility type**: 
+- **css calibration compounds**: 
 
 ### Sample Protocol
 Describe the protocol used for sample preparation and experiment settings
