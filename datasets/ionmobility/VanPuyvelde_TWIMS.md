@@ -20,7 +20,7 @@ The data consists of 6.268 PSMs.
 
 - **data type**: ion mobility
 - **format**: TSV
-- **columns**: Modified sequence, Charge, CCS, Ion Mobility, Ion Mobility Units, High Energy, Ion Mobility Offset
+- **columns**: `Modified sequence` `Charge` `CCS` `Ion Mobility` `Ion Mobility Units` `High Energy` `Ion Mobility Offset`
 - **[instrument]**: maXis, timsTOF Pro, 
 - **[organism]**: Homo sapiens (Human), Saccharomyces cerevisiae (Baker's yeast), Escherichia coli (E. coli)
 - **[fixed modifications]**: <unknown>

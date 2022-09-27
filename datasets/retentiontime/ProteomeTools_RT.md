@@ -27,7 +27,7 @@ The full data contains 1.000.000 unmodified peptides and 150.000 oxidized peptid
 
 - **data type**: retention time
 - **format**: CSV
-- **columns**: index, retention time, sequence, modified sequence
+- **columns**: `index` `retention` `time` `sequence` `modified` `sequence`
 - **[instrument]**: Orbitrap Fusion ETD
 - **[organism]**: Homo sapiens (human)
 - **[variable modification]**: unmodified & oxidation

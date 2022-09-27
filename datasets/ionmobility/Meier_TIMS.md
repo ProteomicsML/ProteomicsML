@@ -19,7 +19,7 @@ The data consists of 718.917 PSMs.
 
 - **data type**: ion mobility
 - **format**: CSV
-- **columns**: index, Modified sequence, Charge, Mass, Intensity, Retention time, CCS, PT
+- **columns**: `index` `Modified sequence` `Charge` `Mass` `Intensity` `Retention time` `CCS` `PT`
 - **[instrument]**: maXis, timsTOF Pro, 
 - **[organism]**: Homo sapiens (Human), Saccharomyces cerevisiae (Baker's yeast)
 - **[fixed modifications]**: <unknown>

@@ -18,7 +18,7 @@ The data contains 14.361 peptides from an unknown source, and is used as a kaggl
 
 - **data type**: retention time
 - **format**: TSV
-- **columns**: peptide sequence, uncalibrated elution time
+- **columns**: `peptide` `sequence` `uncalibrated elution time`
 - **[instrument]**:  <unknown>
 - **[organism]**: Homo sapiens (human)
 - **[fixed modifications]**: <unknown>
@@ -47,7 +47,6 @@ The pedigree of the data is not well known.
 - This may possibly be the unmodified peptides from PXD000612
 - This may possibly be the unmodified peptides from https://pubmed.ncbi.nlm.nih.gov/25159151/
 - This is a phospho-enriched dataset. Perhaps only the unmodified peptides are offered
-
 
 
 [instrument]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1000463
