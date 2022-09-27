@@ -2,6 +2,7 @@ on:
   workflow_dispatch:
   pull_request_target:
     types: [ready_for_review]
+    paths: ['**.ipynb']
 
 name: Update notebook copies
 
@@ -14,6 +15,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Set up Python
         uses: actions/setup-python@v4
