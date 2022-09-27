@@ -17,12 +17,14 @@ The dataset has been divided up into training (250 MB) and holdout (4.87GB) of a
 - **data source identifier**: PXD004732
 - **data type**: fragmentation intensity
 - **format**: hdf5
-- **columns**: <unknown>
+- **columns**: `sequence_integer`, `precursor_charge_onehot`, `intensities_raw`,
+       `collision_energy_aligned_normed`, `collision_energy`,
+       `precursor_charge` `sequence_maxquant`, `sequence_length`
 - **instrument**: Orbitrap Fusion ETD
 - **organism**: Homo sapiens (human)
 - **fixed modifications**: <unknown>
 - **variable modification**: unmodified
-- **dissociation method**: <unknown>
+- **dissociation method**: CID and HCD
 - **collision energy**: 35 and 28
 - **mass analyzer type**: ion and orbitrap
 - **spectra encoding**: prosit annotation pipeline 

@@ -24,7 +24,7 @@ The total data contains ~27.200 peptides and is mainly useful for teaching purpo
 - **data source identifier**: PXD004732
 - **data type**: retention time
 - **format**: CSV
-- **columns**: `peptide` `sequence` `iRT` `calibrated` `retention` `time`
+- **columns**: `peptide`, `sequence`, `iRT`, `calibrated`, `retention`, `time`
 - **instrument**: Orbitrap Fusion ETD
 - **organism**: Homo sapiens (human)
 - **variable modification**: unmodified
