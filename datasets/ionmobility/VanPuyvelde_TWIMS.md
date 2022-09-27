@@ -11,22 +11,22 @@ date: last-modified
 The data consists of 6.268 PSMs.
 
 ### Attributes
-- **title**: A comprehensive LFQ benchmark dataset on modern day acquisition strategies in proteomics
-- **dataset tag**: VanPuyvelde_TWIMS_CCS
-- **data publication**: [Scientific Data](https://doi.org/10.1038/s41597-022-01216-6)
-- **machine learning publication**: <unknown>
-- **data source identifier**: PXD028735
+- title: A comprehensive LFQ benchmark dataset on modern day acquisition strategies in proteomics
+- dataset tag: VanPuyvelde_TWIMS_CCS
+- data publication: [Scientific Data](https://doi.org/10.1038/s41597-022-01216-6)
+- machine learning publication: <unknown>
+- data source identifier: PXD028735
 
 
-- **data type**: ion mobility
-- **format**: TSV
-- **columns**: `Modified sequence` `Charge` `CCS` `Ion Mobility` `Ion Mobility Units` `High Energy` `Ion Mobility Offset`
-- **[instrument]**: maXis, timsTOF Pro, 
-- **[organism]**: Homo sapiens (Human), Saccharomyces cerevisiae (Baker's yeast), Escherichia coli (E. coli)
-- **[fixed modifications]**: <unknown>
-- **[variable modification]**:unmodified & oxidation & acetylation & carbamidomethyl
-- **ionmobility type**: TWIMS
-- **css calibration compounds**: <unknown>
+- data type: ion mobility
+- format: TSV
+- columns: `Modified sequence` `Charge` `CCS` `Ion Mobility` `Ion Mobility Units` `High Energy` `Ion Mobility Offset`
+- [instrument]\: maXis, timsTOF Pro, 
+- [organism]\: Homo sapiens (Human), Saccharomyces cerevisiae (Baker's yeast), Escherichia coli (E. coli)
+- [fixed modifications]\: <unknown>
+- [variable modification]\:unmodified & oxidation & acetylation & carbamidomethyl
+- ionmobility type: TWIMS
+- css calibration compounds: <unknown>
 
 
 ### Sample Protocol

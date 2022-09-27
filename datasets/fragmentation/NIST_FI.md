@@ -11,24 +11,24 @@ date: last-modified
 The data is 648 MB (zipped)
 
 ### Attributes
-- **title**: NIST
-- **dataset tag**: NIST_FI
-- **data publication**: [NIST](https://chemdata.nist.gov/dokuwiki/lib/exe/fetch.php?media=peptidew:sergey_sheetlin_asms2020.pdf)
-- **machine learning publication**: <unknown>
-- **data source identifier**: <unknown>
+- title: NIST
+- dataset tag: NIST_FI
+- data publication: [NIST](https://chemdata.nist.gov/dokuwiki/lib/exe/fetch.php?media=peptidew:sergey_sheetlin_asms2020.pdf)
+- machine learning publication: <unknown>
+- data source identifier: <unknown>
 
 
-- **data type**: fragmentation intensity
-- **format**: MSP
-- **columns**: <unknown>
-- **[instrument]**: <unknown> 
-- **[organism]**: Homo sapiens (human)
-- **[fixed modifications]**: <unknown>
-- **[variable modification]**: unmodified & oxidation
-- **[dissociation method]**: <unknown> 
-- **[collision energy]**: <unknown> 
-- **[mass analyzer type]**: <unknown> 
-- **spectra encoding**: <unknown> 
+- data type: fragmentation intensity
+- format: MSP
+- columns: <unknown>
+- [instrument]\: <unknown> 
+- [organism]\: Homo sapiens (human)
+- [fixed modifications]\: <unknown>
+- [variable modification]\: unmodified & oxidation
+- [dissociation method]\: <unknown> 
+- [collision energy]\: <unknown> 
+- [mass analyzer type]\: <unknown> 
+- spectra encoding: <unknown> 
 
 ### Sample Protocol
 
