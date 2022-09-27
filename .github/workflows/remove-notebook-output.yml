@@ -16,7 +16,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: "refs/pull/${{ github.event.number }}/merge"
 
       - name: Set up Python
         uses: actions/setup-python@v4
