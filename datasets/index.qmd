@@ -2,7 +2,7 @@
 title: Datasets
 listing:
   - id: detectability-listing
-    contents: "detectability/**/*.md"
+    contents: "detectability//*.md"
     type: table
     table-hover: true
     fields: [title, date]

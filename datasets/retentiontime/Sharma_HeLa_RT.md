@@ -10,21 +10,21 @@ date: last-modified
 The data contains 14.361 peptides from an unknown source, and is used as a kaggle competition dataset.
 
 ### Attributes
-- **title**: Kirill Pevzner "Proteomics Retention Time Prediction" dataset from Sharma et al. HeLa data from kaggle
-- **dataset tag**: Sharma_HeLa_RT
-- **data publication**:  <unknown>
-- **machine learning publication**: <unknown>
-- **data source identifier**: <unknown>
+- title: Kirill Pevzner "Proteomics Retention Time Prediction" dataset from Sharma et al. HeLa data from kaggle
+- dataset tag: Sharma_HeLa_RT
+- data publication:  <unknown>
+- machine learning publication: <unknown>
+- data source identifier: <unknown>
 
-- **data type**: retention time
-- **format**: TSV
-- **columns**: `peptide` `sequence` `uncalibrated elution time`
-- **[instrument]**:  <unknown>
-- **[organism]**: Homo sapiens (human)
-- **[fixed modifications]**: <unknown>
-- **[variable modification]**: <unknown>
-- **[chromatography separation]**:  <unknown>
-- **peak measurement**: <unknown>
+- data type: retention time
+- format: TSV
+- columns: `peptide` `sequence` `uncalibrated elution time`
+- [instrument]\:  <unknown>
+- [organism]\: Homo sapiens (human)
+- [fixed modifications]\: <unknown>
+- [variable modification]\: <unknown>
+- [chromatography separation]\:  <unknown>
+- peak measurement: <unknown>
 
 
 ### Sample Protocol
