@@ -31,8 +31,8 @@ more open and reproducible science!
 🧑‍🔧 Learn how to [Contribute][contributing]<br>
 🤝 Read the [Code of Conduct][code-of-conduct]<br>
 
-[tutorials]: https://proteomicsml.org/tutorials
-[datasets]: https://proteomicsml.org/datasets
+[tutorials]: https://www.proteomicsml.org/tutorials
+[datasets]: https://www.proteomicsml.org/datasets
 [tutorials-qa]: https://github.com/ProteomicsML/ProteomicsML/discussions/categories/tutorials-q-a
 [dataset-discussions]: https://github.com/ProteomicsML/ProteomicsML/discussions/categories/dataset-discussions
 [general-discussions]: https://github.com/ProteomicsML/ProteomicsML/discussions/categories/general
