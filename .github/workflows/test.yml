@@ -1,7 +1,5 @@
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
   pull_request:
 
 name: Test website rendering
