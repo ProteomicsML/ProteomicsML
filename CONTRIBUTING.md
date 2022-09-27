@@ -243,18 +243,25 @@ with these changes. Choose the pull request template that fits your changes best
 
 ## Website deployment
 
-When a pull request is merged with the `main` branch, the following GitHub Actions are
+When a pull request has been approved by a reviewer, the following GitHub Actions are
 triggered:
 
-1. **Test website rendering**: The full website is rendered to check that no errors
-   occur. This action should already have been run successfully for the pull
-   request that implemented the changes. Nevertheless, merging could also introduce
-   new issues.
-2. **Update notebook copies**: A script is run to make copies of all tutorial
-   notebooks with all output removed. The filenames of these copies are prepended with
-   an underscore and should be used to open the notebooks interactively, e.g., in
-   Google Colab.
-3. **Publish website**: Quarto is used to render the static website, which is then
-   force-pushed to the [ProteomicsML/proteomicsml.github.io](https://github.com/ProteomicsML/proteomicsml.github.io)
-   repository. This repository is served on [proteomicsml.org](https://www.proteomicsml.org/)
-   through GitHub Pages.
+- **Test website rendering**: The full website is rendered to check that no errors
+  occur. This action should already have been run successfully for the pull
+  request that implemented the changes. Nevertheless, merging could also introduce
+  new issues.
+- **Update notebook copies**: A script is run to make copies of all tutorial
+  notebooks with all output removed. The filenames of these copies are prepended with
+  an underscore and should be used to open the notebooks interactively, e.g., in
+  Google Colab.
+  This script adds a commit to the pull request branch, which can only be accepted
+  once this action has run successfully.
+
+
+When a pull request is merged with the `main` branch, the following GitHub Action is
+triggered:
+
+- **Publish website**: Quarto is used to render the static website, which is then
+  force-pushed to the [ProteomicsML/proteomicsml.github.io](https://github.com/ProteomicsML/proteomicsml.github.io)
+  repository. This repository is served on [proteomicsml.org](https://www.proteomicsml.org/)
+  through GitHub Pages.
