@@ -15,15 +15,13 @@ The data consists of 718.917 PSMs.
 - **data publication**: [MSP](https://doi.org/10.1074/mcp.tir118.000900)
 - **machine learning publication**: [Nature Communications](https://doi.org/10.1038/s41467-021-21352-8)
 - **data source identifier**: PXD010012, PXD019086, PXD017703
-
-
 - **data type**: ion mobility
 - **format**: CSV
 - **columns**: `index` `Modified sequence` `Charge` `Mass` `Intensity` `Retention time` `CCS` `PT`
-- **[instrument]**: maXis, timsTOF Pro, 
-- **[organism]**: Homo sapiens (Human), Saccharomyces cerevisiae (Baker's yeast)
-- **[fixed modifications]**: <unknown>
-- **[variable modification]**:unmodified & oxidation & acetylation & carbamidomethyl
+- **instrument**: maXis, timsTOF Pro, 
+- **organism**: Homo sapiens (Human), Saccharomyces cerevisiae (Baker's yeast)
+- **fixed modifications**: <unknown>
+- **variable modification**:unmodified & oxidation & acetylation & carbamidomethyl
 - **ionmobility type**: TIMS
 - **css calibration compounds**: <unknown>
 
@@ -75,13 +73,3 @@ trained with multiply charged peptides.
 
 ### Comments
 - #
-
-
-[instrument]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1000463
-[organism]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FOBI_0100026
-[fixed modifications]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1003021
-[variable modification]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1003022
-[dissociation method]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1000044
-[collision energy]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1000045 
-[mass analyzer type]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1000443&lang=en&viewMode=All&siblings=false
-[chromatography separation]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1002270&lang=en&viewMode=All&siblings=false

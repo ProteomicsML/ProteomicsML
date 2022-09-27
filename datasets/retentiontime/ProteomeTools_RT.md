@@ -18,20 +18,19 @@ The full data contains 1.000.000 unmodified peptides and 150.000 oxidized peptid
 - Oxidized: Containing 150.000 all oxidized peptides. <br>
 - Mixed: Containing 150.000 oxidized and 150.000 unmodified peptides. <br>
 
-### Attributes
-- **title**: ProteomeTools synthetic peptides and iRT calibrated retention times
-- **dataset tag**: ProteomeTools_RT
-- **data publication**: [ProteomeTools](https://doi.org/10.1038/nmeth.4153)
-- **machine learning publication**: [Prosit](https://doi.org/10.1038/nmeth.4153)
-- **data source identifier**: PXD004732 
-
+### Attributes 
+* **title**: ProteomeTools synthetic peptides and iRT calibrated retention times
+* **dataset tag**: ProteomeTools_RT
+* **data publication**: [ProteomeTools](https://doi.org/10.1038/nmeth.4153)
+* **machine learning publication**: [Prosit](https://doi.org/10.1038/nmeth.4153)
+* **data source identifier**: PXD004732 
 - **data type**: retention time
 - **format**: CSV
-- **columns**: `index` `retention` `time` `sequence` `modified` `sequence`
-- **[instrument]**: Orbitrap Fusion ETD
-- **[organism]**: Homo sapiens (human)
-- **[variable modification]**: unmodified & oxidation
-- **[chromatography separation]**: <unknown>
+- **columns**: `index` `retention time` `sequence` `modified` `sequence`
+- **instrument**: Orbitrap Fusion ETD
+- **organism**: Homo sapiens (human)
+- **variable modification**: unmodified & oxidation
+- **chromatography separation**: <unknown>
 - **peak measurement**: <unknown>
 
  
@@ -54,12 +53,3 @@ made available to the public in ProteomicsDB.
 ### Comments
 - #
 
-
-[instrument]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1000463
-[organism]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FOBI_0100026
-[fixed modifications]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1003021
-[variable modification]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1003022
-[dissociation method]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1000044
-[collision energy]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1000045 
-[mass analyzer type]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1000443&lang=en&viewMode=All&siblings=false
-[chromatography separation]: https://www.ebi.ac.uk/ols/ontologies/ms/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FMS_1002270&lang=en&viewMode=All&siblings=false
