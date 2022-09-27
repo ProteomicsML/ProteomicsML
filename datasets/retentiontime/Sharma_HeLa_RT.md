@@ -17,7 +17,7 @@ The data contains 14.361 peptides from an unknown source, and is used as a kaggl
 - **data source identifier**: <unknown>
 - **data type**: retention time
 - **format**: TSV
-- **columns**: `peptide` `sequence` `uncalibrated elution time`
+- **columns**: `peptide`, `sequence`, `uncalibrated elution time`
 - **instrument**:  <unknown>
 - **organism**: Homo sapiens (human)
 - **fixed modifications**: <unknown>
