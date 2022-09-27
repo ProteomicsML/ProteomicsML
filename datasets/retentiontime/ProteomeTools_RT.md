@@ -19,20 +19,20 @@ The full data contains 1.000.000 unmodified peptides and 150.000 oxidized peptid
 - Mixed: Containing 150.000 oxidized and 150.000 unmodified peptides. <br>
 
 ### Attributes
-- title: ProteomeTools synthetic peptides and iRT calibrated retention times
-- dataset tag: ProteomeTools_RT
-- data publication: [ProteomeTools](https://doi.org/10.1038/nmeth.4153)
-- machine learning publication: [Prosit](https://doi.org/10.1038/nmeth.4153)
-- data source identifier: PXD004732 
+- **title**: ProteomeTools synthetic peptides and iRT calibrated retention times
+- **dataset tag**: ProteomeTools_RT
+- **data publication**: [ProteomeTools](https://doi.org/10.1038/nmeth.4153)
+- **machine learning publication**: [Prosit](https://doi.org/10.1038/nmeth.4153)
+- **data source identifier**: PXD004732 
 
-- data type: retention time
-- format: CSV
-- columns: `index` `retention` `time` `sequence` `modified` `sequence`
-- [instrument]\: Orbitrap Fusion ETD
-- [organism]\: Homo sapiens (human)
-- [variable modification]\: unmodified & oxidation
-- [chromatography separation]\: <unknown>
-- peak measurement: <unknown>
+- **data type**: retention time
+- **format**: CSV
+- **columns**: `index` `retention` `time` `sequence` `modified` `sequence`
+- **[instrument]**: Orbitrap Fusion ETD
+- **[organism]**: Homo sapiens (human)
+- **[variable modification]**: unmodified & oxidation
+- **[chromatography separation]**: <unknown>
+- **peak measurement**: <unknown>
 
  
 ### Sample Protocol

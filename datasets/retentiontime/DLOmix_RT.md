@@ -17,21 +17,21 @@ The total data contains ~27.200 peptides and is mainly useful for teaching purpo
 - Train/val: Containing 27.200 peptides.
 
 ### Attributes
-- title: DLOmix deep learning in proteomics python framework for retention time
-- dataset tag: DLOmix_RT
-- data publication: [ProteomeTools](https://doi.org/10.1038/nmeth.4153)
-- machine learning publication: [Prosit](https://doi.org/10.1038/nmeth.4153)
-- data source identifier: PXD004732
+- **title**: DLOmix deep learning in proteomics python framework for retention time
+- **dataset tag**: DLOmix_RT
+- **data publication**: [ProteomeTools](https://doi.org/10.1038/nmeth.4153)
+- **machine learning publication**: [Prosit](https://doi.org/10.1038/nmeth.4153)
+- **data source identifier**: PXD004732
 
 
-- data type: retention time
-- format: CSV
-- columns: `peptide` `sequence` `iRT` `calibrated` `retention` `time`
-- [instrument]\: Orbitrap Fusion ETD
-- [organism]\: Homo sapiens (human)
-- [variable modification]\: unmodified
-- [chromatography separation]\: <unknown>
-- peak measurement: <unknown>
+- **data type**: retention time
+- **format**: CSV
+- **columns**: `peptide` `sequence` `iRT` `calibrated` `retention` `time`
+- **[instrument]**: Orbitrap Fusion ETD
+- **[organism]**: Homo sapiens (human)
+- **[variable modification]**: unmodified
+- **[chromatography separation]**: <unknown>
+- **peak measurement**: <unknown>
 
 ### Sample Protocol
 Tryptic peptides were individually synthesized by solid
