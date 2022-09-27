@@ -1,13 +1,12 @@
 on:
-  workflow_dispatch:
-  pull_request_target:
-    types: [ready_for_review]
-    paths: ['**.ipynb']
+  push:
+    branches: [main]
 
 name: Update notebook copies
 
 jobs:
   generate-copies:
+    if: "! contains(github.event.head_commit.message, 'Update notebook copies without output')"
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -15,8 +14,6 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v3
-        with:
-          ref: "refs/pull/${{ github.event.number }}/merge"
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -29,9 +26,36 @@ jobs:
       - name: Generate copies of all notebooks without code output
         run: python .github/workflows/scripts/remove_notebook_output.py
 
-      - name: Commit and push
-        run: |
-          git config user.name "${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>"
-          git config user.email "noreply@github.com"
-          git commit -a -m "Clean notebooks and update copies without output"
-          git push
+      - name: Create pull request
+        id: cpr
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.GH_PR_TOKEN }}
+          commit-message: Update notebook copies without output
+          committer: GitHub <noreply@github.com>
+          author: GitHub <noreply@github.com>
+          branch: notebooks-removed-output
+          delete-branch: true
+          title: 'Update notebook copies without output'
+          body: |
+            This automated PR generates new copies of all notebooks without output.
+            The automatically generated versions are prepended with an underscore
+            and can be used to open in Colab for interactive usage.
+          labels: |
+            notebook copies
+            automated pr
+
+      - name: Approve pull request
+        if: (steps.cpr.outputs.pull-request-operation == 'created' ||	steps.cpr.outputs.pull-request-operation == 'updated')
+        uses: juliangruber/approve-pull-request-action@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          number: ${{ steps.cpr.outputs.pull-request-number }}
+
+      - name: Merge pull request
+        if: (steps.cpr.outputs.pull-request-operation == 'created' ||	steps.cpr.outputs.pull-request-operation == 'updated')
+        uses: peter-evans/enable-pull-request-automerge@v2
+        with:
+          token: ${{ secrets.GH_PR_TOKEN }}
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+          merge-method: squash
