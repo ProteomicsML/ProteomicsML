@@ -1,12 +1,973 @@
-@article{gabriels2019,
-  abstract     = {{MS²PIP is a data-driven tool that accurately predicts peak intensities for a given peptide's fragmentation mass spectrum. Since the release of the (MSPIP)-P-2 web server in 2015, we have brought significant updates to both the tool and the web server. In addition to the original models for CID and HCD fragmentation, we have added specialized models for the TripleTOF 5600+ mass spectrometer, for TMT-labeled peptides, for iTRAQ-labeled peptides, and for iTRAQ-labeled phosphopeptides. Because the fragmentation pattern is heavily altered in each of these cases, these additional models greatly improve the prediction accuracy for their corresponding data types. We have also substantially reduced the computational resources required to run (MSPIP)-P-2, and have completely rebuilt the web server, which now allows predictions of up to 100 000 peptide sequences in a single request. The MS(2)PIPweb server is freely available at https://iomics.ugent.be/ms2pip/.}},
-  author       = {{Gabriels, Ralf and Martens, Lennart and Degroeve, Sven}},
-  issn         = {{0305-1048}},
-  journal      = {{NUCLEIC ACIDS RESEARCH}},
-  language     = {{eng}},
-  number       = {{W1}},
-  pages        = {{W295--W299}},
-  title        = {{Updated MS²PIP web server delivers fast and accurate MS² peak intensity prediction for multiple fragmentation methods, instruments and labeling techniques}},
-  volume       = {{47}},
-  year         = {{2019}},
+% For 2022 manuscript
+
+
+@article{Zhou2017-ee,
+  title    = "{MetCCS} predictor: a web server for predicting collision
+              cross-section values of metabolites in ion mobility-mass
+              spectrometry based metabolomics",
+  author   = "Zhou, Zhiwei and Xiong, Xin and Zhu, Zheng-Jiang",
+  abstract = "SUMMARY: In metabolomics, rigorous structural identification of
+              metabolites presents a challenge for bioinformatics. The use of
+              collision cross-section (CCS) values of metabolites derived from
+              ion mobility-mass spectrometry effectively increases the
+              confidence of metabolite identification, but this technique
+              suffers from the limit number of available CCS values. Currently,
+              there is no software available for rapidly generating the
+              metabolites' CCS values. Here, we developed the first web server,
+              namely, MetCCS Predictor, for predicting CCS values. It can
+              predict the CCS values of metabolites using molecular descriptors
+              within a few seconds. Common users with limited background on
+              bioinformatics can benefit from this software and effectively
+              improve the metabolite identification in metabolomics.
+              AVAILABILITY AND IMPLEMENTATION: The web server is freely
+              available at: http://www.metabolomics-shanghai.org/MetCCS/ .
+              CONTACT: jiangzhu@sioc.ac.cn. SUPPLEMENTARY INFORMATION:
+              Supplementary data are available at Bioinformatics online.",
+  journal  = "Bioinformatics",
+  volume   =  33,
+  number   =  14,
+  pages    = "2235--2237",
+  month    =  jul,
+  year     =  2017,
+  language = "en",
+  doi      = {10.1093/bioinformatics/btx140},
+}
+
+% The entry below contains non-ASCII chars that could not be converted
+% to a LaTeX equivalent.
+@article{Van_Wijk2021-fp,
+  title    = "The Arabidopsis {PeptideAtlas}: Harnessing worldwide proteomics
+              data to create a comprehensive community proteomics resource",
+  author   = "van Wijk, Klaas J and Leppert, Tami and Sun, Qi and Boguraev,
+              Sascha S and Sun, Zhi and Mendoza, Luis and Deutsch, Eric W",
+  abstract = "We developed a resource, the Arabidopsis PeptideAtlas
+              (www.peptideatlas.org/builds/arabidopsis/), to solve central
+              questions about the Arabidopsis thaliana proteome, such as the
+              significance of protein splice forms and post-translational
+              modifications (PTMs), or simply to obtain reliable information
+              about specific proteins. PeptideAtlas is based on published mass
+              spectrometry (MS) data collected through ProteomeXchange and
+              reanalyzed through a uniform processing and metadata annotation
+              pipeline. All matched MS-derived peptide data are linked to
+              spectral, technical, and biological metadata. Nearly 40 million
+              out of ∼143 million MS/MS (tandem MS) spectra were matched to the
+              reference genome Araport11, identifying ∼0.5 million unique
+              peptides and 17,858 uniquely identified proteins (only isoform
+              per gene) at the highest confidence level (false discovery rate
+              0.0004; 2 non-nested peptides $\geq$9 amino acid each), assigned
+              canonical proteins, and 3,543 lower-confidence proteins.
+              Physicochemical protein properties were evaluated for targeted
+              identification of unobserved proteins. Additional proteins and
+              isoforms currently not in Araport11 were identified that were
+              generated from pseudogenes, alternative start, stops, and/or
+              splice variants, and small Open Reading Frames; these features
+              should be considered when updating the Arabidopsis genome.
+              Phosphorylation can be inspected through a sophisticated PTM
+              viewer. PeptideAtlas is integrated with community resources
+              including TAIR, tracks in JBrowse, PPDB, and UniProtKB.
+              Subsequent PeptideAtlas builds will incorporate millions more
+              MS/MS data.",
+  journal  = "Plant Cell",
+  volume   =  33,
+  number   =  11,
+  pages    = "3421--3453",
+  month    =  nov,
+  year     =  2021,
+  language = "en",
+  doi      = {10.1093/plcell/koab211},
+}
+
+@article{Omenn2021-qc,
+  title    = "Progress Identifying and Analyzing the Human Proteome: 2021
+              Metrics from the {HUPO} Human Proteome Project",
+  author   = "Omenn, Gilbert S and Lane, Lydie and Overall, Christopher M and
+              Paik, Young-Ki and Cristea, Ileana M and Corrales, Fernando J and
+              Lindskog, Cecilia and Weintraub, Susan and Roehrl, Michael H A
+              and Liu, Siqi and Bandeira, Nuno and Srivastava, Sudhir and Chen,
+              Yu-Ju and Aebersold, Ruedi and Moritz, Robert L and Deutsch, Eric
+              W",
+  abstract = "The 2021 Metrics of the HUPO Human Proteome Project (HPP) show
+              that protein expression has now been credibly detected (neXtProt
+              PE1 level) for 18 357 (92.8\%) of the 19 778 predicted proteins
+              coded in the human genome, a gain of 483 since 2020 from reports
+              throughout the world reanalyzed by the HPP. Conversely, the
+              number of neXtProt PE2, PE3, and PE4 missing proteins has been
+              reduced by 478 to 1421. This represents remarkable progress on
+              the proteome parts list. The utilization of proteomics in a broad
+              array of biological and clinical studies likewise continues to
+              expand with many important findings and effective integration
+              with other omics platforms. We present highlights from the
+              Immunopeptidomics, Glycoproteomics, Infectious Disease,
+              Cardiovascular, Musculo-Skeletal, Liver, and Cancers B/D-HPP
+              teams and from the Knowledgebase, Mass Spectrometry, Antibody
+              Profiling, and Pathology resource pillars, as well as ethical
+              considerations important to the clinical utilization of
+              proteomics and protein biomarkers.",
+  journal  = "J. Proteome Res.",
+  volume   =  20,
+  number   =  12,
+  pages    = "5227--5240",
+  month    =  dec,
+  year     =  2021,
+  keywords = "Biology and Disease-HPP (B/D-HPP); Chromosome-centric HPP
+              (C-HPP); Human Protein Atlas; Human Proteome Project (HPP); Mass
+              Spectrometry Interactive Virtual Environment (MassIVE);
+              PeptideAtlas; missing proteins (MP); neXtProt protein existence
+              (PE) metrics; non-MS PE1 proteins; uncharacterized protein
+              existence 1 (uPE1)",
+  language = "en"
+}
+
+@article{Von_Heijne1983-cu,
+  title    = "Patterns of amino acids near signal-sequence cleavage sites",
+  author   = "von Heijne, G",
+  abstract = "According to the signal hypothesis, a signal sequence, once
+              having initiated export of a growing protein chain across the
+              rough endoplasmic reticulum, is cleaved from the mature protein
+              at a specific site. It has long been known that some part of the
+              cleavage specificity resides in the last residue of the signal
+              sequence, which invariably is one with a small, uncharged
+              side-chain, but no further specific patterns of amino acids near
+              the point of cleavage have been discovered so far. In this paper,
+              some such patterns, based on a sample of 78 eukaryotic signal
+              sequences, are presented and discussed, and a first attempt at
+              formulating rules for the prediction of cleavage sites is made.",
+  journal  = "Eur. J. Biochem.",
+  volume   =  133,
+  number   =  1,
+  pages    = "17--21",
+  month    =  jun,
+  year     =  1983,
+  language = "en"
+}
+
+@article{tyanova2016-ma,
+  title={The MaxQuant computational platform for mass spectrometry-based shotgun proteomics},
+  author={Tyanova, Stefka and Temu, Tikira and Cox, Juergen},
+  journal={Nature protocols},
+  volume={11},
+  number={12},
+  pages={2301--2319},
+  year={2016},
+  publisher={Nature Publishing Group}
+}
+
+@article{Zolg2017-ys,
+  title    = "Building {ProteomeTools} based on a complete synthetic human
+              proteome",
+  author   = "Zolg, Daniel P and Wilhelm, Mathias and Schnatbaum, Karsten and
+              Zerweck, Johannes and Knaute, Tobias and Delanghe, Bernard and
+              Bailey, Derek J and Gessulat, Siegfried and Ehrlich,
+              Hans-Christian and Weininger, Maximilian and Yu, Peng and
+              Schlegl, Judith and Kramer, Karl and Schmidt, Tobias and
+              Kusebauch, Ulrike and Deutsch, Eric W and Aebersold, Ruedi and
+              Moritz, Robert L and Wenschuh, Holger and Moehring, Thomas and
+              Aiche, Stephan and Huhmer, Andreas and Reimer, Ulf and Kuster,
+              Bernhard",
+  abstract = "We describe ProteomeTools, a project building molecular and
+              digital tools from the human proteome to facilitate biomedical
+              research. Here we report the generation and multimodal liquid
+              chromatography-tandem mass spectrometry analysis of >330,000
+              synthetic tryptic peptides representing essentially all canonical
+              human gene products, and we exemplify the utility of these data
+              in several applications. The resource (available at
+              http://www.proteometools.org) will be extended to >1 million
+              peptides, and all data will be shared with the community via
+              ProteomicsDB and ProteomeXchange.",
+  journal  = "Nat. Methods",
+  volume   =  14,
+  number   =  3,
+  pages    = "259--262",
+  month    =  mar,
+  year     =  2017,
+  language = "en"
+}
+
+@article{Wen2020-cp,
+  title    = "Deep Learning in Proteomics",
+  author   = "Wen, Bo and Zeng, Wen-Feng and Liao, Yuxing and Shi, Zhiao and
+              Savage, Sara R and Jiang, Wen and Zhang, Bing",
+  abstract = "Proteomics, the study of all the proteins in biological systems,
+              is becoming a data-rich science. Protein sequences and structures
+              are comprehensively catalogued in online databases. With recent
+              advancements in tandem mass spectrometry (MS) technology, protein
+              expression and post-translational modifications (PTMs) can be
+              studied in a variety of biological systems at the global scale.
+              Sophisticated computational algorithms are needed to translate
+              the vast amount of data into novel biological insights. Deep
+              learning automatically extracts data representations at high
+              levels of abstraction from data, and it thrives in data-rich
+              scientific research domains. Here, a comprehensive overview of
+              deep learning applications in proteomics, including retention
+              time prediction, MS/MS spectrum prediction, de novo peptide
+              sequencing, PTM prediction, major histocompatibility
+              complex-peptide binding prediction, and protein structure
+              prediction, is provided. Limitations and the future directions of
+              deep learning in proteomics are also discussed. This review will
+              provide readers an overview of deep learning and how it can be
+              used to analyze proteomics data.",
+  journal  = "Proteomics",
+  volume   =  20,
+  number   = "21-22",
+  month    =  nov,
+  year     =  2020,
+  keywords = "bioinformatics; deep learning; proteomics",
+  language = "en"
+}
+
+@article{Van_Puyvelde2022-nv,
+  title    = "A comprehensive {LFQ} benchmark dataset on modern day acquisition
+              strategies in proteomics",
+  author   = "Van Puyvelde, Bart and Daled, Simon and Willems, Sander and
+              Gabriels, Ralf and Gonzalez de Peredo, Anne and Chaoui, Karima
+              and Mouton-Barbosa, Emmanuelle and Bouyssi{\'e}, David and
+              Boonen, Kurt and Hughes, Christopher J and Gethings, Lee A and
+              Perez-Riverol, Yasset and Bloomfield, Nic and Tate, Stephen and
+              Schiltz, Odile and Martens, Lennart and Deforce, Dieter and
+              Dhaenens, Maarten",
+  abstract = "In the last decade, a revolution in liquid chromatography-mass
+              spectrometry (LC-MS) based proteomics was unfolded with the
+              introduction of dozens of novel instruments that incorporate
+              additional data dimensions through innovative acquisition
+              methodologies, in turn inspiring specialized data analysis
+              pipelines. Simultaneously, a growing number of proteomics
+              datasets have been made publicly available through data
+              repositories such as ProteomeXchange, Zenodo and Skyline
+              Panorama. However, developing algorithms to mine this data and
+              assessing the performance on different platforms is currently
+              hampered by the lack of a single benchmark experimental design.
+              Therefore, we acquired a hybrid proteome mixture on different
+              instrument platforms and in all currently available families of
+              data acquisition. Here, we present a comprehensive Data-Dependent
+              and Data-Independent Acquisition (DDA/DIA) dataset acquired using
+              several of the most commonly used current day instrumental
+              platforms. The dataset consists of over 700 LC-MS runs, including
+              adequate replicates allowing robust statistics and covering over
+              nearly 10 different data formats, including scanning quadrupole
+              and ion mobility enabled acquisitions. Datasets are available via
+              ProteomeXchange (PXD028735).",
+  journal  = "Sci Data",
+  volume   =  9,
+  number   =  1,
+  pages    = "126",
+  month    =  mar,
+  year     =  2022,
+  language = "en",
+  doi      = {10.1038/s41597-022-01216-6},
+}
+
+@article{Broeckling2021-ks,
+  title    = "Application of Predicted Collisional Cross Section to Metabolome
+              Databases to Probabilistically Describe the Current and Future
+              Ion Mobility Mass Spectrometry",
+  author   = "Broeckling, Corey D and Yao, Linxing and Isaac, Giorgis and
+              Gioioso, Marisa and Ianchis, Valentin and Vissers, Johannes P C",
+  abstract = "Metabolomics is a powerful phenotyping platform with potential
+              for high-throughput analyses. The primary technology for
+              metabolite profiling is mass spectrometry. In recent years, the
+              coupling of mass spectrometry with ion mobility spectrometry
+              (IMS) has offered the promise of faster analysis time and greater
+              resolving power. Our understanding of the potential impact of IMS
+              on the field of metabolomics is limited by availability of
+              comprehensive experimental data. In this analysis, we use a
+              probabilistic approach to enumerate the strengths and
+              limitations, the present and future, of this technology. This is
+              accomplished through use of ``model'' metabolomes, predicted
+              physicochemical properties, and probabilistic descriptions of
+              resolving power. This analysis advances our understanding of the
+              importance of orthogonality in resolving (separation) dimensions,
+              describes the impact of the metabolome composition on resolution
+              demands, and offers a system resolution landscape that may serve
+              to guide practitioners in the coming years.",
+  journal  = "J. Am. Soc. Mass Spectrom.",
+  volume   =  32,
+  number   =  3,
+  pages    = "661--669",
+  month    =  mar,
+  year     =  2021,
+  language = "en"
+}
+
+@article{C_Silva2019-yy,
+  title    = "Accurate peptide fragmentation predictions allow data driven
+              approaches to replace and improve upon proteomics search engine
+              scoring functions",
+  author   = "C Silva, Ana S and Bouwmeester, Robbin and Martens, Lennart and
+              Degroeve, Sven",
+  abstract = "MOTIVATION: The use of post-processing tools to maximize the
+              information gained from a proteomics search engine is widely
+              accepted and used by the community, with the most notable example
+              being Percolator-a semi-supervised machine learning model which
+              learns a new scoring function for a given dataset. The usage of
+              such tools is however bound to the search engine's scoring
+              scheme, which doesn't always make full use of the intensity
+              information present in a spectrum. We aim to show how this tool
+              can be applied in such a way that maximizes the use of spectrum
+              intensity information by leveraging another machine
+              learning-based tool, MS2PIP. MS2PIP predicts fragment ion peak
+              intensities. RESULTS: We show how comparing predicted intensities
+              to annotated experimental spectra by calculating direct
+              similarity metrics provides enough information for a tool such as
+              Percolator to accurately separate two classes of
+              peptide-to-spectrum matches. This approach allows using more
+              information out of the data (compared with simpler intensity
+              based metrics, like peak counting or explained intensities
+              summing) while maintaining control of statistics such as the
+              false discovery rate. AVAILABILITY AND IMPLEMENTATION: All of the
+              code is available online at
+              https://github.com/compomics/ms2rescore. SUPPLEMENTARY
+              INFORMATION: Supplementary data are available at Bioinformatics
+              online.",
+  journal  = "Bioinformatics",
+  volume   =  35,
+  number   =  24,
+  pages    = "5243--5248",
+  month    =  dec,
+  year     =  2019,
+  language = "en"
+}
+
+@article{Meier2021-ig,
+  title    = "Deep learning the collisional cross sections of the peptide
+              universe from a million experimental values",
+  author   = "Meier, Florian and K{\"o}hler, Niklas D and Brunner,
+              Andreas-David and Wanka, Jean-Marc H and Voytik, Eugenia and
+              Strauss, Maximilian T and Theis, Fabian J and Mann, Matthias",
+  abstract = "The size and shape of peptide ions in the gas phase are an
+              under-explored dimension for mass spectrometry-based proteomics.
+              To investigate the nature and utility of the peptide collisional
+              cross section (CCS) space, we measure more than a million data
+              points from whole-proteome digests of five organisms with trapped
+              ion mobility spectrometry (TIMS) and parallel accumulation-serial
+              fragmentation (PASEF). The scale and precision (CV 0.99).
+              Hydrophobicity, proportion of prolines and position of histidines
+              are main determinants of the cross sections in addition to
+              sequence-specific interactions. CCS values can now be predicted
+              for any peptide and organism, forming a basis for advanced
+              proteomics workflows that make full use of the additional
+              information.",
+  journal  = "Nat. Commun.",
+  volume   =  12,
+  number   =  1,
+  pages    = "1185",
+  month    =  feb,
+  year     =  2021,
+  language = "en"
+}
+
+@article{Nielsen1999-ej,
+  title    = "Machine learning approaches for the prediction of signal peptides
+              and other protein sorting signals",
+  author   = "Nielsen, H and Brunak, S and von Heijne, G",
+  abstract = "Prediction of protein sorting signals from the sequence of amino
+              acids has great importance in the field of proteomics today.
+              Recently, the growth of protein databases, combined with machine
+              learning approaches, such as neural networks and hidden Markov
+              models, have made it possible to achieve a level of reliability
+              where practical use in, for example automatic database annotation
+              is feasible. In this review, we concentrate on the present status
+              and future perspectives of SignalP, our neural network-based
+              method for prediction of the most well-known sorting signal: the
+              secretory signal peptide. We discuss the problems associated with
+              the use of SignalP on genomic sequences, showing that signal
+              peptide prediction will improve further if integrated with
+              predictions of start codons and transmembrane helices. As a step
+              towards this goal, a hidden Markov model version of SignalP has
+              been developed, making it possible to discriminate between
+              cleaved signal peptides and uncleaved signal anchors.
+              Furthermore, we show how SignalP can be used to characterize
+              putative signal peptides from an archaeon, Methanococcus
+              jannaschii. Finally, we briefly review a few methods for
+              predicting other protein sorting signals and discuss the future
+              of protein sorting prediction in general.",
+  journal  = "Protein Eng.",
+  volume   =  12,
+  number   =  1,
+  pages    = "3--9",
+  month    =  jan,
+  year     =  1999,
+  language = "en"
+}
+
+@article{Michelmann2015-nu,
+  title    = "Fundamentals of trapped ion mobility spectrometry",
+  author   = "Michelmann, Karsten and Silveira, Joshua A and Ridgeway, Mark E
+              and Park, Melvin A",
+  abstract = "Trapped ion mobility spectrometry (TIMS) is a relatively new
+              gas-phase separation method that has been coupled to quadrupole
+              orthogonal acceleration time-of-flight mass spectrometry. The
+              TIMS analyzer is a segmented rf ion guide wherein ions are
+              mobility-analyzed using an electric field that holds ions
+              stationary against a moving gas, unlike conventional drift tube
+              ion mobility spectrometry where the gas is stationary. Ions are
+              initially trapped, and subsequently eluted from the TIMS analyzer
+              over time according to their mobility (K). Though TIMS has
+              achieved a high level of performance (R > 250) in a small device
+              (<5 cm) using modest operating potentials (<300 V), a proper
+              theory has yet to be produced. Here, we develop a quantitative
+              theory for TIMS via mathematical derivation and simulations. A
+              one-dimensional analytical model, used to predict the transit
+              time and theoretical resolving power, is described. Theoretical
+              trends are in agreement with experimental measurements performed
+              as a function of K, pressure, and the axial electric field scan
+              rate. The linear dependence of the transit time with 1/K provides
+              a fundamental basis for determination of reduced mobility or
+              collision cross section values by calibration. The quantitative
+              description of TIMS provides an operational understanding of the
+              analyzer, outlines the current performance capabilities, and
+              provides insight into future avenues for improvement.",
+  journal  = "J. Am. Soc. Mass Spectrom.",
+  volume   =  26,
+  number   =  1,
+  pages    = "14--24",
+  month    =  jan,
+  year     =  2015,
+  language = "en"
+}
+
+@article{Larriba-Andaluz2020-kc,
+  title     = "Fundamentals of ion mobility in the free molecular regime.
+               Interlacing the past, present and future of ion mobility
+               calculations",
+  author    = "Larriba-Andaluz, Carlos and Prell, James S",
+  abstract  = "While existing ion mobility calculators are capable of feats as
+               impressive as calculating collision cross sections (CCS) within
+               a few per cent and within a very reasonable time, the
+               simplifications assumed in their estimations precludes them from
+               being more precise, potentially overreaching with respect to the
+               interpretation of existing calculations. With ion mobility
+               instrumentation progressively reaching resolutions of several
+               hundreds to thousands (accuracy in the range of ?0.1\%), a more
+               accurate theoretical description of gas-phase ion mobility
+               becomes necessary to correctly interpret experimental
+               state-of-the-art separations. This manuscript entails an effort
+               to consolidate the most relevant theoretical work pertaining to
+               ion mobility within the ?free molecular? regime, describing in
+               detail the rationale for approximations up to the
+               two-temperature theory, using both a momentum transfer approach
+               as well as the solution to the moments of the Boltzmann equation
+               for the ion. With knowledge of the existing deficiencies in the
+               numerical methods, the manuscript provides a series of necessary
+               additions in order to better simulate some of the separations
+               observed experimentally due to second-order effects, namely,
+               high field effects, dipole alignment, angular velocities and
+               moments of inertia, potential interactions and inelastic
+               collisions among others.",
+  journal   = "Int. Rev. Phys. Chem.",
+  publisher = "Taylor \& Francis",
+  volume    =  39,
+  number    =  4,
+  pages     = "569--623",
+  month     =  oct,
+  year      =  2020
+}
+
+@article{Hebert2014-tc,
+  title    = "The one hour yeast proteome",
+  author   = "Hebert, Alexander S and Richards, Alicia L and Bailey, Derek J
+              and Ulbrich, Arne and Coughlin, Emma E and Westphall, Michael S
+              and Coon, Joshua J",
+  abstract = "We describe the comprehensive analysis of the yeast proteome in
+              just over one hour of optimized analysis. We achieve this
+              expedited proteome characterization with improved sample
+              preparation, chromatographic separations, and by using a new
+              Orbitrap hybrid mass spectrometer equipped with a mass filter, a
+              collision cell, a high-field Orbitrap analyzer, and, finally, a
+              dual cell linear ion trap analyzer (Q-OT-qIT, Orbitrap Fusion).
+              This system offers high MS(2) acquisition speed of 20 Hz and
+              detects up to 19 peptide sequences within a single second of
+              operation. Over a 1.3 h chromatographic method, the Q-OT-qIT
+              hybrid collected an average of 13,447 MS(1) and 80,460 MS(2)
+              scans (per run) to produce 43,400 (x) peptide spectral matches
+              and 34,255 (x) peptides with unique amino acid sequences (1\%
+              false discovery rate (FDR)). On average, each one hour analysis
+              achieved detection of 3,977 proteins (1\% FDR). We conclude that
+              further improvements in mass spectrometer scan rate could render
+              comprehensive analysis of the human proteome within a few hours.",
+  journal  = "Mol. Cell. Proteomics",
+  volume   =  13,
+  number   =  1,
+  pages    = "339--347",
+  month    =  jan,
+  year     =  2014,
+  language = "en"
+}
+
+@article{Meyer2021-jm,
+  title    = "Deep learning neural network tools for proteomics",
+  author   = "Meyer, Jesse G",
+  abstract = "Mass-spectrometry-based proteomics enables quantitative analysis
+              of thousands of human proteins. However, experimental and
+              computational challenges restrict progress in the field. This
+              review summarizes the recent flurry of machine-learning
+              strategies using artificial deep neural networks (or ``deep
+              learning'') that have started to break barriers and accelerate
+              progress in the field of shotgun proteomics. Deep learning now
+              accurately predicts physicochemical properties of peptides from
+              their sequence, including tandem mass spectra and retention time.
+              Furthermore, deep learning methods exist for nearly every aspect
+              of the modern proteomics workflow, enabling improved feature
+              selection, peptide identification, and protein inference.",
+  journal  = "Cell Rep Methods",
+  volume   =  1,
+  number   =  2,
+  pages    = "100003",
+  month    =  jun,
+  year     =  2021,
+  keywords = "MS/MS; bioinformatics; deep learning; mass spectrometry; neural
+              networks; peptides; proteomics; retention time",
+  language = "en"
+}
+
+@article{Deutsch2020-og,
+  title    = "The {ProteomeXchange} consortium in 2020: enabling 'big data'
+              approaches in proteomics",
+  author   = "Deutsch, Eric W and Bandeira, Nuno and Sharma, Vagisha and
+              Perez-Riverol, Yasset and Carver, Jeremy J and Kundu, Deepti J
+              and Garc{\'\i}a-Seisdedos, David and Jarnuczak, Andrew F and
+              Hewapathirana, Suresh and Pullman, Benjamin S and Wertz, Julie
+              and Sun, Zhi and Kawano, Shin and Okuda, Shujiro and Watanabe, Yu
+              and Hermjakob, Henning and MacLean, Brendan and MacCoss, Michael
+              J and Zhu, Yunping and Ishihama, Yasushi and Vizca{\'\i}no, Juan
+              A",
+  abstract = "The ProteomeXchange (PX) consortium of proteomics resources
+              (http://www.proteomexchange.org) has standardized data submission
+              and dissemination of mass spectrometry proteomics data worldwide
+              since 2012. In this paper, we describe the main developments
+              since the previous update manuscript was published in Nucleic
+              Acids Research in 2017. Since then, in addition to the four PX
+              existing members at the time (PRIDE, PeptideAtlas including the
+              PASSEL resource, MassIVE and jPOST), two new resources have
+              joined PX: iProX (China) and Panorama Public (USA). We first
+              describe the updated submission guidelines, now expanded to
+              include six members. Next, with current data submission
+              statistics, we demonstrate that the proteomics field is now
+              actively embracing public open data policies. At the end of June
+              2019, more than 14 100 datasets had been submitted to PX
+              resources since 2012, and from those, more than 9 500 in just the
+              last three years. In parallel, an unprecedented increase of data
+              re-use activities in the field, including 'big data' approaches,
+              is enabling novel research and new data resources. At last, we
+              also outline some of our future plans for the coming years.",
+  journal  = "Nucleic Acids Res.",
+  volume   =  48,
+  number   = "D1",
+  pages    = "D1145--D1152",
+  month    =  jan,
+  year     =  2020,
+  language = "en"
+}
+
+@article{Gessulat2019-rt,
+  title    = "Prosit: proteome-wide prediction of peptide tandem mass spectra
+              by deep learning",
+  author   = "Gessulat, Siegfried and Schmidt, Tobias and Zolg, Daniel Paul and
+              Samaras, Patroklos and Schnatbaum, Karsten and Zerweck, Johannes
+              and Knaute, Tobias and Rechenberger, Julia and Delanghe, Bernard
+              and Huhmer, Andreas and Reimer, Ulf and Ehrlich, Hans-Christian
+              and Aiche, Stephan and Kuster, Bernhard and Wilhelm, Mathias",
+  abstract = "In mass-spectrometry-based proteomics, the identification and
+              quantification of peptides and proteins heavily rely on sequence
+              database searching or spectral library matching. The lack of
+              accurate predictive models for fragment ion intensities impairs
+              the realization of the full potential of these approaches. Here,
+              we extended the ProteomeTools synthetic peptide library to
+              550,000 tryptic peptides and 21 million high-quality tandem mass
+              spectra. We trained a deep neural network, termed Prosit,
+              resulting in chromatographic retention time and fragment ion
+              intensity predictions that exceed the quality of the experimental
+              data. Integrating Prosit into database search pipelines led to
+              more identifications at >10$\times$ lower false discovery rates.
+              We show the general applicability of Prosit by predicting spectra
+              for proteases other than trypsin, generating spectral libraries
+              for data-independent acquisition and improving the analysis of
+              metaproteomes. Prosit is integrated into ProteomicsDB, allowing
+              search result re-scoring and custom spectral library generation
+              for any organism on the basis of peptide sequence alone.",
+  journal  = "Nat. Methods",
+  volume   =  16,
+  number   =  6,
+  pages    = "509--518",
+  month    =  jun,
+  year     =  2019,
+  language = "en"
+}
+
+@article{Adhikari2020-vu,
+  title    = "A high-stringency blueprint of the human proteome",
+  author   = "Adhikari, Subash and Nice, Edouard C and Deutsch, Eric W and
+              Lane, Lydie and Omenn, Gilbert S and Pennington, Stephen R and
+              Paik, Young-Ki and Overall, Christopher M and Corrales, Fernando
+              J and Cristea, Ileana M and Van Eyk, Jennifer E and Uhl{\'e}n,
+              Mathias and Lindskog, Cecilia and Chan, Daniel W and Bairoch,
+              Amos and Waddington, James C and Justice, Joshua L and LaBaer,
+              Joshua and Rodriguez, Henry and He, Fuchu and Kostrzewa, Markus
+              and Ping, Peipei and Gundry, Rebekah L and Stewart, Peter and
+              Srivastava, Sanjeeva and Srivastava, Sudhir and Nogueira, Fabio C
+              S and Domont, Gilberto B and Vandenbrouck, Yves and Lam, Maggie P
+              Y and Wennersten, Sara and Vizcaino, Juan Antonio and Wilkins,
+              Marc and Schwenk, Jochen M and Lundberg, Emma and Bandeira, Nuno
+              and Marko-Varga, Gyorgy and Weintraub, Susan T and Pineau,
+              Charles and Kusebauch, Ulrike and Moritz, Robert L and Ahn, Seong
+              Beom and Palmblad, Magnus and Snyder, Michael P and Aebersold,
+              Ruedi and Baker, Mark S",
+  abstract = "The Human Proteome Organization (HUPO) launched the Human
+              Proteome Project (HPP) in 2010, creating an international
+              framework for global collaboration, data sharing, quality
+              assurance and enhancing accurate annotation of the genome-encoded
+              proteome. During the subsequent decade, the HPP established
+              collaborations, developed guidelines and metrics, and undertook
+              reanalysis of previously deposited community data, continuously
+              increasing the coverage of the human proteome. On the occasion of
+              the HPP's tenth anniversary, we here report a 90.4\% complete
+              high-stringency human proteome blueprint. This knowledge is
+              essential for discerning molecular processes in health and
+              disease, as we demonstrate by highlighting potential roles the
+              human proteome plays in our understanding, diagnosis and
+              treatment of cancers, cardiovascular and infectious diseases.",
+  journal  = "Nat. Commun.",
+  volume   =  11,
+  number   =  1,
+  pages    = "5301",
+  month    =  oct,
+  year     =  2020,
+  language = "en"
+}
+
+@article{Gabriels2019-gx,
+  title    = "Updated MS²PIP web server delivers fast and accurate MS² peak
+              intensity prediction for multiple fragmentation methods,
+              instruments and labeling techniques",
+  author   = "Gabriels, Ralf and Martens, Lennart and Degroeve, Sven",
+  abstract = "MS²PIP is a data-driven tool that accurately predicts peak
+              intensities for a given peptide's fragmentation mass spectrum.
+              Since the release of the MS²PIP web server in 2015, we have
+              brought significant updates to both the tool and the web server.
+              In addition to the original models for CID and HCD fragmentation,
+              we have added specialized models for the TripleTOF 5600+ mass
+              spectrometer, for TMT-labeled peptides, for iTRAQ-labeled
+              peptides, and for iTRAQ-labeled phosphopeptides. Because the
+              fragmentation pattern is heavily altered in each of these cases,
+              these additional models greatly improve the prediction accuracy
+              for their corresponding data types. We have also substantially
+              reduced the computational resources required to run MS²PIP, and
+              have completely rebuilt the web server, which now allows
+              predictions of up to 100 000 peptide sequences in a single
+              request. The MS²PIP web server is freely available at
+              https://iomics.ugent.be/ms2pip/.",
+  journal  = "Nucleic Acids Res.",
+  volume   =  47,
+  number   = "W1",
+  pages    = "W295--W299",
+  month    =  jul,
+  year     =  2019,
+  language = "en",
+  doi      = {10.1093/nar/gkz299},
+}
+
+@article{Dodds2019-oi,
+  title    = "Ion Mobility Spectrometry: Fundamental Concepts, Instrumentation,
+              Applications, and the Road Ahead",
+  author   = "Dodds, James N and Baker, Erin S",
+  abstract = "Ion mobility spectrometry (IMS) is a rapid separation technique
+              that has experienced exponential growth as a field of study.
+              Interfacing IMS with mass spectrometry (IMS-MS) provides
+              additional analytical power as complementary separations from
+              each technique enable multidimensional characterization of
+              detected analytes. IMS separations occur on a millisecond
+              timescale, and therefore can be readily nested into traditional
+              GC and LC/MS workflows. However, the continual development of
+              novel IMS methods has generated some level of confusion regarding
+              the advantages and disadvantages of each. In this critical
+              insight, we aim to clarify some common misconceptions for new
+              users in the community pertaining to the fundamental concepts of
+              the various IMS instrumental platforms (i.e., DTIMS, TWIMS, TIMS,
+              FAIMS, and DMA), while addressing the strengths and shortcomings
+              associated with each. Common IMS-MS applications are also
+              discussed in this review, such as separating isomeric species,
+              performing signal filtering for MS, and incorporating collision
+              cross-section (CCS) values into both targeted and untargeted
+              omics-based workflows as additional ion descriptors for chemical
+              annotation. Although many challenges must be addressed by the IMS
+              community before mobility information is collected in a routine
+              fashion, the future is bright with possibilities.",
+  journal  = "J. Am. Soc. Mass Spectrom.",
+  volume   =  30,
+  number   =  11,
+  pages    = "2185--2195",
+  month    =  nov,
+  year     =  2019,
+  keywords = "IMS; Ion mobility spectrometry; Mass spectrometry; Untargeted
+              metabolomics",
+  language = "en"
+}
+
+@article{Dincer2022-re,
+  doi = {10.1021/acs.jproteome.2c00211},
+  url = {https://doi.org/10.1021/acs.jproteome.2c00211},
+  year = {2022},
+  month = jun,
+  publisher = {American Chemical Society ({ACS})},
+  volume = {21},
+  number = {7},
+  pages = {1771--1782},
+  author = {Ayse B. Dincer and Yang Lu and Devin K. Schweppe and Sewoong Oh and William Stafford Noble},
+  title = {Reducing Peptide Sequence Bias in Quantitative Mass Spectrometry Data with Machine Learning},
+  journal = {Journal of Proteome Research}
+}
+
+@article{Rehfeldt2021-iw,
+  title    = "{MS2AI}: Automated repurposing of public peptide {LC-MS} data for
+              machine learning applications",
+  author   = "Rehfeldt, Tobias Greisager and Krawczyk, Konrad and B{\o}gebjerg,
+              Mathias and Schw{\"a}mmle, Veit and R{\"o}ttger, Richard",
+  abstract = "MOTIVATION: Liquid-chromatography mass-spectrometry (LC-MS) is
+              the established standard for analyzing the proteome in biological
+              samples by identification and quantification of thousands of
+              proteins. Machine learning (ML) promises to considerably improve
+              the analysis of the resulting data, however, there is yet to be
+              any tool that mediates the path from raw data to modern ML
+              applications. More specifically, ML applications are currently
+              hampered by three major limitations: (1) absence of balanced
+              training data with large sample size; (2) unclear definition of
+              sufficiently information-rich data representations for e.g.,
+              peptide identification; (3) lack of benchmarking of ML methods on
+              specific LC-MS problems. RESULTS: We created the MS2AI pipeline
+              that automates the process of gathering vast quantities of mass
+              spectrometry (MS) data for large scale ML applications. The
+              software retrieves raw data from either in-house sources or from
+              the proteomics identifications database, PRIDE. Subsequently, the
+              raw data is stored in a standardized format amenable for ML,
+              encompassing MS1/MS2 spectra and peptide identifications. This
+              tool bridges the gap between MS and AI, and to this effect we
+              also present an ML application in the form of a convolutional
+              neural network for the identification of oxidized peptides.
+              AVAILABILITY: An open-source implementation of the software can
+              be found at https://gitlab.com/roettgerlab/ms2ai. SUPPLEMENTARY
+              INFORMATION: Supplementary data are available at Bioinformatics
+              online.",
+  journal  = "Bioinformatics",
+  month    =  oct,
+  year     =  2021,
+  language = "en"
+}
+
+@article{Fondrie2021-nb,
+  title    = "ppx: Programmatic Access to Proteomics Data Repositories",
+  author   = "Fondrie, William E and Bittremieux, Wout and Noble, William S",
+  abstract = "The volume of proteomics and mass spectrometry data available in
+              public repositories continues to grow at a rapid pace as more
+              researchers embrace open science practices. Open access to the
+              data behind scientific discoveries has become critical to
+              validate published findings and develop new computational tools.
+              Here, we present ppx, a Python package that provides easy,
+              programmatic access to the data stored in ProteomeXchange
+              repositories, such as PRIDE and MassIVE. The ppx package can be
+              used as either a command line tool or a Python package to
+              retrieve the files and metadata associated with a project when
+              provided its identifier. To demonstrate how ppx enhances
+              reproducible research, we used ppx within a Snakemake workflow to
+              reanalyze a published data set with the open modification search
+              tool ANN-SoLo and compared our reanalysis to the original
+              results. We show that ppx readily integrates into workflows, and
+              our reanalysis produced results consistent with the original
+              analysis. We envision that ppx will be a valuable tool for
+              creating reproducible analyses, providing tool developers easy
+              access to data for development, testing, and benchmarking, and
+              enabling the use of mass spectrometry data in data-intensive
+              analyses. The ppx package is freely available and open source
+              under the MIT license at https://github.com/wfondrie/ppx.",
+  journal  = "J. Proteome Res.",
+  volume   =  20,
+  number   =  9,
+  pages    = "4621--4624",
+  month    =  sep,
+  year     =  2021,
+  keywords = "FAIR; Python; bioinformatics; data access; data dissemination;
+              data sharing; mass spectrometry; proteomics; repository;
+              reproducibility",
+  language = "en"
+}
+
+@article{Shvartsburg2008-ir,
+  title    = "Fundamentals of traveling wave ion mobility spectrometry",
+  author   = "Shvartsburg, Alexandre A and Smith, Richard D",
+  abstract = "Traveling wave ion mobility spectrometry (TW IMS) is a new IMS
+              method implemented in the Synapt IMS/mass spectrometry system
+              (Waters). Despite its wide adoption, the foundations of TW IMS
+              were only qualitatively understood and factors governing the ion
+              transit time (the separation parameter) and resolution remained
+              murky. Here we develop the theory of TW IMS using derivations and
+              ion dynamics simulations. The key parameter is the ratio (c) of
+              ion drift velocity at the steepest wave slope to wave speed. At
+              low c, the ion transit velocity is proportional to the squares of
+              mobility (K) and electric field intensity (E), as opposed to
+              linear scaling in drift tube (DT) IMS and differential mobility
+              analyzers. At higher c, the scaling deviates from quadratic in a
+              way controlled by the waveform profile, becoming more gradual
+              with the ideal triangular profile but first steeper and then more
+              gradual for realistic profiles with variable E. At highest c, the
+              transit velocity asymptotically approaches the wave speed. Unlike
+              with DT IMS, the resolving power of TW IMS depends on mobility,
+              scaling as K(1/2) in the low-c limit and less at higher c. A
+              nonlinear dependence of the transit time on mobility means that
+              the true resolving power of TW IMS differs from that indicated by
+              the spectrum. A near-optimum resolution is achievable over an
+              approximately 300-400\% range of mobilities. The major predicted
+              trends are in agreement with TW IMS measurements for peptide ions
+              as a function of mobility, wave amplitude, and gas pressure. The
+              issues of proper TW IMS calibration and ion distortion by field
+              heating are also discussed. The new quantitative understanding of
+              TW IMS separations allows rational optimization of instrument
+              design and operation and improved spectral calibration.",
+  journal  = "Anal. Chem.",
+  volume   =  80,
+  number   =  24,
+  pages    = "9689--9699",
+  month    =  dec,
+  year     =  2008,
+  language = "en"
+}
+
+@article{Perez-Riverol2022-ak,
+  title    = "The {PRIDE} database resources in 2022: a hub for mass
+              spectrometry-based proteomics evidences",
+  author   = "Perez-Riverol, Yasset and Bai, Jingwen and Bandla, Chakradhar and
+              Garc{\'\i}a-Seisdedos, David and Hewapathirana, Suresh and
+              Kamatchinathan, Selvakumar and Kundu, Deepti J and Prakash,
+              Ananth and Frericks-Zipper, Anika and Eisenacher, Martin and
+              Walzer, Mathias and Wang, Shengbo and Brazma, Alvis and
+              Vizca{\'\i}no, Juan Antonio",
+  abstract = "The PRoteomics IDEntifications (PRIDE) database
+              (https://www.ebi.ac.uk/pride/) is the world's largest data
+              repository of mass spectrometry-based proteomics data. PRIDE is
+              one of the founding members of the global ProteomeXchange (PX)
+              consortium and an ELIXIR core data resource. In this manuscript,
+              we summarize the developments in PRIDE resources and related
+              tools since the previous update manuscript was published in
+              Nucleic Acids Research in 2019. The number of submitted datasets
+              to PRIDE Archive (the archival component of PRIDE) has reached on
+              average around 500 datasets per month during 2021. In addition to
+              continuous improvements in PRIDE Archive data pipelines and
+              infrastructure, the PRIDE Spectra Archive has been developed to
+              provide direct access to the submitted mass spectra using
+              Universal Spectrum Identifiers. As a key point, the file format
+              MAGE-TAB for proteomics has been developed to enable the
+              improvement of sample metadata annotation. Additionally, the
+              resource PRIDE Peptidome provides access to aggregated
+              peptide/protein evidences across PRIDE Archive. Furthermore, we
+              will describe how PRIDE has increased its efforts to reuse and
+              disseminate high-quality proteomics data into other added-value
+              resources such as UniProt, Ensembl and Expression Atlas.",
+  journal  = "Nucleic Acids Res.",
+  volume   =  50,
+  number   = "D1",
+  pages    = "D543--D552",
+  month    =  jan,
+  year     =  2022,
+  language = "en"
+}
+
+@article{Bouwmeester2021-cf,
+  title    = "{DeepLC} can predict retention times for peptides that carry
+              as-yet unseen modifications",
+  author   = "Bouwmeester, Robbin and Gabriels, Ralf and Hulstaert, Niels and
+              Martens, Lennart and Degroeve, Sven",
+  abstract = "The inclusion of peptide retention time prediction promises to
+              remove peptide identification ambiguity in complex liquid
+              chromatography-mass spectrometry identification workflows.
+              However, due to the way peptides are encoded in current
+              prediction models, accurate retention times cannot be predicted
+              for modified peptides. This is especially problematic for
+              fledgling open searches, which will benefit from accurate
+              retention time prediction for modified peptides to reduce
+              identification ambiguity. We present DeepLC, a deep learning
+              peptide retention time predictor using peptide encoding based on
+              atomic composition that allows the retention time of (previously
+              unseen) modified peptides to be predicted accurately. We show
+              that DeepLC performs similarly to current state-of-the-art
+              approaches for unmodified peptides and, more importantly,
+              accurately predicts retention times for modifications not seen
+              during training. Moreover, we show that DeepLC's ability to
+              predict retention times for any modification enables potentially
+              incorrect identifications to be flagged in an open search of a
+              wide variety of proteome data.",
+  journal  = "Nat. Methods",
+  volume   =  18,
+  number   =  11,
+  pages    = "1363--1369",
+  month    =  nov,
+  year     =  2021,
+  language = "en"
+}
+
+
+% For tutorials and other
+
+
+@article{Gabriels2019,
+  abstract     = {MS²PIP is a data-driven tool that accurately predicts peak intensities for a given peptide's fragmentation mass spectrum. Since the release of the (MSPIP)-P-2 web server in 2015, we have brought significant updates to both the tool and the web server. In addition to the original models for CID and HCD fragmentation, we have added specialized models for the TripleTOF 5600+ mass spectrometer, for TMT-labeled peptides, for iTRAQ-labeled peptides, and for iTRAQ-labeled phosphopeptides. Because the fragmentation pattern is heavily altered in each of these cases, these additional models greatly improve the prediction accuracy for their corresponding data types. We have also substantially reduced the computational resources required to run (MSPIP)-P-2, and have completely rebuilt the web server, which now allows predictions of up to 100 000 peptide sequences in a single request. The MS(2)PIPweb server is freely available at https://iomics.ugent.be/ms2pip/.},
+  author       = {Gabriels, Ralf and Martens, Lennart and Degroeve, Sven},
+  issn         = {0305-1048},
+  journal      = {NUCLEIC ACIDS RESEARCH},
+  language     = {eng},
+  number       = {W1},
+  pages        = {W295--W299},
+  title        = {Updated MS²PIP web server delivers fast and accurate MS² peak intensity prediction for multiple fragmentation methods, instruments and labeling techniques},
+  doi          = {10.1093/nar/gkz299},
+  volume       = {47},
+  year         = {2019},
+}
+
+@article{Lam2008,
+  doi = {10.1038/nmeth.1254},
+  url = {https://doi.org/10.1038/nmeth.1254},
+  year = {2008},
+  month = sep,
+  publisher = {Springer Science and Business Media {LLC}},
+  volume = {5},
+  number = {10},
+  pages = {873--875},
+  author = {Henry Lam and Eric W Deutsch and James S Eddes and Jimmy K Eng and Stephen E Stein and Ruedi Aebersold},
+  title = {Building consensus spectral libraries for peptide identification in proteomics},
+  journal = {Nature Methods}
+}
+
+@article{Levitsky2018,
+  doi = {10.1021/acs.jproteome.8b00717},
+  url = {https://doi.org/10.1021/acs.jproteome.8b00717},
+  year = {2018},
+  month = dec,
+  publisher = {American Chemical Society ({ACS})},
+  volume = {18},
+  number = {2},
+  pages = {709--714},
+  author = {Lev I. Levitsky and Joshua A. Klein and Mark V. Ivanov and Mikhail V. Gorshkov},
+  title = {Pyteomics 4.0: Five Years of Development of a Python Proteomics Framework},
+  journal = {Journal of Proteome Research}
+}
+
+@article{Bittremieux2019,
+  doi = {10.1021/acs.analchem.9b04884},
+  url = {https://doi.org/10.1021/acs.analchem.9b04884},
+  year = {2019},
+  month = dec,
+  publisher = {American Chemical Society ({ACS})},
+  volume = {92},
+  number = {1},
+  pages = {659--661},
+  author = {Wout Bittremieux},
+  title = {spectrum_utils: A Python Package for Mass Spectrometry Data Processing and Visualization},
+  journal = {Analytical Chemistry}
+}
+
+@inproceedings{Chen2016,
+  doi = {10.1145/2939672.2939785},
+  url = {https://doi.org/10.1145/2939672.2939785},
+  year = {2016},
+  month = aug,
+  publisher = {{ACM}},
+  author = {Tianqi Chen and Carlos Guestrin},
+  title = {{XGBoost}},
+  booktitle = {Proceedings of the 22nd {ACM} {SIGKDD} International Conference on Knowledge Discovery and Data Mining}
 }
