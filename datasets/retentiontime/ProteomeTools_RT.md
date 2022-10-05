@@ -4,11 +4,11 @@ date: last-modified
 ---
 
 ### Downloads
-[![](https://img.shields.io/badge/download-small%20dataset-008080?style=flat-square)](https://github.com/ProteomicsML/ProteomicsML/raw/main/datasets/retentiontime/ProteomeTools/Small.csv.gz)<br>
-[![](https://img.shields.io/badge/download-medium%20dataset-008080?style=flat-square)](https://github.com/ProteomicsML/ProteomicsML/raw/main/datasets/retentiontime/ProteomeTools/Medium.csv.gz)<br>
-[![](https://img.shields.io/badge/download-large%20dataset-008080?style=flat-square)](hhttps://github.com/ProteomicsML/ProteomicsML/raw/main/datasets/retentiontime/ProteomeTools/Large.csv.gz)<br>
-[![](https://img.shields.io/badge/download-mixed%20dataset-008080?style=flat-square)](https://github.com/ProteomicsML/ProteomicsML/raw/main/datasets/retentiontime/ProteomeTools/Mixed.csv.gz)<br>
-[![](https://img.shields.io/badge/download-oxidation%20dataset-008080?style=flat-square)](https://github.com/ProteomicsML/ProteomicsML/raw/main/datasets/retentiontime/ProteomeTools/Oxidation.csv.gz)<br>
+[![](https://img.shields.io/badge/download-small%20dataset-205380?style=flat-square)](https://github.com/ProteomicsML/ProteomicsML/raw/main/datasets/retentiontime/ProteomeTools/Small.csv.gz)<br>
+[![](https://img.shields.io/badge/download-medium%20dataset-205380?style=flat-square)](https://github.com/ProteomicsML/ProteomicsML/raw/main/datasets/retentiontime/ProteomeTools/Medium.csv.gz)<br>
+[![](https://img.shields.io/badge/download-large%20dataset-205380?style=flat-square)](hhttps://github.com/ProteomicsML/ProteomicsML/raw/main/datasets/retentiontime/ProteomeTools/Large.csv.gz)<br>
+[![](https://img.shields.io/badge/download-mixed%20dataset-205380?style=flat-square)](https://github.com/ProteomicsML/ProteomicsML/raw/main/datasets/retentiontime/ProteomeTools/Mixed.csv.gz)<br>
+[![](https://img.shields.io/badge/download-oxidation%20dataset-205380?style=flat-square)](https://github.com/ProteomicsML/ProteomicsML/raw/main/datasets/retentiontime/ProteomeTools/Oxidation.csv.gz)<br>
 
 ### Dataset Descriptions
 The full data contains 1.000.000 unmodified peptides and 150.000 oxidized peptides all with MaxQuant scores > 100 (as described in Prosit paper) split into five groups. <br>
@@ -19,12 +19,12 @@ The full data contains 1.000.000 unmodified peptides and 150.000 oxidized peptid
 - Mixed: Containing 150.000 oxidized and 150.000 unmodified peptides. <br>
 
 
-### Attributes 
+### Attributes
 * **title**: ProteomeTools synthetic peptides and iRT calibrated retention times
 * **dataset tag**: ProteomeTools_RT
 * **data publication**: [ProteomeTools](https://doi.org/10.1038/nmeth.4153)
 * **machine learning publication**: [Prosit](https://doi.org/10.1038/nmeth.4153)
-* **data source identifier**: PXD004732 
+* **data source identifier**: PXD004732
 - **data type**: retention time
 - **format**: CSV
 - **columns**: `index`, `retention time`, `sequence`, `modified`, `sequence`
@@ -34,7 +34,7 @@ The full data contains 1.000.000 unmodified peptides and 150.000 oxidized peptid
 - **chromatography separation**: <unknown>
 - **peak measurement**: <unknown>
 
- 
+
 ### Sample Protocol
 Tryptic peptides were individually synthesized by solid
 phase synthesis, combined into pools of ~1,000 peptides and measured on an Orbitrap

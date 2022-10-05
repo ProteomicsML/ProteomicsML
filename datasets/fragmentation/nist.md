@@ -4,18 +4,18 @@ date: last-modified
 ---
 
 ### Downloads
-[![](https://img.shields.io/badge/download-original%20dataset-008080?style=flat-square)](https://chemdata.nist.gov/dokuwiki/doku.php?id=peptidew:lib:humanhcd20160503)<br>
-[![](https://img.shields.io/badge/download-parsed%20train%2Fvalidation%20data-008080?style=flat-square)](http://ftp.pride.ebi.ac.uk/pub/databases/pride/resources/proteomicsml/fragmentation/nist-humanhcd20160503-parsed-trainval.feather)<br>
-[![](https://img.shields.io/badge/download-parsed%20test%20data-008080?style=flat-square)](http://ftp.pride.ebi.ac.uk/pub/databases/pride/resources/proteomicsml/fragmentation/nist-humanhcd20160503-parsed-test.feather)<br>
-[![](https://img.shields.io/badge/download-parsed%20and%20encoded%20train%2Fvalidation%20data-008080?style=flat-square)](http://ftp.pride.ebi.ac.uk/pub/databases/pride/resources/proteomicsml/fragmentation/nist-humanhcd20160503-parsed-trainval-encoded.feather)<br>
-[![](https://img.shields.io/badge/download-parsed%20and%20encoded%20test%20data-008080?style=flat-square)](http://ftp.pride.ebi.ac.uk/pub/databases/pride/resources/proteomicsml/fragmentation/nist-humanhcd20160503-parsed-test-encoded.feather)<br>
+[![](https://img.shields.io/badge/download-original%20dataset-205380?style=flat-square)](https://chemdata.nist.gov/dokuwiki/doku.php?id=peptidew:lib:humanhcd20160503)<br>
+[![](https://img.shields.io/badge/download-parsed%20train%2Fvalidation%20set-205380?style=flat-square)](http://ftp.pride.ebi.ac.uk/pub/databases/pride/resources/proteomicsml/fragmentation/nist-humanhcd20160503-parsed-trainval.feather)<br>
+[![](https://img.shields.io/badge/download-parsed%20test%20set-205380?style=flat-square)](http://ftp.pride.ebi.ac.uk/pub/databases/pride/resources/proteomicsml/fragmentation/nist-humanhcd20160503-parsed-test.feather)<br>
+[![](https://img.shields.io/badge/download-parsed%20and%20encoded%20train%2Fvalidation%20set-205380?style=flat-square)](http://ftp.pride.ebi.ac.uk/pub/databases/pride/resources/proteomicsml/fragmentation/nist-humanhcd20160503-parsed-trainval-encoded.feather)<br>
+[![](https://img.shields.io/badge/download-parsed%20and%20encoded%20test%20set-205380?style=flat-square)](http://ftp.pride.ebi.ac.uk/pub/databases/pride/resources/proteomicsml/fragmentation/nist-humanhcd20160503-parsed-test-encoded.feather)<br>
 
 ### Dataset Description
 The data is 648 MB (zipped)
 
 ### Attributes
 - **title**: NIST
-- **dataset tag**: nist
+- **dataset tag**: `fragmentation/nist`
 - **data publication**: [Sheetlin et al. 2020](https://chemdata.nist.gov/dokuwiki/lib/exe/fetch.php?media=peptidew:sergey_sheetlin_asms2020.pdf)
 - **machine learning publication**: <unknown>
 - **data source identifier**: <unknown>
@@ -24,11 +24,11 @@ The data is 648 MB (zipped)
 - **columns**: <unknown>
 - **instrument**: <unknown>
 - **organism**: Homo sapiens (human)
-- **fixed modifications**: <unknown>
-- **variable modification**: unmodified & oxidation
-- **dissociation method**: <unknown>
-- **collision energy**: <unknown>
-- **mass analyzer type**: <unknown>
+- **fixed modifications**: Carbamidomethylation of C
+- **variable modification**: unmodified & Oxidation of M
+- **dissociation method**: HCD (beam-type CID)
+- **collision energy**: *various*
+- **mass analyzer type**: Orbitrap
 - **spectra encoding**: <unknown>
 
 ### Sample Protocol

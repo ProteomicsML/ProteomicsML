@@ -3,15 +3,15 @@ title: ProteomeTools
 date: last-modified
 ---
 ### Downloads
-[![](https://img.shields.io/badge/download-training%20dataset-008080?style=flat-square)](https://figshare.com/ndownloader/files/12506534)<br>
-[![](https://img.shields.io/badge/download-holdout%20dataset-008080?style=flat-square)](https://figshare.com/ndownloader/files/12785291)
+[![](https://img.shields.io/badge/download-training%20dataset-205380?style=flat-square)](https://figshare.com/ndownloader/files/12506534)<br>
+[![](https://img.shields.io/badge/download-holdout%20dataset-205380?style=flat-square)](https://figshare.com/ndownloader/files/12785291)
 
 ### Dataset Description
 The dataset has been divided up into training (250 MB) and holdout (4.87GB) of annotated ms2 spectra.
 
 ### Attributes
 - **title**: ProteomeTools synthetic peptides
-- **dataset tag**: ProteomeTools_FI
+- **dataset tag**: `fragmentation/ProteomeTools_FI`
 - **data publication**: [ProteomeTools](https://doi.org/10.1038/nmeth.4153)
 - **machine learning publication**: [Prosit](https://doi.org/10.1038/nmeth.4153)
 - **data source identifier**: PXD004732
@@ -27,7 +27,7 @@ The dataset has been divided up into training (250 MB) and holdout (4.87GB) of a
 - **dissociation method**: CID and HCD
 - **collision energy**: 35 and 28
 - **mass analyzer type**: ion and orbitrap
-- **spectra encoding**: prosit annotation pipeline 
+- **spectra encoding**: prosit annotation pipeline
 
 ### Sample protocol description
 Tryptic peptides were individually synthesized by solid

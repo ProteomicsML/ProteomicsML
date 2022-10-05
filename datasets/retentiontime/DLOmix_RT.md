@@ -3,13 +3,13 @@ title: DLOmix
 date: last-modified
 ---
 ### Download
-[![](https://img.shields.io/badge/download-training%20dataset-008080?style=flat-square)](https://github.com/wilhelm-lab/dlomix/blob/develop/example_dataset/proteomTools_test.csv?raw=true)<br>
-[![](https://img.shields.io/badge/download-validation%20dataset-008080?style=flat-square)](https://github.com/wilhelm-lab/dlomix/blob/develop/example_dataset/proteomTools_train.csv?raw=true)<br>
-[![](https://img.shields.io/badge/download-train/val%20dataset-008080?style=flat-square)](https://github.com/wilhelm-lab/dlomix/blob/develop/example_dataset/proteomTools_train_val.csv?raw=true)<br>
-[![](https://img.shields.io/badge/download-testing%20dataset-008080?style=flat-square)](https://github.com/wilhelm-lab/dlomix/blob/develop/example_dataset/proteomTools_val.csv?raw=true)<br>
+[![](https://img.shields.io/badge/download-training%20dataset-205380?style=flat-square)](https://github.com/wilhelm-lab/dlomix/blob/develop/example_dataset/proteomTools_test.csv?raw=true)<br>
+[![](https://img.shields.io/badge/download-validation%20dataset-205380?style=flat-square)](https://github.com/wilhelm-lab/dlomix/blob/develop/example_dataset/proteomTools_train.csv?raw=true)<br>
+[![](https://img.shields.io/badge/download-train/val%20dataset-205380?style=flat-square)](https://github.com/wilhelm-lab/dlomix/blob/develop/example_dataset/proteomTools_train_val.csv?raw=true)<br>
+[![](https://img.shields.io/badge/download-testing%20dataset-205380?style=flat-square)](https://github.com/wilhelm-lab/dlomix/blob/develop/example_dataset/proteomTools_val.csv?raw=true)<br>
 
 ### Dataset Description
-This is a direct subset of the ProteomeTools dataset with computed iRTs based on the PROCAL. 
+This is a direct subset of the ProteomeTools dataset with computed iRTs based on the PROCAL.
 The total data contains ~27.200 peptides and is mainly useful for teaching purposes
 - Training: Containing 27.160 peptides
 - Validation: Containing 6.800 peptides
@@ -18,7 +18,7 @@ The total data contains ~27.200 peptides and is mainly useful for teaching purpo
 
 ### Attributes
 - **title**: DLOmix deep learning in proteomics python framework for retention time
-- **dataset tag**: DLOmix_RT
+- **dataset tag**: `retentiontime/DLOmix_RT`
 - **data publication**: [ProteomeTools](https://doi.org/10.1038/nmeth.4153)
 - **machine learning publication**: [Prosit](https://doi.org/10.1038/nmeth.4153)
 - **data source identifier**: PXD004732
