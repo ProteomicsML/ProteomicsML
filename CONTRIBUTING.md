@@ -131,8 +131,16 @@ these rules and conventions:
        and/or datasets used.
 
     e. All original publications that describe the methodologies, datasets, or tools
-       that are used in the tutorial should be properly cited following to scientific
-       publishing conventions. [TODO: add methodology]
+       that are used in the tutorial should be properly cited following scientific
+       authoring conventions. To add a citation, add a bibtex entry to
+       `references.bib` and use the Quarto citation tag. For example,
+       `[@ProteomicsML2022]` renders to: [@ProteomicsML2022]. More info can be found
+       in the [Quarto documentation](https://quarto.org/docs/authoring/footnotes-and-citations.html#bibliography-generation).
+
+       :::{.callout-tip}
+       Use [doi2bib.org](https://www.doi2bib.org/) to easily get bibtex entries for any
+       given publication.
+       :::
 
 
 3. Code cells and programming language
