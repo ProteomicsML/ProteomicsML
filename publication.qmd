@@ -27,5 +27,10 @@ abstract: Dataset acquisition and curation are often the hardest and most time-c
 
 ---
 
-*Manuscript submitted to the Journal of Proteome Research for the Third Special Issue on Software Tools and Resources.*
+---
 
+Manuscript submitted to Journal of Proteome Research for the Third Special Issue on Software Tools and Resources. View the full preprint on ChemRxiv:
+
+>**ProteomicsML: An Online Platform for Community-Curated Datasets and Tutorials for Machine Learning in Proteomics**<br>
+>Tobias Greisager Rehfeldt\*, Ralf Gabriels\*, Robbin Bouwmeester\*, Siegfried Gessulat, Benjamin Neely, Magnus Palmblad, Yasset Perez-Riverol, Tobias Schmidt, Juan Antonio Vizcaı́no^§^, and Eric W. Deutsch^§^<br>
+>October 2022. ChemRxiv. [doi:10.26434/chemrxiv-2022-2s6kx](https://doi.org/10.26434/chemrxiv-2022-2s6kx).

@@ -2,7 +2,7 @@
 title: Tutorials
 listing:
   - id: detectability-listing
-    contents: "detectability/**/*.md"
+    contents: "detectability/**/*.ipynb"
     type: table
     table-hover: true
     fields: [title, author, date]
@@ -46,6 +46,12 @@ suitable format. Explore all tutorials on ProteomicsML and click the "Open in Co
 badge to interact with the notebooks in a userfriendly coding environment.
 
 
+## Detectability
+
+::: {#detectability-listing}
+:::
+
+
 ## Fragmentation
 
 ::: {#fragmentation-listing}
@@ -55,12 +61,6 @@ badge to interact with the notebooks in a userfriendly coding environment.
 ## Ion mobility
 
 ::: {#ionmobility-listing}
-:::
-
-
-## Detectability
-
-::: {#detectability-listing}
 :::
 
 

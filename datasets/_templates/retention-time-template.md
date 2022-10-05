@@ -4,26 +4,26 @@ date: last-modified
 ---
 
 ### Downloads
-[![](https://img.shields.io/badge/download-dataset%20name-008080?style=flat-square)]()
+[![](https://img.shields.io/badge/download-dataset%20name-205380?style=flat-square)]()
 
 ### Dataset Description
 Describe the data post-processing steps (such as iRT calculations), as well as possible data splits and filtering
 
 ### Attributes
-- **title**: 
-- **dataset tag**: 
-- **data publication**: 
-- **machine learning publication**: 
-- **data source identifier**: 
+- **title**:
+- **dataset tag**:
+- **data publication**:
+- **machine learning publication**:
+- **data source identifier**:
 - **data type**: retention time
-- **format**: 
-- **columns**: 
-- **instrument**: 
-- **organism**: 
+- **format**:
+- **columns**:
+- **instrument**:
+- **organism**:
 - **fixed modifications**:
 - **variable modification**:
-- **chromatography separation**: 
-- **peak measurement**: 
+- **chromatography separation**:
+- **peak measurement**:
 
 ### Sample Protocol
 Describe the protocol used for sample preparation and experiment settings

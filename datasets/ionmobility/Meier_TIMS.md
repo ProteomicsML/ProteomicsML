@@ -4,21 +4,21 @@ date: last-modified
 ---
 
 ### Downloads
-[![](https://img.shields.io/badge/download-full%20dataset-008080?style=flat-square)](https://github.com/ProteomicsML/ProteomicsML/raw/main/datasets/ionmobility/Meier_IM_CCS/combined_sm.zip)
+[![](https://img.shields.io/badge/download-full%20dataset-205380?style=flat-square)](https://github.com/ProteomicsML/ProteomicsML/raw/main/datasets/ionmobility/Meier_IM_CCS/combined_sm.zip)
 
 ### Dataset Description
 The data consists of 718.917 PSMs.
 
 ### Attributes
 - **title**: Deep learning the collisional cross-sections of the peptide universe from a million experimental values
-- **dataset tag**: Meier_IM_CCS
+- **dataset tag**: `ionmobility/Meier_TIMS`
 - **data publication**: [MSP](https://doi.org/10.1074/mcp.tir118.000900)
 - **machine learning publication**: [Nature Communications](https://doi.org/10.1038/s41467-021-21352-8)
 - **data source identifier**: PXD010012, PXD019086, PXD017703
 - **data type**: ion mobility
 - **format**: CSV
 - **columns**: `index`, `Modified sequence`, `Charge`, `Mass`, `Intensity`, `Retention time`, `CCS`, `PT`
-- **instrument**: maXis, timsTOF Pro, 
+- **instrument**: maXis, timsTOF Pro,
 - **organism**: Homo sapiens (Human), Saccharomyces cerevisiae (Baker's yeast)
 - **fixed modifications**: <unknown>
 - **variable modification**:unmodified & oxidation & acetylation & carbamidomethyl

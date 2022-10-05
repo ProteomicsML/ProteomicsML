@@ -2,7 +2,7 @@
 title: Datasets
 listing:
   - id: detectability-listing
-    contents: "detectability/**/*.md"
+    contents: "detectability/**/*@(.md)"
     type: table
     table-hover: true
     fields: [title, date]
@@ -20,7 +20,7 @@ listing:
     sort:
         - "title asc"
   - id: ionmobility-listing
-    contents: "ionmobility/**/*.md"
+    contents: "ionmobility/**/*@(.md)"
     type: table
     table-hover: true
     fields: [title, date]
@@ -29,7 +29,7 @@ listing:
     sort:
         - "title asc"
   - id: retentiontime-listing
-    contents: "retentiontime/**/*.md"
+    contents: "retentiontime/**/*@(.md)"
     type: table
     table-hover: true
     fields: [title, date]
@@ -43,6 +43,12 @@ listing:
 On ProteomicsML you will find datasets for beginners and experts in the field alike.
 Download, and explore the intricate nature of mass spectrometry data.
 
+## Detectability
+
+::: {#detectability-listing}
+:::
+
+
 ## Fragmentation
 
 ::: {#fragmentation-listing}
@@ -52,12 +58,6 @@ Download, and explore the intricate nature of mass spectrometry data.
 ## Ion mobility
 
 ::: {#ionmobility-listing}
-:::
-
-
-## Detectability
-
-::: {#detectability-listing}
 :::
 
 
