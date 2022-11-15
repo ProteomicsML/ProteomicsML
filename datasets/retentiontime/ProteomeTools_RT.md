@@ -11,12 +11,12 @@ date: last-modified
 [![](https://img.shields.io/badge/download-mixed%20dataset-205380?style=flat-square)](https://github.com/ProteomicsML/ProteomicsML/raw/main/datasets/retentiontime/ProteomeTools/mixed.zip)<br>
 
 ### Dataset Descriptions
-The full data contains 1.000.000 unmodified peptides and 150.000 oxidized peptides all with MaxQuant scores > 100 (as described in Prosit paper) split into five groups. <br>
+The full data contains 1.000.000 unmodified peptides and 200.000 oxidized peptides all with MaxQuant scores > 100 (as described in Prosit paper) split into five groups. <br>
 - Small: Containing 100.000 unmodified peptides (good for teaching) <br>
 - Medium: Containing 250.000 unmodified peptides (good for validating) <br>
-- Large: Containing 250.000 unmodified peptides (good for training) <br>
-- Oxidized: Containing 150.000 all oxidized peptides. <br>
-- Mixed: Containing 150.000 oxidized and 150.000 unmodified peptides. <br>
+- Large: Containing 1.000.000 unmodified peptides (good for training) <br>
+- Oxidized: Containing 200.000 all oxidized peptides. <br>
+- Mixed: Containing 200.000 oxidized and 150.000 unmodified peptides. <br>
 
 
 ### Attributes
