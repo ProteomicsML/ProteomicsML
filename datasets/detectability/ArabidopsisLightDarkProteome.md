@@ -21,6 +21,7 @@ properties are also computed and provided in the dataset.
 - **data source identifier**: 52 PXDs as listed at [PeptideAtlas](https://db.systemsbiology.net/sbeams/cgi/PeptideAtlas/buildDetails?atlas_build_id=510)
 - **data type**: protein detectability
 - **format**: TSV
+- **size**: 23,674 rows (3.3 MB)
 - **columns**: `protein_identifier`, `gene_symbol`, `chromosome`,
        `number_of_observations`, `molecular_weight`,
        `gravy_score`, `isoelectric_point`, `rna_detected_percent`,
