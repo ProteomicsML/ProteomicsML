@@ -12,6 +12,7 @@ uniquely mapping peptides of length 9+AA and providing at least 18AA of coverage
 also extracted "not observed" proteins that have no peptide detections (that pass
 PeptideAtlas's stringent thresholds) at all. Physicochemical properties and RNA-seq-based
 properties are also computed and provided in the dataset.
+The dataset contains 32.674 rows totalling 3.3 MB
 
 ### Attributes
 - **title**: Arabidopsis PeptideAtlas Light and Dark Proteome
@@ -21,7 +22,6 @@ properties are also computed and provided in the dataset.
 - **data source identifier**: 52 PXDs as listed at [PeptideAtlas](https://db.systemsbiology.net/sbeams/cgi/PeptideAtlas/buildDetails?atlas_build_id=510)
 - **data type**: protein detectability
 - **format**: TSV
-- **size**: 23,674 rows (3.3 MB)
 - **columns**: `protein_identifier`, `gene_symbol`, `chromosome`,
        `number_of_observations`, `molecular_weight`,
        `gravy_score`, `isoelectric_point`, `rna_detected_percent`,
