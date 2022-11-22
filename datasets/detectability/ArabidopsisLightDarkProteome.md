@@ -6,13 +6,13 @@ date: last-modified
 [![](https://img.shields.io/badge/download-training%20dataset-205380?style=flat-square)](http://www.peptideatlas.org/builds/arabidopsis/light_and_dark_protein_list.tsv)<br>
 
 ### Dataset Description
-From the Arabidopsis PeptideAtlas build (http://www.peptideatlas.org/builds/arabidopsis/)
+The dataset contains 32.674 rows totalling 3.3 MB from the Arabidopsis PeptideAtlas build (http://www.peptideatlas.org/builds/arabidopsis/)
 we have extracted all the "canonical" proteins, which have been observed with at least 2
 uniquely mapping peptides of length 9+AA and providing at least 18AA of coverage. We have
 also extracted "not observed" proteins that have no peptide detections (that pass
 PeptideAtlas's stringent thresholds) at all. Physicochemical properties and RNA-seq-based
 properties are also computed and provided in the dataset.
-The dataset contains 32.674 rows totalling 3.3 MB
+
 
 ### Attributes
 - **title**: Arabidopsis PeptideAtlas Light and Dark Proteome
