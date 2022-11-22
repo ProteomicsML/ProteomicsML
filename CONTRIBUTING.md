@@ -240,13 +240,21 @@ a dataset, please follow these rules and conventions:
 ### Opening a pull request to add your contributions
 
 - Commit and push your changes to your
-[fork](https://help.github.com/articles/pushing-to-a-remote/).
+  [fork](https://help.github.com/articles/pushing-to-a-remote/).
 - Open a
-[pull request](https://help.github.com/articles/creating-a-pull-request/)
-with these changes. Choose the pull request template that fits your changes best.
+  [pull request](https://help.github.com/articles/creating-a-pull-request/)
+  with these changes. Choose the pull request template that fits your changes best.
 - The pull request should pass all the continuous integration tests which are
   automatically run by
   [GitHub Actions](https://github.com/proteomicsml/proteomicsml/actions).
+- All pull requests should be approved by at least two maintainers before they can be
+  merged.
+
+
+## Becoming a maintainer
+If you would like to become a maintainer and review pull requests by others, please
+start a [discussion thread](https://github.com/ProteomicsML/ProteomicsML/discussions)
+to let us know!
 
 
 ## Website deployment

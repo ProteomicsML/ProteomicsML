@@ -7,7 +7,8 @@ date: last-modified
 [![](https://img.shields.io/badge/download-holdout%20dataset-205380?style=flat-square)](https://figshare.com/ndownloader/files/12785291)
 
 ### Dataset Description
-The dataset has been divided up into training (250 MB) and holdout (4.87GB) of annotated ms2 spectra.
+The dataset has been divided up into training (4.87GB) and holdout (250 MB) of annotated
+ms2 spectra.
 
 ### Attributes
 - **title**: ProteomeTools synthetic peptides
