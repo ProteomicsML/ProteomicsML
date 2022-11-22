@@ -11,7 +11,11 @@ date: last-modified
 [![](https://img.shields.io/badge/download-parsed%20and%20encoded%20test%20set-205380?style=flat-square)](http://ftp.pride.ebi.ac.uk/pub/databases/pride/resources/proteomicsml/fragmentation/nist-humanhcd20160503-parsed-test-encoded.feather)<br>
 
 ### Dataset Description
-The data is 648 MB (zipped)
+The original dataset is 646 MB (zipped). After parsing the MSP library into a tabular
+format while only retaining peak intensities for singly charged b- and y-ions, it was
+randomly split into test (3.4 MB, 27 036 spectra) and train/validation subsets (30 MB,
+243 404 spectra). Files with encoded peptides were processed for ML as described in the
+fragmentation tutorial [NIST (part 2): Traditional ML: Gradient boosting](/tutorials/fragmentation/nist-2-traditional-ml-gradient-boosting.html).
 
 ### Attributes
 - **title**: NIST
