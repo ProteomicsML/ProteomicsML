@@ -34,6 +34,9 @@ properties are also computed and provided in the dataset.
 - **collision energy**: various
 - **mass analyzer type**: various
 
+### Sample Protocol
+No sample protocol is known for the dataset
+
 ### Data analysis protocol
 52 public datasets were downloaded from ProteomeXchange repositories,
 processed through the PeptideAtlas processing pipeline, and protein
