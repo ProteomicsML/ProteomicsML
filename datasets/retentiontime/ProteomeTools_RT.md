@@ -4,19 +4,19 @@ date: last-modified
 ---
 
 ### Downloads
-[![](https://img.shields.io/badge/download-small%20dataset-205380?style=flat-square)](https://github.com/ProteomicsML/ProteomicsML/raw/main/datasets/retentiontime/ProteomeTools/Small.csv.gz)<br>
-[![](https://img.shields.io/badge/download-medium%20dataset-205380?style=flat-square)](https://github.com/ProteomicsML/ProteomicsML/raw/main/datasets/retentiontime/ProteomeTools/Medium.csv.gz)<br>
-[![](https://img.shields.io/badge/download-large%20dataset-205380?style=flat-square)](hhttps://github.com/ProteomicsML/ProteomicsML/raw/main/datasets/retentiontime/ProteomeTools/Large.csv.gz)<br>
-[![](https://img.shields.io/badge/download-mixed%20dataset-205380?style=flat-square)](https://github.com/ProteomicsML/ProteomicsML/raw/main/datasets/retentiontime/ProteomeTools/Mixed.csv.gz)<br>
-[![](https://img.shields.io/badge/download-oxidation%20dataset-205380?style=flat-square)](https://github.com/ProteomicsML/ProteomicsML/raw/main/datasets/retentiontime/ProteomeTools/Oxidation.csv.gz)<br>
+[![](https://img.shields.io/badge/download-small%20dataset-205380?style=flat-square)](https://github.com/ProteomicsML/ProteomicsML/raw/main/datasets/retentiontime/ProteomeTools/small.zip)<br>
+[![](https://img.shields.io/badge/download-medium%20dataset-205380?style=flat-square)](https://github.com/ProteomicsML/ProteomicsML/raw/main/datasets/retentiontime/ProteomeTools/medium.zip)<br>
+[![](https://img.shields.io/badge/download-large%20dataset-205380?style=flat-square)](hhttps://github.com/ProteomicsML/ProteomicsML/raw/main/datasets/retentiontime/ProteomeTools/large.zip)<br>
+[![](https://img.shields.io/badge/download-oxidation%20dataset-205380?style=flat-square)](https://github.com/ProteomicsML/ProteomicsML/raw/main/datasets/retentiontime/ProteomeTools/oxidized.zip)<br>
+[![](https://img.shields.io/badge/download-mixed%20dataset-205380?style=flat-square)](https://github.com/ProteomicsML/ProteomicsML/raw/main/datasets/retentiontime/ProteomeTools/mixed.zip)<br>
 
 ### Dataset Descriptions
-The full data contains 1.000.000 unmodified peptides and 150.000 oxidized peptides all with MaxQuant scores > 100 (as described in Prosit paper) split into five groups. <br>
+The full data contains 1.000.000 unmodified peptides and 200.000 oxidized peptides all with MaxQuant scores > 100 (as described in Prosit paper) split into five groups. <br>
 - Small: Containing 100.000 unmodified peptides (good for teaching) <br>
 - Medium: Containing 250.000 unmodified peptides (good for validating) <br>
-- Large: Containing 250.000 unmodified peptides (good for training) <br>
-- Oxidized: Containing 150.000 all oxidized peptides. <br>
-- Mixed: Containing 150.000 oxidized and 150.000 unmodified peptides. <br>
+- Large: Containing 1.000.000 unmodified peptides (good for training) <br>
+- Oxidized: Containing 200.000 all oxidized peptides. <br>
+- Mixed: Containing 200.000 oxidized and 150.000 unmodified peptides. <br>
 
 
 ### Attributes
@@ -27,7 +27,7 @@ The full data contains 1.000.000 unmodified peptides and 150.000 oxidized peptid
 * **data source identifier**: PXD004732
 - **data type**: retention time
 - **format**: CSV
-- **columns**: `index`, `retention time`, `sequence`, `modified`, `sequence`
+- **columns**: `raw file`, `sequence`, `retention time`, `modified sequence`, `modifications` 
 - **instrument**: Orbitrap Fusion ETD
 - **organism**: Homo sapiens (human)
 - **variable modification**: unmodified & oxidation
