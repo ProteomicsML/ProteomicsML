@@ -12,11 +12,11 @@ ProteomicsML was set up as a joint effort of [SDU][sdu], [CompOmics][compomics],
 and [MSAID][msaid]. We believe that ProteomicsML is solid step forward for the field towards
 more open and reproducible science!
 
-Want to learn more about the project? Read our preprint on ChemRxiv:
+Want to learn more about the project? Read our publication:
 
->**ProteomicsML: An Online Platform for Community-Curated Datasets and Tutorials for Machine Learning in Proteomics**<br>
->Tobias Greisager Rehfeldt\*, Ralf Gabriels\*, Robbin Bouwmeester\*, Siegfried Gessulat, Benjamin Neely, Magnus Palmblad, Yasset Perez-Riverol, Tobias Schmidt, Juan Antonio Vizcaı́no^§^, and Eric W. Deutsch^§^<br>
->October 2022. ChemRxiv. [doi:10.26434/chemrxiv-2022-2s6kx](https://doi.org/10.26434/chemrxiv-2022-2s6kx).
+>**ProteomicsML: An Online Platform for Community-Curated Data Sets and Tutorials for Machine Learning in Proteomics**.<br>
+>Tobias G. Rehfeldt\*, Ralf Gabriels\*, Robbin Bouwmeester\*, Siegfried Gessulat, Benjamin A. Neely, Magnus Palmblad, Yasset Perez-Riverol, Tobias Schmidt, Juan Antonio Vizcaı́no^§^, and Eric W. Deutsch^§^.<br>
+>J. Proteome Res. 2023, 22, 2, 632–636. [doi:10.1021/acs.jproteome.2c00629](https://doi.org/10.1021/acs.jproteome.2c00629).
 
 
 

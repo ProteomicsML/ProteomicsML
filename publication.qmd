@@ -1,5 +1,5 @@
 ---
-title: "ProteomicsML: An Online Platform for Community-Curated Datasets and Tutorials for Machine Learning in Proteomics"
+title: "ProteomicsML: An Online Platform for Community-Curated Data Sets and Tutorials for Machine Learning in Proteomics"
 date: 9/30/2022
 author:
  - name: Tobias G. Rehfeldt*
@@ -29,8 +29,8 @@ abstract: Dataset acquisition and curation are often the hardest and most time-c
 
 ---
 
-Manuscript submitted to Journal of Proteome Research for the Third Special Issue on Software Tools and Resources. View the full preprint on ChemRxiv:
+Published in the Third Special Issue on Software Tools and Resources of Journal of Proteome Research. Read the full publication:
 
->**ProteomicsML: An Online Platform for Community-Curated Datasets and Tutorials for Machine Learning in Proteomics**<br>
->Tobias Greisager Rehfeldt\*, Ralf Gabriels\*, Robbin Bouwmeester\*, Siegfried Gessulat, Benjamin Neely, Magnus Palmblad, Yasset Perez-Riverol, Tobias Schmidt, Juan Antonio Vizcaı́no^§^, and Eric W. Deutsch^§^<br>
->October 2022. ChemRxiv. [doi:10.26434/chemrxiv-2022-2s6kx](https://doi.org/10.26434/chemrxiv-2022-2s6kx).
+>**ProteomicsML: An Online Platform for Community-Curated Data Sets and Tutorials for Machine Learning in Proteomics**.<br>
+>Tobias G. Rehfeldt\*, Ralf Gabriels\*, Robbin Bouwmeester\*, Siegfried Gessulat, Benjamin A. Neely, Magnus Palmblad, Yasset Perez-Riverol, Tobias Schmidt, Juan Antonio Vizcaı́no^§^, and Eric W. Deutsch^§^.<br>
+>J. Proteome Res. 2023, 22, 2, 632–636. [doi:10.1021/acs.jproteome.2c00629](https://doi.org/10.1021/acs.jproteome.2c00629).
