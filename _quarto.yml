@@ -54,9 +54,11 @@ website:
   repo-actions: [source, edit]
   page-footer: |
     <small>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons CC BY 4.0</a> license.</small>
+  cookie-consent:
+    type: express
+    style: interstitial
   google-analytics:
     tracking-id: G-VVRMZHT2W2
-    storage: none
     anonymize-ip: true
   open-graph: true
   twitter-card: true
