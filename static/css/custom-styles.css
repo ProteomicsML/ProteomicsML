@@ -2,6 +2,15 @@
     max-width: 100%;
     width: auto;
 }
+
 .navbar-logo {
     max-height: 48px;
+}
+
+.termsfeed-com---palette-light .cc-nb-okagree,
+.termsfeed-com---palette-light .cc-nb-reject,
+.termsfeed-com---palette-light .cc-cp-foot-save,
+.termsfeed-com---pc-dialog input[type="checkbox"].cc-custom-checkbox:checked+label:before {
+    background-color: #205380;
+    background: #205380;
 }
