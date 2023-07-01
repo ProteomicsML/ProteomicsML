@@ -73,6 +73,8 @@ format:
     link-external-icon: false
     link-external-newwindow: true
     linkcolor: "#205380"
+    include-in-header:
+      - file: "static/html/bioschema.html"
 
 resources: ["CNAME"]
 bibliography: references.bib
