@@ -2,7 +2,7 @@
 title: Tutorials
 listing:
   - id: detectability-listing
-    contents: "detectability/**/*.ipynb"
+    contents: "detectability/*.ipynb"
     type: table
     table-hover: true
     fields: [title, author, date]
