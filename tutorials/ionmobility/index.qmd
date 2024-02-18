@@ -1,3 +1,17 @@
 ---
 title: Ion mobility
+
+listing:
+  - id: ionmobility-listing
+    contents: "*.ipynb"
+    type: table
+    table-hover: true
+    fields: [title, author, date]
+    sort-ui: false
+    filter-ui: false
+    sort:
+        - "title asc"
 ---
+
+::: {#ionmobility-listing}
+:::
