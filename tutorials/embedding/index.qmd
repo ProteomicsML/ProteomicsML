@@ -1,7 +1,7 @@
 ---
-title: Peptide embedding
+title: Embedding peptides
 listing:
-  - id: peptide-embedding-listing
+  - id: embedding-peptides-listing
     contents: "*.ipynb"
     type: table
     table-hover: true
@@ -13,5 +13,5 @@ listing:
 ---
 
 
-::: {#peptide-embedding-listing}
+::: {#embedding-peptides-listing}
 :::
