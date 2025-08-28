@@ -1,0 +1,28 @@
+---
+title: "Background Resources"
+---
+
+New to proteomics? No problem! We have assembled a list of good resources for learning about
+mass-spectrometry based proteomics quickly, from videos to articles to short courses.
+Just pick the format you like best.
+
+## General Proteomics
+These external links provide some resources to get up to speed on mass spectrometry-based proteomics fast
+
+
+
+
+## Glycoproteomics
+These links provide some resources to get up to speed on mass spectrometry-based glycoproteomics fast
+
+**Books**<br>
+📒 NCBI Bookshelf - [Essentials of Glycobiology][essentials_book]<br>
+
+**Short Introductory articles**<br>
+📄 “[The Hitchhiker's guide to glycoproteomics][hitchhikers_guide]” (2021) Oliveira * Kolarich<br>
+
+
+
+[essentials-book]: https://www.ncbi.nlm.nih.gov/books/NBK579918/
+[hitchhikers_guide]: https://pmc.ncbi.nlm.nih.gov/articles/PMC8421054/
+
