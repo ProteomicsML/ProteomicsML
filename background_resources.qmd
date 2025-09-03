@@ -18,10 +18,10 @@ These external links provide some resources to get up to speed on mass spectrome
 [intro_shuken_pdf]: https://biocev.lf1.cuni.cz/file/492/shuken-2023-an-introduction-to-mass-spectrometry-based-proteomics.pdf
 
 **Short Introductory videos**<br>
-📄 “[Mass Spectrometry for Proteomics][video_padula]” Matt Padula<br>
-📄 “[Top down vs bottom up proteomics][video_doucette]” Alan Doucette<br>
-📄 “[Fundamentals of peptide and protein mass spectrometry][video_carr]” Steve Carr (Broad Institute)<br>
-📄 “[Introduction to Database Searching using Mascot][video_cottrell]” John Cottrell (Matrix Science)<br>
+💬 “[Mass Spectrometry for Proteomics][video_padula]” Matt Padula<br>
+💬 “[Top down vs bottom up proteomics][video_doucette]” Alan Doucette<br>
+💬 “[Fundamentals of peptide and protein mass spectrometry][video_carr]” Steve Carr (Broad Institute)<br>
+💬 “[Introduction to Database Searching using Mascot][video_cottrell]” John Cottrell (Matrix Science)<br>
 
 [video_padula]: https://www.youtube.com/watch?v=L6MHSb7I820
 [video_doucette]: https://www.youtube.com/watch?v=NeMA3RFFLIw
@@ -30,13 +30,13 @@ These external links provide some resources to get up to speed on mass spectrome
 
 **Available courses**<br>
 (These are mostly in-person recurring courses<br>
-📄 [ASMS][course_asms]<br>
-📄 [MaxQuant][course_maxquant]<br>
-📄 [May Institute][course_mayinstitute]<br>
-📄 [Skyline][course_skyline]<br>
-📄 [Galaxy-P][course_galaxyp]<br>
-📄 [EBI][course_ebi]<br>
-📄 [Brixen Proteomics][course_brixen]<br>
+🧑‍🔧 [ASMS][course_asms]<br>
+🧑‍🔧 [MaxQuant][course_maxquant]<br>
+🧑‍🔧 [May Institute][course_mayinstitute]<br>
+🧑‍🔧 [Skyline][course_skyline]<br>
+🧑‍🔧 [Galaxy-P][course_galaxyp]<br>
+🧑‍🔧 [EBI][course_ebi]<br>
+🧑‍🔧 [Brixen Proteomics][course_brixen]<br>
 
 [course_asms]: https://www.asms.org/conferences/annual-conference/short-courses
 [course_maxquant]: https://maxquant.org/summer_school/
@@ -70,19 +70,18 @@ These links provide some resources to get up to speed on mass spectrometry-based
 📄 “[Glycomic and glycoproteomic analysis of glycoproteins-a tutorial][glyco_tutorial]” (2017) Shajahan*Azadi<br>
 📄 “[Critical considerations in N-glycoproteomics][critical_considerations]” (2023)<br>
 
-Videos (webinars, lectures):<br>
-📄 “[GlySpace Education][video_glyspace]”<br>
-📄 “[SIB YouTube Channel (for glyco)][sib_youtube]”<br>
-📄 “[GlySpace webinar series][glyspace_webinars]”<br>
-📄 “[Translational clinical glycoproteomics in practice | Bruker][bruker_in_practice]”<br>
-📄 “[Gordan Lauc’s YouTube Glyco-education channel][lauc_youtube]”<br>
-
-
 [essentials_book]: https://www.ncbi.nlm.nih.gov/books/NBK579918/
 [hitchhikers_guide]: https://pmc.ncbi.nlm.nih.gov/articles/PMC8421054/
 [nature_primer]: https://www.nature.com/articles/s43586-022-00128-4
 [glyco_tutorial]: https://pubmed.ncbi.nlm.nih.gov/28585084/ 
 [critical_considerations]: https://doi.org/10.1016/j.cbpa.2023.102272
+
+Videos (webinars, lectures):<br>
+💬 “[GlySpace Education][video_glyspace]”<br>
+💬 “[SIB YouTube Channel (for glyco)][sib_youtube]”<br>
+💬 “[GlySpace webinar series][glyspace_webinars]”<br>
+💬 “[Translational clinical glycoproteomics in practice | Bruker][bruker_in_practice]”<br>
+💬 “[Gordan Lauc’s YouTube Glyco-education channel][lauc_youtube]”<br>
 
 [video_glyspace]: http://www.glyspace.org/education.php
 [sib_youtube]: https://www.youtube.com/@sib-swissinstituteofbioinf4579/search?query=glyco
@@ -90,7 +89,52 @@ Videos (webinars, lectures):<br>
 [bruker_in_practice]: https://www.bruker.com/de/news-and-events/webinars/2024/translational-clinical-glycoproteomics-in-practice.html
 [lauc_youtube]: https://www.youtube.com/playlist?list=PLB8UtfqFXZk8gPvwHdqBIsuHe6D2CI7il
 
+**Blogs**<br>
+📄 [Glycopedia][blog_glycopedia] (Serge Perez, Grenoble)<br>
+📄 [Glyco-knowledge vignettes][blog_glycoknowledge] (Rick Cummings, Harvard)<br>
 
+[blog_glycopedia]: https://www.ncbi.nlm.nih.gov/books/NBK579918/
+[blog_glycoknowledge]: https://research.bidmc.org/ncfg/interestingfacts/interesting-facts-about-glycans
 
+**Tutorials on specific tools**<br>
+📄 [FragPipe][tutorial_fragpipe]<br>
+📄 [ProteinProspector][tutorial_proteinprospector]<br>
+
+[tutorial_fragpipe]: https://fragpipe.nesvilab.org/docs/tutorial_glyco.html
+[tutorial_proteinprospector]: https://vimeo.com/992202630
+
+**Available courses**<br>
+(These are mostly in-person recurring courses<br>
+🧑‍🔧 [Summer school in biomedical glycoscience][course_grenoble] in Grenoble<br>
+🧑‍🔧 [GlycoTwinning training][course_glycotwinning] in Portugal<br>
+🧑‍🔧 [Summer course on glycosciences][course_netherlands] in the Netherlands<br>
+🧑‍🔧 [U. Georgia CCRC training courses][course_ugeorgia] in the US<br>
+🧑‍🔧 [ASMS][course_asms]<br>
+
+[course_grenoble]: https://gehic.rseq.org/actividades/summer-school-in-biomedical-glycoscience-2/
+[course_glycotwinning]: https://www.glycotwinning.eu/glycomaterials#educationalmaterials
+[course_netherlands]: https://www.rug.nl/education/summer-winter-schools/glycosciences/?lang=en
+[course_ugeorgia]: https://ast.uga.edu/training-in-glycoscience/
+
+**Other Resources**<br>
+📒 [ELIXIR TeSS (Training eSupport System)][elixir_tess]<br>
+📒 [Interactive map of web-based glycoinformatics resources][glyco_map] (Expasy)<br>
+📒 [GlycoNet training documents][glyconet_training]<br>
+
+[glyco_map]: https://glycoproteome.expasy.org/
+[glyconet_training]: https://canadianglycomics.ca/training/high-school-resources/
+
+**Benchmarking efforts**<br>
+📒 [HUPO Human glycomics initiative][benchmark_hgi]<br>
+📒 [1st HGI study][benchmark_hgi1] (2021)<br>
+📒 [1st HGI study results][benchmark_hgi1results] (2021)<br>
+📒 [2nd HGI study][benchmark_hgi2] (2021)<br>
+📒 [NIST Interlaboratory Study on Glycosylation Analysis of Monoclonal Antibodies: Comparison of Results from Diverse Analytical Methods][benchmark_nist] (2020)<br>
+
+[benchmark_hgi]: https://hupo.org/Human-Glycoproteomics-Initiative
+[benchmark_hgi1]: https://hupo.org/page-1757416
+[benchmark_hgi1results]: https://doi.org/10.1038/s41592-021-01309-x
+[benchmark_hgi2]: https://hupo.org/page-1757437
+[benchmark_nist]: https://doi.org/10.1074/mcp.ra119.001677
 
 
