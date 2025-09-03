@@ -9,6 +9,23 @@ Just pick the format you like best.
 ## General Proteomics
 These external links provide some resources to get up to speed on mass spectrometry-based proteomics fast
 
+**Short Introductory articles**<br>
+📄 “[A beginner’s guide to mass spectrometry–based proteomics][intro_sinha]” (2023) Sinha & Mann<br>
+📄 “[An introduction to mass spectrometry-based proteomics][intro_shuken]” (2023) Shuken<br>
+
+[intro_sinha]: https://portlandpress.com/biochemist/article/42/5/64/226371/A-beginner-s-guide-to-mass-spectrometry-based
+[intro_shuken]: https://pubs.acs.org/doi/abs/10.1021/acs.jproteome.2c00838
+
+**Short Introductory videos**<br>
+📄 “[Mass Spectrometry for Proteomics][video_padula]” Matt Padula<br>
+📄 “[Top down vs bottom up proteomics][video_doucette]” Alan Doucette<br>
+📄 “[Fundamentals of peptide and protein mass spectrometry][video_broade]” Steve Carr (Broad Institute)<br>
+📄 “[Introduction to Database Searching using Mascot][video_cottrell]” John Cottrell (Matrix Science)<br>
+
+[video_padula]: https://www.youtube.com/watch?v=L6MHSb7I820
+[video_doucette]: https://www.youtube.com/watch?v=NeMA3RFFLIw
+[video_carr]: https://www.youtube.com/watch?v=PFOodSbH9IY
+[video_cottrell]: https://www.youtube.com/watch?v=tB3cR2vDCKc
 
 
 
@@ -24,12 +41,12 @@ These links provide some resources to get up to speed on mass spectrometry-based
 📄 “[Glycomic and glycoproteomic analysis of glycoproteins-a tutorial][glyco_tutorial]” (2017) Shajahan*Azadi<br>
 📄 “[Critical considerations in N-glycoproteomics][critical_considerations]” (2023)<br>
 
-Videos (webinars, lectures): 
-📄 “[GlySpace Education][video_glyspace]”
-📄 “[SIB YouTube Channel (for glyco)][sib_youtube]”
-📄 “[GlySpace webinar series][glyspace_webinars]”
-📄 “[Translational clinical glycoproteomics in practice | Bruker][bruker_in_practice]”
-📄 “[Gordan Lauc’s YouTube Glyco-education channel][lauc_youtube]”
+Videos (webinars, lectures):<br>
+📄 “[GlySpace Education][video_glyspace]”<br>
+📄 “[SIB YouTube Channel (for glyco)][sib_youtube]”<br>
+📄 “[GlySpace webinar series][glyspace_webinars]”<br>
+📄 “[Translational clinical glycoproteomics in practice | Bruker][bruker_in_practice]”<br>
+📄 “[Gordan Lauc’s YouTube Glyco-education channel][lauc_youtube]”<br>
 
 
 [essentials_book]: https://www.ncbi.nlm.nih.gov/books/NBK579918/
