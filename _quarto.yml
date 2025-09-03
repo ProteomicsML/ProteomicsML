@@ -45,6 +45,8 @@ website:
       - section: Datasets
         file: datasets/index.qmd
         contents: "datasets/**"
+      - text: Background Resources
+        file: background_resources.html
       - text: Contributing
         file: CONTRIBUTING.md
       - text: Code of Conduct
