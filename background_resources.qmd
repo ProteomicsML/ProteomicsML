@@ -11,10 +11,11 @@ These external links provide some resources to get up to speed on mass spectrome
 
 **Short Introductory articles**<br>
 📄 “[A beginner’s guide to mass spectrometry–based proteomics][intro_sinha]” (2023) Sinha & Mann<br>
-📄 “[An introduction to mass spectrometry-based proteomics][intro_shuken]” (2023) Shuken<br>
+📄 “[An introduction to mass spectrometry-based proteomics][intro_shuken]” (2023) Shuken ([PDF][intro_shuken_PDF])<br>
 
 [intro_sinha]: https://portlandpress.com/biochemist/article/42/5/64/226371/A-beginner-s-guide-to-mass-spectrometry-based
 [intro_shuken]: https://pubs.acs.org/doi/abs/10.1021/acs.jproteome.2c00838
+[intro_shuken_pdf]: https://biocev.lf1.cuni.cz/file/492/shuken-2023-an-introduction-to-mass-spectrometry-based-proteomics.pdf
 
 **Short Introductory videos**<br>
 📄 “[Mass Spectrometry for Proteomics][video_padula]” Matt Padula<br>
@@ -26,6 +27,36 @@ These external links provide some resources to get up to speed on mass spectrome
 [video_doucette]: https://www.youtube.com/watch?v=NeMA3RFFLIw
 [video_carr]: https://www.youtube.com/watch?v=PFOodSbH9IY
 [video_cottrell]: https://www.youtube.com/watch?v=tB3cR2vDCKc
+
+**Available courses**<br>
+(These are mostly in-person recurring courses)
+📄 [ASMS][course_asms]<br>
+📄 [MaxQuant][course_maxquant]<br>
+📄 [OpenMS][course_openms]<br>
+📄 [May Institute][course_mayinstitute]<br>
+📄 [Skyline][course_skyline]<br>
+📄 [Galaxy-P][course_galaxyp]<br>
+📄 [EBI][course_ebi]<br>
+📄 [Brixen Proteomics][course_brixen]<br>
+
+[course_asms]: https://www.asms.org/conferences/annual-conference/short-courses
+[course_maxquant]: https://maxquant.org/summer_school/
+[course_openms]: 
+[course_mayinstitute]: https://computationalproteomics.khoury.northeastern.edu/
+[course_skyline]: https://skyline.ms/project/home/software/Skyline/events/begin.view
+[course_galaxyp]: https://galaxyp.org/
+[course_ebi]: https://www.ebi.ac.uk/training/events/proteomics-bioinformatics-2025/#vf-tabs__section--tab1
+[course_brixen]: https://www.brixenproteomics.org
+
+**Books**<br>
+📒 ASMS [Learning R for Mass Spectrometrists][asms_r_book]<br>
+
+[asms_r_book]: https://jeffsocal.github.io/ASMS_R_Basics/
+
+**Other Resources**<br>
+📒 [ELIXIR TeSS (Training eSupport System)][elixir_tess]<br>
+
+[elixir_tess]: https://tess.elixir-europe.org/
 
 
 
