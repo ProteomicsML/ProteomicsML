@@ -19,7 +19,7 @@ These external links provide some resources to get up to speed on mass spectrome
 **Short Introductory videos**<br>
 📄 “[Mass Spectrometry for Proteomics][video_padula]” Matt Padula<br>
 📄 “[Top down vs bottom up proteomics][video_doucette]” Alan Doucette<br>
-📄 “[Fundamentals of peptide and protein mass spectrometry][video_broade]” Steve Carr (Broad Institute)<br>
+📄 “[Fundamentals of peptide and protein mass spectrometry][video_carr]” Steve Carr (Broad Institute)<br>
 📄 “[Introduction to Database Searching using Mascot][video_cottrell]” John Cottrell (Matrix Science)<br>
 
 [video_padula]: https://www.youtube.com/watch?v=L6MHSb7I820
