@@ -29,10 +29,9 @@ These external links provide some resources to get up to speed on mass spectrome
 [video_cottrell]: https://www.youtube.com/watch?v=tB3cR2vDCKc
 
 **Available courses**<br>
-(These are mostly in-person recurring courses)
+(These are mostly in-person recurring courses<br>
 📄 [ASMS][course_asms]<br>
 📄 [MaxQuant][course_maxquant]<br>
-📄 [OpenMS][course_openms]<br>
 📄 [May Institute][course_mayinstitute]<br>
 📄 [Skyline][course_skyline]<br>
 📄 [Galaxy-P][course_galaxyp]<br>
@@ -41,7 +40,6 @@ These external links provide some resources to get up to speed on mass spectrome
 
 [course_asms]: https://www.asms.org/conferences/annual-conference/short-courses
 [course_maxquant]: https://maxquant.org/summer_school/
-[course_openms]: 
 [course_mayinstitute]: https://computationalproteomics.khoury.northeastern.edu/
 [course_skyline]: https://skyline.ms/project/home/software/Skyline/events/begin.view
 [course_galaxyp]: https://galaxyp.org/
