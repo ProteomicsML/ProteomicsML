@@ -20,9 +20,31 @@ These links provide some resources to get up to speed on mass spectrometry-based
 
 **Short Introductory articles**<br>
 📄 “[The Hitchhiker's guide to glycoproteomics][hitchhikers_guide]” (2021) Oliveira * Kolarich<br>
+📄 “[Glycoproteomics Nature Primer][nature_primer]” (2022)<br>
+📄 “[Glycomic and glycoproteomic analysis of glycoproteins-a tutorial][glyco_tutorial]” (2017) Shajahan*Azadi<br>
+📄 “[Critical considerations in N-glycoproteomics][critical_considerations]” (2023)<br>
+
+Videos (webinars, lectures): 
+📄 “[GlySpace Education][video_glyspace]”
+📄 “[SIB YouTube Channel (for glyco)][sib_youtube]”
+📄 “[GlySpace webinar series][glyspace_webinars]”
+📄 “[Translational clinical glycoproteomics in practice | Bruker][bruker_in_practice]”
+📄 “[Gordan Lauc’s YouTube Glyco-education channel][lauc_youtube]”
 
 
-
-[essentials-book]: https://www.ncbi.nlm.nih.gov/books/NBK579918/
+[essentials_book]: https://www.ncbi.nlm.nih.gov/books/NBK579918/
 [hitchhikers_guide]: https://pmc.ncbi.nlm.nih.gov/articles/PMC8421054/
+[nature_primer]: https://www.nature.com/articles/s43586-022-00128-4
+[glyco_tutorial]: https://pubmed.ncbi.nlm.nih.gov/28585084/ 
+[critical_considerations]: https://doi.org/10.1016/j.cbpa.2023.102272
+
+[video_glyspace]: http://www.glyspace.org/education.php
+[sib_youtube]: https://www.youtube.com/@sib-swissinstituteofbioinf4579/search?query=glyco
+[glyspace_webinars]: https://wiki.glygen.org/GlyGen_Webinar_Series
+[bruker_in_practice]: https://www.bruker.com/de/news-and-events/webinars/2024/translational-clinical-glycoproteomics-in-practice.html
+[lauc_youtube]: https://www.youtube.com/playlist?list=PLB8UtfqFXZk8gPvwHdqBIsuHe6D2CI7il
+
+
+
+
 
