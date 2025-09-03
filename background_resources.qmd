@@ -29,7 +29,7 @@ These external links provide some resources to get up to speed on mass spectrome
 [video_cottrell]: https://www.youtube.com/watch?v=tB3cR2vDCKc
 
 **Available courses**<br>
-(These are mostly in-person recurring courses<br>
+(These are mostly in-person recurring courses)<br>
 🧑‍🔧 [ASMS][course_asms]<br>
 🧑‍🔧 [MaxQuant][course_maxquant]<br>
 🧑‍🔧 [May Institute][course_mayinstitute]<br>
@@ -66,7 +66,7 @@ These links provide some resources to get up to speed on mass spectrometry-based
 
 **Short Introductory articles**<br>
 📄 “[The Hitchhiker's guide to glycoproteomics][hitchhikers_guide]” (2021) Oliveira * Kolarich<br>
-📄 “[Glycoproteomics Nature Primer][nature_primer]” (2022)<br>
+📄 “[Glycoproteomics Nature Primer][nature_primer]” (2022) Bagdonaite * Scott<br>
 📄 “[Glycomic and glycoproteomic analysis of glycoproteins-a tutorial][glyco_tutorial]” (2017) Shajahan*Azadi<br>
 📄 “[Critical considerations in N-glycoproteomics][critical_considerations]” (2023)<br>
 
@@ -93,7 +93,7 @@ Videos (webinars, lectures):<br>
 📄 [Glycopedia][blog_glycopedia] (Serge Perez, Grenoble)<br>
 📄 [Glyco-knowledge vignettes][blog_glycoknowledge] (Rick Cummings, Harvard)<br>
 
-[blog_glycopedia]: https://www.ncbi.nlm.nih.gov/books/NBK579918/
+[blog_glycopedia]: https://glycopedia.eu/
 [blog_glycoknowledge]: https://research.bidmc.org/ncfg/interestingfacts/interesting-facts-about-glycans
 
 **Tutorials on specific tools**<br>
@@ -104,7 +104,7 @@ Videos (webinars, lectures):<br>
 [tutorial_proteinprospector]: https://vimeo.com/992202630
 
 **Available courses**<br>
-(These are mostly in-person recurring courses<br>
+(These are mostly in-person recurring courses)<br>
 🧑‍🔧 [Summer school in biomedical glycoscience][course_grenoble] in Grenoble<br>
 🧑‍🔧 [GlycoTwinning training][course_glycotwinning] in Portugal<br>
 🧑‍🔧 [Summer course on glycosciences][course_netherlands] in the Netherlands<br>
