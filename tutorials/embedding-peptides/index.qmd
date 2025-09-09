@@ -1,0 +1,17 @@
+---
+title: Embedding peptides
+listing:
+  - id: embedding-peptides-listing
+    contents: "*.ipynb"
+    type: table
+    table-hover: true
+    fields: [title, author, date]
+    sort-ui: false
+    filter-ui: false
+    sort:
+        - "title asc"
+---
+
+
+::: {#embedding-peptides-listing}
+:::
